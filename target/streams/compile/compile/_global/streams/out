@@ -1,0 +1,6 @@
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E018] Syntax Error: D:\Users\Chris\OneDrive\Studium\Software Engineering\WorkSpace\4-gewinnt\src\main\scala\Main.scala:20:29 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m20 |[0m[33mdef[0m [36msep[0m([36mcellWidth[0m:[35mInt[0m = [31m3[0m) = )[31m"+"[0m + ([31m"-"[0m) *cellWidth)*[31m6[0m + eol[0m
+[0m[[0m[31merror[0m] [0m[0m   |                             [31m^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |                             expression expected but [31m')'[0m found[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0mone error found[0m
