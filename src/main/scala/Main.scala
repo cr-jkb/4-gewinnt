@@ -1,6 +1,7 @@
 @main
+//test test Moin!
 def hello: Unit =
-  println("Welcome to 4-Gewinnt!")
+  println("Willkommen zu 4-Gewinnt!")
   val ints = List.range(0,6)
   for i <- ints
   do spielbrett
