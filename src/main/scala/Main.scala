@@ -1,18 +1,18 @@
 @main
 def hello: Unit =
-  println("Welcome to 4-Gewinnt!")
-  val ints = List.range(0,6)
-  for i <- ints
-  do spielbrett
-  print(spielbrett_separator)
+  println("Welcome to 4-Gewinnt!" + eol)
+  println(SpielBrett())
 
 val eol = sys.props("line.separator")
-def spielbrett: Unit =
-  print(spielbrett_separator)
-  print(spielbrett_slots)
 
-val spielbrett_separator = "+---+---+---+---+---+---+---+" + eol 
-val spielbrett_slots = "|   |   |   |   |   |   |   |" + eol
+def SpielBrett(breite:Int = 7, hoehe:Int = 6, cellWidth:Int = 3): String = {
+	return ((spielbrett_seperator(breite, cellWidth) + spielbrett_slots(breite, cellWidth))*hoehe + spielbrett_seperator(breite, cellWidth))
+}
 
-val grid = (spielbrett_separator + spielbrett_slots) * 6 + spielbrett_separator
-def sep(cellWidth:Int = 3) = ("+" + ("-") *cellWidth)*6 + eol
+def spielbrett_seperator(breite:Int, cellWidth:Int): String = {
+	return (("+"+("-"*cellWidth))* breite + "+" + eol)
+}
+
+def spielbrett_slots(breite:Int, cellWidth:Int): String = {
+	return (("|"+(" "*cellWidth))* breite + "|" + eol)
+}
