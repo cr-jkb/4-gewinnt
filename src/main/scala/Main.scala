@@ -1,18 +1,26 @@
 @main
 def hello: Unit =
-  println("Welcome to 4-Gewinnt!" + eol)
-  println(SpielBrett())
+	
+	println(eol + "Hochschule fuer Technik, Wirtschaft & Gestaltung")
+	println("AIN SOFTWARE-ENGINEERING WiSe 21/22")
+	println("        ### GRUPPE 15 ###")
+	println(eol + ">  Willkommen zu 4-Gewinnt!  <")
+	println(SpielBrett())
 
+	println(eol + "Made with heart in Constance")
 val eol = sys.props("line.separator")
 
-def SpielBrett(breite:Int = 7, hoehe:Int = 6, cellWidth:Int = 3): String = {
-	return ((spielbrett_seperator(breite, cellWidth) + spielbrett_slots(breite, cellWidth))*hoehe + spielbrett_seperator(breite, cellWidth))
+def SpielBrett(rows:Int = 7, lines:Int = 6, cellWidth:Int = 3)
+: String = {
+	return ((spielbrett_separator(rows, cellWidth) +
+		spielbrett_slots(rows, cellWidth))*lines +
+		spielbrett_separator(rows, cellWidth))
 }
 
-def spielbrett_seperator(breite:Int, cellWidth:Int): String = {
-	return (("+"+("-"*cellWidth))* breite + "+" + eol)
+def spielbrett_separator(rows:Int, cellWidth:Int): String = {
+	return (("+" + ("-"*cellWidth))*rows + "+" + eol)
 }
 
-def spielbrett_slots(breite:Int, cellWidth:Int): String = {
-	return (("|"+(" "*cellWidth))* breite + "|" + eol)
+def spielbrett_slots(rows:Int, cellWidth:Int): String = {
+	return (("|" + (" "*cellWidth))*rows + "|" + eol)
 }
