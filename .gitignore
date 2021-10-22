@@ -2,3 +2,13 @@
 *.log
 *.jar
 *.tasty
+*.vscode
+*.json
+*.db
+*.bloop
+*.bsp
+*.metals
+*.cache
+project/project/
+project/target/
+target/
