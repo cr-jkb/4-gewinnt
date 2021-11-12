@@ -18,4 +18,16 @@ class GridSpec extends AnyWordSpec:
     "have a valid and scalable game field" in {
       SpielBrett(1, 1, 1) should be { "+-+" + eol + "| |" + eol + "+-+" + eol }
     }
+
+    "have a input process" in {
+      processInputLine("q", "+-+" + eol + "|X|" + eol + "+-+" + eol, 1, 1, 1) should be { "+-+" + eol + "|X|" + eol + "+-+" + eol }
+      processInputLine("n", "+-+" + eol + "|X|" + eol + "+-+" + eol, 1, 1, 1) should be { "+-+" + eol + "| |" + eol + "+-+" + eol }
+      processInputLine("i", "+-+" + eol + "| |" + eol + "+-+" + eol, 1, 1, 1) should be { "+-+" + eol + "|X|" + eol + "+-+" + eol }
+    }
+
+    "have a valid check" in {
+      checkValid(1, 1, 1, 1, 1, "+-+" + eol + "| |" + eol + "+-+" + eol) should be { true }
+      checkValid(1, 1, 1, 1, 1, "+-+" + eol + "|X|" + eol + "+-+" + eol) should be { false }
+      checkValid(1, 1, 1, 1, 1, "+-+" + eol + "|O|" + eol + "+-+" + eol) should be { false }
+    }
   }

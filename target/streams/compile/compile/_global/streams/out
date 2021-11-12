@@ -1,6 +1,60 @@
-[0m[[0m[31merror[0m] [0m[0m[31m-- [E018] Syntax Error: D:\Users\Chris\OneDrive\Studium\Software Engineering\WorkSpace\4-gewinnt\src\main\scala\Main.scala:20:29 [0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m20 |[0m[33mdef[0m [36msep[0m([36mcellWidth[0m:[35mInt[0m = [31m3[0m) = )[31m"+"[0m + ([31m"-"[0m) *cellWidth)*[31m6[0m + eol[0m
-[0m[[0m[31merror[0m] [0m[0m   |                             [31m^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m   |                             expression expected but [31m')'[0m found[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\model\Field.scala:20:5 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m20 |[0m		[33mthis[0m = sb.toString[0m
+[0m[[0m[31merror[0m] [0m[0m   |		     [31m^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |		     end of statement expected but '=' found[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E040] Syntax Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\model\Field.scala:24:0 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m24 |[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |[31m^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |unindent expected, but eof found[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E129] Potential Issue Warning: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\Main.scala:72:0 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m72 |[0m		[31mtrue[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m   |		[33m^^^^[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m   |A pure expression does nothing in statement position; you may be omitting necessary parentheses[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\aview\TUI.scala:18:0 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m18 |[0m	input = readLine()[0m
+[0m[[0m[31merror[0m] [0m[0m   |	[31m^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |	Not found: input[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\aview\TUI.scala:19:0 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m19 |[0m	input [33mmatch[0m {[0m
+[0m[[0m[31merror[0m] [0m[0m   |	[31m^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |	Not found: input[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E008] Not Found Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\controller\Controller.scala:8:25 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m8 |[0m	[33mdef[0m [36mreset[0m() = copy(field.reset())[0m
+[0m[[0m[31merror[0m] [0m[0m  |	                   [31m^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |	                   value reset is not a member of model.Field[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E134] Type Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\model\Field.scala:13:13 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m13 |[0m		[33mval[0m [36msb[0m = [33mnew[0m [35mStringBuilder[0m([33mthis[0m)[0m
+[0m[[0m[31merror[0m] [0m[0m   |		             [31m^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |None of the overloaded alternatives of [33mconstructor[0m [35mStringBuilder[0m in [33mclass[0m [35mStringBuilder[0m with types[0m
+[0m[[0m[31merror[0m] [0m[0m   | (initCapacity: Int, initValue: String): StringBuilder[0m
+[0m[[0m[31merror[0m] [0m[0m   | (str: String): StringBuilder[0m
+[0m[[0m[31merror[0m] [0m[0m   | (capacity: Int): StringBuilder[0m
+[0m[[0m[31merror[0m] [0m[0m   | (): StringBuilder[0m
+[0m[[0m[31merror[0m] [0m[0m   | (underlying: StringBuilder): StringBuilder[0m
+[0m[[0m[31merror[0m] [0m[0m   |match arguments ((Field.this : model.Field))[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\model\Field.scala:4:56 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m4 |[0m	[33mdef[0m [33mthis[0m([36mlines[0m: [35mInt[0m, [36mrows[0m: [35mInt[0m, [36mcellWidth[0m: [35mInt[0m) = [33mthis[0m((spielbrett_separator(rows, cellWidth) + spielbrett_slots(rows, cellWidth)) * lines + spielbrett_separator(rows, cellWidth))[0m
+[0m[[0m[31merror[0m] [0m[0m  |	                                                        [31m^^^^^^^^^^^^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |         spielbrett_separator is not accessible from constructor arguments[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\model\Field.scala:6:45 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m6 |[0m		[33mreturn[0m (([31m"+"[0m + ([31m"-"[0m*cellWidth))*rows + [31m"+"[0m + eol)[0m
+[0m[[0m[31merror[0m] [0m[0m  |		                                             [31m^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |		                                             Not found: eol[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E006] Not Found Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\model\Field.scala:9:45 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m9 |[0m		[33mreturn[0m (([31m"|"[0m + ([31m" "[0m*cellWidth))*rows + [31m"|"[0m + eol)[0m
+[0m[[0m[31merror[0m] [0m[0m  |		                                             [31m^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |		                                             Not found: eol[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- [E120] Naming Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\model\Field.scala:4:4 [0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m4 |[0m	[33mdef[0m [33mthis[0m([36mlines[0m: [35mInt[0m, [36mrows[0m: [35mInt[0m, [36mcellWidth[0m: [35mInt[0m) = [33mthis[0m((spielbrett_separator(rows, cellWidth) + spielbrett_slots(rows, cellWidth)) * lines + spielbrett_separator(rows, cellWidth))[0m
+[0m[[0m[31merror[0m] [0m[0m  |	    [31m^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m  |Double definition:[0m
+[0m[[0m[31merror[0m] [0m[0m  |def <init>(lines: Int, rows: Int, cellWidth: Int): model.Field in [33mclass[0m [35mField[0m at line 3 and[0m
+[0m[[0m[31merror[0m] [0m[0m  |def <init>(lines: Int, rows: Int, cellWidth: Int): model.Field in [33mclass[0m [35mField[0m at line 4[0m
+[0m[[0m[31merror[0m] [0m[0m  |have the same type after erasure.[0m
+[0m[[0m[31merror[0m] [0m[0m  |[0m
+[0m[[0m[31merror[0m] [0m[0m  |Consider adding a @targetName annotation to one of the conflicting definitions[0m
+[0m[[0m[31merror[0m] [0m[0m  |for disambiguation.[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[31merror[0m] [0m[0m10 errors found[0m
+[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[31merror[0m] [0m[0m10 errors found[0m

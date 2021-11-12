@@ -1,13 +1,1 @@
-[0m[[0m[0mdebug[0m] [0m[0mPackaging D:\Users\Chris\OneDrive\Studium\Software Engineering\WorkSpace\4-gewinnt\target\scala-3.0.2\helloworld_3-0.1.0-SNAPSHOT.jar ...[0m
-[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	hello.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  D:\Users\Chris\OneDrive\Studium\Software Engineering\WorkSpace\4-gewinnt\target\scala-3.0.2\classes\hello.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	hello.tasty[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  D:\Users\Chris\OneDrive\Studium\Software Engineering\WorkSpace\4-gewinnt\target\scala-3.0.2\classes\hello.tasty[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Main$package$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  D:\Users\Chris\OneDrive\Studium\Software Engineering\WorkSpace\4-gewinnt\target\scala-3.0.2\classes\Main$package$.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Main$package.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  D:\Users\Chris\OneDrive\Studium\Software Engineering\WorkSpace\4-gewinnt\target\scala-3.0.2\classes\Main$package.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	Main$package.tasty[0m
-[0m[[0m[0mdebug[0m] [0m[0m	  D:\Users\Chris\OneDrive\Studium\Software Engineering\WorkSpace\4-gewinnt\target\scala-3.0.2\classes\Main$package.tasty[0m
-[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
+[0m[[0m[0mdebug[0m] [0m[0mJar uptodate: C:\Users\menne\Documents\GitHub\4-gewinnt\target\scala-3.0.2\helloworld_3-0.1.0-SNAPSHOT.jar[0m
