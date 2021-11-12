@@ -1,32 +1,32 @@
 package aview
 
 import controller.Controller
-import util.Observer
+import model.Stone
 import scala.io.StdIn.readLine
-import java.util.Scanner
-
-var spieler: Boolean = false
+import util.Observer
 
 class TUI(controller: Controller) extends Observer:
-	controller.add(this)
-	def run =
-		println(controller.field)
-		getInputAndPrintLoop(controller)
-	override def update = ???
+  controller.add(this)
+  def run =
+    println(controller.field.toString)
+    getInputAndPrintLoop()
+  override def update: Unit = println(controller.toString)
 
-def getInputAndPrintLoop(controller: Controller): Unit =
-	input = readLine()
-	input match {
-		case "q" =>
-		case "n" => 
-			controller.reset()
-			println(controller.field)
-			getInputAndPrintLoop(controller)
-		case "i" =>
-			val line = new Scanner(System.in)
-			val userLine = line.nextInt 
-			val userRow = line.nextInt
-			controller.put(spieler, userLine, userRow)
-			println(controller.field)
-			getInputAndPrintLoop(controller)
-	}
+  def getInputAndPrintLoop(): Unit =
+    val input = readLine
+    input match
+      case "q" =>
+      case _ => {
+        val chars = input.toCharArray
+        val stone = chars(0) match
+          case 'X' => Stone.X
+          case 'x' => Stone.X
+          case 'O' => Stone.O
+          case 'o' => Stone.O
+          case _   => Stone.Empty
+        val x = chars(2).toString.toInt
+        val y = chars(4).toString.toInt
+        controller.put(stone, x - 1, y - 1)
+        println(controller.toString)
+        getInputAndPrintLoop()
+      }
