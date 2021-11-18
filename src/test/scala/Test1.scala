@@ -9,7 +9,7 @@ class GridSpec extends AnyWordSpec:
       spielbrett_separator(1, 2) should be { "+--+" + eol }
     }
 
-    "have scalable slot cells" in {
+    "have scalable slot cells " in {
       spielbrett_slots(1, 1) should be { "| |" + eol }
       spielbrett_slots(2, 1) should be { "| | |" + eol }
       spielbrett_slots(1, 2) should be { "|  |" + eol }
