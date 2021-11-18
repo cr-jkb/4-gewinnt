@@ -1,7 +1,0 @@
-[0m[[0m[31merror[0m] [0m[0m[31m-- [E007] Type Mismatch Error: C:\Users\menne\Documents\GitHub\4-gewinnt\src\main\scala\model\Matrix.scala:6:24 [0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m6 |[0m  [33mval[0m [36msize2[0m: [35mInt[0m = rows(row).size[0m
-[0m[[0m[31merror[0m] [0m[0m  |                        [31m^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m  |                        Found:    Int => Vector[T][0m
-[0m[[0m[31merror[0m] [0m[0m  |                        Required: Int[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
