@@ -1,7 +1,7 @@
 package model
 
 case class Field(matrix: Matrix[Stone]):
-  def this(row: Int, column: Int, filling: Stone) = this(new Matrix(row, column, filling))
+  def this(row: Int = 6, column: Int = 7, filling: Stone = Stone.Empty) = this(new Matrix(row, column, filling))
   val size = matrix.size
   val size2 = matrix.size2
   val eol = sys.props("line.separator")
