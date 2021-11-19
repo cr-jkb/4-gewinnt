@@ -7,6 +7,8 @@ import util.Observer
 
 class TUI(controller: Controller) extends Observer:
   controller.add(this)
+  val size1 = 6
+  val size2 = 7
   def run =
     println(controller.field.toString)
     getInputAndPrintLoop()
