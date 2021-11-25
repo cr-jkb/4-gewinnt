@@ -37,6 +37,19 @@ class TuiSpec extends AnyWordSpec {
       tui.size2 should be(7)
       controller.field.get(0, 0) should be(Stone.X)
     }
+    "have a valid input for stone x" in {
+      val in = new BufferedReader(new StringReader("x 1 1" + eol + "q" + eol))
+      val source = new ByteArrayOutputStream()
+      val printer = new PrintStream(source)
+      Console.withOut(printer) {
+        Console.withIn(in) {
+          tui.getInputAndPrintLoop()
+        }
+      }
+      tui.size1 should be(6)
+      tui.size2 should be(7)
+      controller.field.get(0, 0) should be(Stone.X)
+    }
     "have a valid input for stone O" in {
       val in = new BufferedReader(new StringReader("O 1 1" + eol + "q" + eol))
       val source = new ByteArrayOutputStream()
@@ -50,8 +63,8 @@ class TuiSpec extends AnyWordSpec {
       tui.size2 should be(7)
       controller.field.get(0, 0) should be(Stone.O)
     }
-    "have a valid input for stone Empty" in {
-      val in = new BufferedReader(new StringReader("  1 1" + eol + "q" + eol))
+    "have a valid input for stone o" in {
+      val in = new BufferedReader(new StringReader("o 1 1" + eol + "q" + eol))
       val source = new ByteArrayOutputStream()
       val printer = new PrintStream(source)
       Console.withOut(printer) {
@@ -61,7 +74,7 @@ class TuiSpec extends AnyWordSpec {
       }
       tui.size1 should be(6)
       tui.size2 should be(7)
-      controller.field.get(0, 0) should be(Stone.Empty)
+      controller.field.get(0, 0) should be(Stone.O)
     }
   }
 }
