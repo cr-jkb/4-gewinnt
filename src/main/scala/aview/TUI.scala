@@ -7,10 +7,11 @@ import util.Observer
 
 class TUI(controller: Controller) extends Observer:
   controller.add(this)
+  val eol = sys.props("line.separator")
   val size1 = 6
   val size2 = 7
   def run =
-    println(controller.field.toString)
+    print(eol + "Hochschule fuer Technik, Wirtschaft & Gestaltung" + eol + "AIN SOFTWARE-ENGINEERING WiSe 21/22" + eol + "        ### GRUPPE 15 ###" + eol + eol + ">  Willkommen zu 4-Gewinnt  <" + eol + controller.field.toString)
     getInputAndPrintLoop()
   override def update: Unit = println(controller.toString)
 
@@ -29,6 +30,5 @@ class TUI(controller: Controller) extends Observer:
         val x = chars(2).toString.toInt
         val y = chars(4).toString.toInt
         controller.put(stone, x - 1, y - 1)
-        println(controller.toString)
         getInputAndPrintLoop()
       }
