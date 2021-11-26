@@ -2,6 +2,9 @@ package controller
 
 import util.Observer
 import model.Stone
+import model.ComputerModeStrategy
+import model.PlayerModeStrategy
+import model.Field
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers.*
 
@@ -27,6 +30,13 @@ class ControllerSpec extends AnyWordSpec {
         controller.remove(observer)
         controller.put(1, 1)
         observer.toString should be("true")
+      }
+    }
+    "a set Mode occurs" should {
+      val controller2 = new Controller()
+      "set the Field to this Mode" in {
+        controller2.setMode("computer") should be(ComputerModeStrategy())
+        controller2.setMode("player") should be(PlayerModeStrategy())
       }
     }
   }
