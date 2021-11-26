@@ -19,16 +19,20 @@ class TUI(controller: Controller) extends Observer:
     val input = readLine
     input match
       case "q" =>
+      case "computer" => 
+        controller.setMode(input)
+        println("Modus wurde gewechselt.")
+        getInputAndPrintLoop()
+      case "player" =>
+        controller.setMode(input)
+        println("Modus wurde gewechselt.")
+        getInputAndPrintLoop()
       case _ => {
         val chars = input.toCharArray
         val stone = chars(0) match
-          case 'X' => Stone.X
-          case 'x' => Stone.X
-          case 'O' => Stone.O
-          case 'o' => Stone.O
-          case _   => Stone.Empty
-        val x = chars(2).toString.toInt
-        val y = chars(4).toString.toInt
-        controller.put(stone, x - 1, y - 1)
-        getInputAndPrintLoop()
+          case 'i' =>
+            val x = chars(2).toString.toInt
+            val y = chars(4).toString.toInt
+            controller.put(x - 1, y - 1)
+            getInputAndPrintLoop()
       }
