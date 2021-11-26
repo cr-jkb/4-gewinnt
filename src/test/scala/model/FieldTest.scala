@@ -33,6 +33,10 @@ class FieldSpec extends AnyWordSpec {
           field1.mesh(1) should be("+-+" + eol + "|X|" + eol + "+-+" + eol)
           field2.mesh(1) should be("+-+-+" + eol + "|X|X|" + eol + "+-+-+" + eol + "|X|X|" + eol + "+-+-+" + eol)
         }
+      "be able to set a new Mode" in {
+        field1.setMode("computer") should be(ComputerModeStrategy())
+        field1.setMode("player") should be(PlayerModeStrategy())
+      }
     }
     "filled with O" should {
       val field1 = new Field(1, 1, Stone.O)
@@ -62,6 +66,10 @@ class FieldSpec extends AnyWordSpec {
           field1.mesh(1) should be("+-+" + eol + "|O|" + eol + "+-+" + eol)
           field2.mesh(1) should be("+-+-+" + eol + "|O|O|" + eol + "+-+-+" + eol + "|O|O|" + eol + "+-+-+" + eol)
         }
+      "be able to set a new Mode" in {
+        field1.setMode("computer") should be(ComputerModeStrategy())
+        field1.setMode("player") should be(PlayerModeStrategy())
+      }
     }
     "filled with Empty" should {
       var field = new Field(3, 3, Stone.Empty)
@@ -84,6 +92,10 @@ class FieldSpec extends AnyWordSpec {
           #|   |   |   |
           #+---+---+---+
           #""").stripMargin('#'))
+      }
+      "be able to set a new Mode" in {
+        field.setMode("computer") should be(ComputerModeStrategy())
+        field.setMode("player") should be(PlayerModeStrategy())
       }
     }
   }

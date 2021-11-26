@@ -18,7 +18,11 @@ case class Field(matrix: Matrix[Stone], var player: PlayerState, var mode: ModeS
     mode.put(x, y, this)
   def get(x: Int, y: Int): Stone = matrix.cell(x, y)
   def getPlayerState(): Boolean = if (player == TruePlayerState()) true else false
-  def setMode(str: String) =
+  def setMode(str: String): ModeStrategy =
     str match 
-      case "player" => mode = PlayerModeStrategy()
-      case "computer" => mode = ComputerModeStrategy()
+      case "player" => 
+        mode = PlayerModeStrategy()
+        mode
+      case "computer" =>
+        mode = ComputerModeStrategy()
+        mode
