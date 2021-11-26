@@ -4,6 +4,7 @@ import controller.Controller
 import model.Stone
 import scala.io.StdIn.readLine
 import util.Observer
+import java.awt.im.spi.InputMethod
 
 class TUI(controller: Controller) extends Observer:
   controller.add(this)
@@ -36,3 +37,30 @@ class TUI(controller: Controller) extends Observer:
             controller.put(x - 1, y - 1)
             getInputAndPrintLoop()
       }
+
+      def handleInput(chars:String) = {
+        val stone = chars(0) match
+          case 'i' =>
+            new Some(insert(chars(2).toString.toInt, chars(4).toString.toInt))
+            
+          case _ =>
+            new None
+        
+      }
+
+      trait Option[InputOption] {
+        def map(match_f:InputMethod => InputMethod): Option[InputMethod]
+      }
+      case class Some[InputMethod] (val iO:InputOption) extends Option[InputMethod] {
+        def map(match_f: InputMethod => InputMethod) = new Some(handleInput(InputOption))
+      }
+      case class None[InputMethod]() extends Option[InputMethod] {
+        def map(match_f: InputMethod => InputMethod) = new None
+      } 
+
+      trait InputOption {}
+
+      case class insert(x:Int, y:Int) extends InputOption:
+        controller.put(x - 1, y - 1)
+
+
