@@ -76,7 +76,7 @@ class FieldSpec extends AnyWordSpec {
           #""").stripMargin('#'))
       }
       "have an X and O after two moves" in {
-        field.put(Stone.X, 0, 0).put(Stone.O, 1, 1).toString should be(("""#+---+---+---+
+        field.put(0, 0).put(1, 1).toString should be(("""#+---+---+---+
           #| X |   |   |
           #+---+---+---+
           #|   | O |   |

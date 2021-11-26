@@ -19,13 +19,13 @@ class ControllerSpec extends AnyWordSpec {
 
       "notify when insert a chip" in {
         controller.add(observer)
-        controller.put(Stone.Empty, 1, 1)
+        controller.put(1, 1)
         observer.toString should be("true")
       }
 
       "after remove should not notify" in {
         controller.remove(observer)
-        controller.put(Stone.Empty, 1, 1)
+        controller.put(1, 1)
         observer.toString should be("true")
       }
     }
