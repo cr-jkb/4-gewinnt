@@ -8,8 +8,8 @@ import util.Observer
 class TUI(controller: Controller) extends Observer:
   controller.add(this)
   val eol = sys.props("line.separator")
-  val size1 = 6
-  val size2 = 7
+  val size1 = controller.field.size
+  val size2 = controller.field.size2
   def run =
     print(eol + "Hochschule fuer Technik, Wirtschaft & Gestaltung" + eol + "AIN SOFTWARE-ENGINEERING WiSe 21/22" + eol + "        ### GRUPPE 15 ###" + eol + eol + ">  Willkommen zu 4-Gewinnt  <" + eol + controller.field.toString)
     getInputAndPrintLoop()
