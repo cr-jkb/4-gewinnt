@@ -76,5 +76,27 @@ class TuiSpec extends AnyWordSpec {
       tui.size2 should be(7)
       controller.field.get(0, 0) should be(Stone.O)
     }
+    "have a valid input for computer" in {
+      val in = new BufferedReader(new StringReader("computer" + eol + "q" + eol))
+      val source = new ByteArrayOutputStream()
+      val printer = new PrintStream(source)
+      Console.withOut(printer) {
+        Console.withIn(in) {
+          tui.getInputAndPrintLoop()
+        }
+      }
+      source.toString should be("Modus wurde gewechselt." + eol)
+    }
+    "have a valid input for player" in {
+      val in = new BufferedReader(new StringReader("player" + eol + "q" + eol))
+      val source = new ByteArrayOutputStream()
+      val printer = new PrintStream(source)
+      Console.withOut(printer) {
+        Console.withIn(in) {
+          tui.getInputAndPrintLoop()
+        }
+      }
+      source.toString should be("Modus wurde gewechselt." + eol)
+    }
   }
 }
