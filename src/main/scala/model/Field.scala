@@ -26,3 +26,9 @@ case class Field(matrix: Matrix[Stone], var player: PlayerState, var mode: ModeS
       case "computer" =>
         mode = ComputerModeStrategy()
         mode
+  def undo(x: Int, y: Int): Field =
+    if (player == TruePlayerState())
+      player = FalsePlayerState()
+    else
+      player = TruePlayerState()
+    copy(matrix.replaceCell(x, y, Stone.Empty))

@@ -30,7 +30,7 @@ class TuiSpec extends AnyWordSpec {
       val printer = new PrintStream(source)
       Console.withOut(printer) {
         Console.withIn(in) {
-          tui.getInputAndPrintLoop()
+          tui.inputLoop()
         }
       }
       tui.size1 should be(6)
@@ -43,7 +43,7 @@ class TuiSpec extends AnyWordSpec {
       val printer = new PrintStream(source)
       Console.withOut(printer) {
         Console.withIn(in) {
-          tui.getInputAndPrintLoop()
+          tui.inputLoop()
         }
       }
       tui.size1 should be(6)
@@ -56,7 +56,7 @@ class TuiSpec extends AnyWordSpec {
       val printer = new PrintStream(source)
       Console.withOut(printer) {
         Console.withIn(in) {
-          tui.getInputAndPrintLoop()
+          tui.inputLoop()
         }
       }
       tui.size1 should be(6)
@@ -69,7 +69,7 @@ class TuiSpec extends AnyWordSpec {
       val printer = new PrintStream(source)
       Console.withOut(printer) {
         Console.withIn(in) {
-          tui.getInputAndPrintLoop()
+          tui.inputLoop()
         }
       }
       tui.size1 should be(6)
@@ -82,7 +82,7 @@ class TuiSpec extends AnyWordSpec {
       val printer = new PrintStream(source)
       Console.withOut(printer) {
         Console.withIn(in) {
-          tui.getInputAndPrintLoop()
+          tui.inputLoop()
         }
       }
       source.toString should be("Modus wurde gewechselt." + eol)
@@ -93,7 +93,7 @@ class TuiSpec extends AnyWordSpec {
       val printer = new PrintStream(source)
       Console.withOut(printer) {
         Console.withIn(in) {
-          tui.getInputAndPrintLoop()
+          tui.inputLoop()
         }
       }
       source.toString should be("Modus wurde gewechselt." + eol)
