@@ -25,6 +25,14 @@ class ControllerSpec extends AnyWordSpec {
         controller.put(1, 1)
         observer.toString should be("true")
       }
+      "notify when redo" in {
+        controller.redo
+        observer.toString should be("false")
+      }
+      "notify when undo" in {
+        controller.undo
+        observer.toString should be("true")
+      }
 
       "after remove should not notify" in {
         controller.remove(observer)
@@ -39,5 +47,6 @@ class ControllerSpec extends AnyWordSpec {
         controller2.setMode("player") should be(PlayerModeStrategy())
       }
     }
+    
   }
 }

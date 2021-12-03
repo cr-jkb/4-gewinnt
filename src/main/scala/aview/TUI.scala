@@ -24,8 +24,8 @@ class TUI(controller: Controller) extends Observer:
           case 'i' => controller.put(move.x, move.y)
           case 'c' => controller.setMode("computer"); println("Modus wurde gewechselt.")
           case 'p' => controller.setMode("player"); println("Modus wurde gewechselt.")
-          case 'r' => controller.redo
-          case 'u' => controller.undo
+          case 'r' => controller.redo; println("Redo erfolgreich.")
+          case 'u' => controller.undo; println("Undo erfolgreich.")
         inputLoop()
 
   def analyseInput(input: String): Option[Move] =

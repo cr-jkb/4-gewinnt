@@ -4,7 +4,7 @@ import model.Field
 import model.Stone
 @main
 def hello: Unit = {
-  val field = new Field(1, 2, Stone.Empty)
+  val field = new Field()
   val controller = Controller(field)
   val tui = TUI(controller)
   tui.run

@@ -98,5 +98,27 @@ class TuiSpec extends AnyWordSpec {
       }
       source.toString should be("Modus wurde gewechselt." + eol)
     }
+    "have a valid undo input" in {
+      val in = new BufferedReader(new StringReader("u" + eol + "q" + eol))
+      val source = new ByteArrayOutputStream()
+      val printer = new PrintStream(source)
+      Console.withOut(printer) {
+        Console.withIn(in) {
+          tui.inputLoop()
+        }
+      }
+      source.toString should be(controller.toString() + eol + "Undo erfolgreich." + eol)
+    }
+    "have a valid redo input" in {
+      val in = new BufferedReader(new StringReader("r" + eol + "q" + eol))
+      val source = new ByteArrayOutputStream()
+      val printer = new PrintStream(source)
+      Console.withOut(printer) {
+        Console.withIn(in) {
+          tui.inputLoop()
+        }
+      }
+      source.toString should be(controller.toString() + eol + "Redo erfolgreich." + eol)
+    }
   }
 }
