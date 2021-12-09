@@ -1,0 +1,4 @@
+libraryDependencies += "org.scalafx" %% "scalafx" % "17.0.1-R26",
+
+
+libraryDependencies += "org.scalafx" %% "scalafx" % "16.0.0-R25",

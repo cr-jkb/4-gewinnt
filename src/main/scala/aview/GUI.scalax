@@ -1,0 +1,26 @@
+package aview
+import scalafx.Includes._
+import scalafx.application.JFXApp3
+import scalafx.scene.Scene
+import scalafx.scene.paint.Color._
+import scalafx.scene.shape.Rectangle
+
+object myGUI extends JFXApp3 {
+    override def start():Unit = {
+        stage = new JFXApp3.PrimaryStage {
+            title.value = "4 Gewinnt - Gruppe 15"
+            width = 600
+            height = 600
+            scene = new Scene {
+                fill = Green
+                content = new Rectangle {
+                    x = 10
+                    y = 10
+                    width = 200
+                    height = 250
+                    fill = Red
+                }
+            }
+        }
+    }
+}
