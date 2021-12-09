@@ -14,8 +14,10 @@ class ControllerSpec extends AnyWordSpec {
       val controller = new Controller()
       val observer = new Observer {
         var updated: Boolean = false
+        var killed: Boolean = false
 
         override def update: Unit = updated = !updated
+        override def kill: Unit = killed = !killed
 
         override def toString: String = updated.toString
       }

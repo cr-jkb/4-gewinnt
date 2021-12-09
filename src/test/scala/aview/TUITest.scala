@@ -9,7 +9,7 @@ import java.io.{BufferedReader, ByteArrayInputStream, ByteArrayOutputStream, Pri
 class TuiSpec extends AnyWordSpec {
   "TUI of 4-Gewinnt" should {
     val controller = new Controller()
-    val tui = new TUI(controller)
+    val tui = TUI(controller)
     val eol = sys.props("line.separator")
 
     "run" in {
@@ -18,7 +18,7 @@ class TuiSpec extends AnyWordSpec {
       val printer = new PrintStream(source)
       Console.withOut(printer) {
         Console.withIn(in) {
-          tui.run
+          val tui2 = tui
         }
       }
       source.toString should be(eol + "Hochschule fuer Technik, Wirtschaft & Gestaltung" + eol + "AIN SOFTWARE-ENGINEERING WiSe 21/22" + eol + "        ### GRUPPE 15 ###" + eol + eol + ">  Willkommen zu 4-Gewinnt  <" + eol + controller.field.toString)
