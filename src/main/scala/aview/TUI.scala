@@ -12,14 +12,14 @@ class TUI(controller: Controller) extends Observer:
   val eol = sys.props("line.separator")
   val size1 = controller.field.size
   val size2 = controller.field.size2
-  def run =
-    print(eol + "Hochschule fuer Technik, Wirtschaft & Gestaltung" + eol + "AIN SOFTWARE-ENGINEERING WiSe 21/22" + eol + "        ### GRUPPE 15 ###" + eol + eol + ">  Willkommen zu 4-Gewinnt  <" + eol + controller.field.toString)
-    inputLoop()
+  print(eol + "Hochschule fuer Technik, Wirtschaft & Gestaltung" + eol + "AIN SOFTWARE-ENGINEERING WiSe 21/22" + eol + "        ### GRUPPE 15 ###" + eol + eol + ">  Willkommen zu 4-Gewinnt  <" + eol + controller.field.toString)
+  inputLoop()
+  
   override def update: Unit = println(controller.toString)
-
+  override def kill: Unit = System.exit(0)
   def inputLoop(): Unit =
     analyseInput(readLine) match
-      case None =>
+      case None => controller.quit
       case Some(move) => 
         move.m match
           case 'i' => controller.put(move.x, move.y)

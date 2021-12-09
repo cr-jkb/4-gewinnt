@@ -11,12 +11,19 @@ class GUI(controller: Controller) extends Observer:
 
   var button = Array.ofDim[Button](controller.field.size, controller.field.size2)
   override def update: Unit = redraw()
+  override def kill: Unit = System.exit(0)
+
+  //val icon = new java.awt.Image() {
+    
+  //}
   val frame = new Frame {
-    title = "4-Gewinnt"
+    title = "4-Gewinnt - Gruppe 15"
+    override def closeOperation(): Unit = controller.quit
+    //iconImage = icon
 
     val spielfeld = new GridPanel(controller.field.size, controller.field.size2) {
       border = LineBorder(java.awt.Color.GRAY, 2)
-      background = java.awt.Color.GRAY
+      background = java.awt.Color.BLACK
       for (index <- 0 to controller.field.size - 1)
         for (index2 <- 0 to controller.field.size2 - 1)
           button(index)(index2) = new Button(controller.field.get(index, index2).toString) {
@@ -38,35 +45,69 @@ class GUI(controller: Controller) extends Observer:
       }
       undoButton.preferredSize_=(new Dimension(30,50))
       contents += undoButton
-      val redoButton = new Button("Redo") {
+      val redoButton = new Button("Redo") {        
         reactions += { case event.ButtonClicked(_) =>
           controller.redo
         }
       }
       redoButton.preferredSize_=(new Dimension(30,50))
       contents += redoButton
-      val playerRadioButton = new RadioButton("Player") {
-        reactions += { case event.ButtonClicked(_) =>
-          controller.setMode("player")
+      val ModeSelect = new GridPanel(2,1) {
+        val playerRadioButton = new RadioButton("Player") {
+          reactions += { case event.ButtonClicked(_) =>
+            controller.setMode("player")
+          }
         }
-      }
-      playerRadioButton.preferredSize_=(new Dimension(30, 50))
-      contents += playerRadioButton
-      val computerRadioButton = new RadioButton("Computer") {
-        reactions += { case event.ButtonClicked(_) =>
-          controller.setMode("computer")
+        playerRadioButton.preferredSize_=(new Dimension(30, 50))
+        contents += playerRadioButton
+        val computerRadioButton = new RadioButton("Computer") {          
+          reactions += { case event.ButtonClicked(_) =>
+            controller.setMode("computer")
+          }
         }
+        computerRadioButton.preferredSize_=(new Dimension(30, 50))
+        val gruppe1 = new ButtonGroup(playerRadioButton, computerRadioButton)
+        gruppe1.select(playerRadioButton)
+        contents += computerRadioButton
       }
-      computerRadioButton.preferredSize_=(new Dimension(30, 50))
-      val gruppe1 = new ButtonGroup(playerRadioButton, computerRadioButton)
-      gruppe1.select(playerRadioButton)
-      contents += computerRadioButton
+      contents += ModeSelect
+      
+      val gameModes = new GridPanel(2,1) {
+        val singlePlayerRB = new RadioButton("SinglePlayer") {
+          enabled = false
+        }
+        val multiPlayerRB = new RadioButton("Multiplayer") {
+          enabled = false
+        }
+        val gruppe2 = new ButtonGroup(singlePlayerRB, multiPlayerRB)
+        gruppe2.select(singlePlayerRB)
+        contents += singlePlayerRB
+        contents += multiPlayerRB
+      }
+      contents += gameModes
     }
 
-    contents = new GridPanel(2, 1) {
+    val myMenu = new MenuBar {
+      contents += new Menu("Options") {
+        mnemonic = Key.O
+        contents += new MenuItem(Action("New Game") { controller.newField })
+        contents += new MenuItem(Action("Quit") {
+        controller.quit
+        close})
+      }
+    }
+    
+
+
+    val frameContents = new BoxPanel(Orientation.Vertical) {
+      contents += myMenu
       contents += spielfeld
       contents += optionen
     }
+
+    contents = frameContents
+    
+
     size = new Dimension(500, 500)
     centerOnScreen()
     open()
@@ -76,3 +117,6 @@ class GUI(controller: Controller) extends Observer:
     for (index <- 0 to controller.field.size - 1)
       for (index2 <- 0 to controller.field.size2 - 1)
         button(index)(index2).text = controller.field.get(index, index2).toString
+
+  //def closeOperation(): Unit =
+    //controller.quit
