@@ -1,8 +1,7 @@
 import aview.TUI
 import aview.GUI
-import controller.Controller
-import model.Field
-import model.Stone
+import controller.controllerComponent.controllerBaseImpl.Controller
+import model.fieldComponent.fieldBaseImpl.Field
 @main
 def main: Unit = {
   val controller = Controller(new Field())

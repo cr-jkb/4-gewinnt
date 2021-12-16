@@ -1,6 +1,5 @@
-package model
+package model.fieldComponent.fieldBaseImpl
 
-import controller.Controller
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.wordspec.AnyWordSpec
 

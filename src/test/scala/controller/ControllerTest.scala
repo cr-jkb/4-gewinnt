@@ -1,17 +1,14 @@
-package controller
+package controller.controllerComponent.controllerBaseImpl
 
 import util.Observer
-import model.Stone
-import model.ComputerModeStrategy
-import model.PlayerModeStrategy
-import model.Field
+import model.fieldComponent.fieldBaseImpl._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers.*
 
 class ControllerSpec extends AnyWordSpec {
   "A controller" when {
     "observed by an Observer" should {
-      val controller = new Controller()
+      val controller = new Controller(new Field())
       val observer = new Observer {
         var updated: Boolean = false
         var killed: Boolean = false
@@ -43,7 +40,7 @@ class ControllerSpec extends AnyWordSpec {
       }
     }
     "a set Mode occurs" should {
-      val controller2 = new Controller()
+      val controller2 = new Controller(new Field())
       "set the Field to this Mode" in {
         controller2.setMode("computer") should be(ComputerModeStrategy())
         controller2.setMode("player") should be(PlayerModeStrategy())

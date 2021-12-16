@@ -1,20 +1,19 @@
 package aview
 
-import controller.Controller
-import model.Stone
-import model.Move
+import controller.controllerComponent.ControllerInterface
+import model.moveComponent.Move
 import scala.io.StdIn.readLine
 import util.Observer
 import scala.util.{Try,Success,Failure}
 
-class TUI(controller: Controller) extends Observer:
+class TUI(controller: ControllerInterface) extends Observer:
   controller.add(this)
   val eol = sys.props("line.separator")
   val size1 = controller.field.size
   val size2 = controller.field.size2
   print(eol + "Hochschule fuer Technik, Wirtschaft & Gestaltung" + eol + "AIN SOFTWARE-ENGINEERING WiSe 21/22" + eol + "        ### GRUPPE 15 ###" + eol + eol + ">  Willkommen zu 4-Gewinnt  <" + eol + controller.field.toString)
   inputLoop()
-  
+
   override def update: Unit = println(controller.toString)
   override def kill: Unit = System.exit(0)
   def inputLoop(): Unit =

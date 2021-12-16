@@ -1,6 +1,6 @@
-package controller
+package controller.controllerComponent.controllerBaseImpl
 
-import model.Field
+import model.fieldComponent.fieldBaseImpl.Field
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers.*
 
@@ -10,7 +10,7 @@ class PutCommandSpec extends AnyWordSpec {
     val field = new Field()
     val field2 = new Field()
     field2.put(0, 0)
-    val putCommand = new PutCommand(0, 0)
+    val putCommand = new PutCommand(0, 0, new Controller(new Field))
 
     "have a noStep function" in {
       putCommand.noStep(field) should be(field)

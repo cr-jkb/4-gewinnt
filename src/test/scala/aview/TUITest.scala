@@ -1,14 +1,14 @@
 package aview
 
-import controller.Controller
-import model.Stone
+import controller.controllerComponent.controllerBaseImpl.Controller
+import model.fieldComponent.fieldBaseImpl._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers.*
 import java.io.{BufferedReader, ByteArrayInputStream, ByteArrayOutputStream, PrintStream, StringReader}
 
 class TuiSpec extends AnyWordSpec {
   "TUI of 4-Gewinnt" should {
-    val controller = new Controller()
+    val controller = new Controller(new Field())
     val tui = TUI(controller)
     val eol = sys.props("line.separator")
 

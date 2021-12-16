@@ -1,12 +1,12 @@
 package aview
 
-import controller.Controller
+import controller.controllerComponent.ControllerInterface
 import scala.swing._
 import util.Observer
 import scala.swing.event._
 import scala.swing.Swing.LineBorder
 
-class GUI(controller: Controller) extends Observer:
+class GUI(controller: ControllerInterface) extends Observer:
   controller.add(this)
 
   var button = Array.ofDim[Button](controller.field.size, controller.field.size2)

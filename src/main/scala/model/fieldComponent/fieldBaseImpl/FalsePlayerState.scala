@@ -1,7 +1,6 @@
-package model
+package model.fieldComponent.fieldBaseImpl
 
 import util.PlayerState
-import model.Stone
 
 case class FalsePlayerState() extends PlayerState {
   override def put(x: Int, y: Int, field: Field): Field = {

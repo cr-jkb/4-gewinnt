@@ -1,4 +1,4 @@
-package model
+package model.fieldComponent.fieldBaseImpl
 
 enum Stone(stringRepresentation: String):
   override def toString = stringRepresentation
