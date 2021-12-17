@@ -24,8 +24,8 @@ class GUI(controller: ControllerInterface) extends Observer:
     val spielfeld = new GridPanel(controller.field.size, controller.field.size2) {
       border = LineBorder(java.awt.Color.GRAY, 2)
       background = java.awt.Color.BLACK
-      for (index <- 0 to controller.field.size - 1)
-        for (index2 <- 0 to controller.field.size2 - 1)
+      for (index <- 0 until controller.field.size;
+           index2 <- 0 until controller.field.size2)
           button(index)(index2) = new Button(controller.field.get(index, index2).toString) {
             reactions += { case event.ButtonClicked(_) =>
               controller.put(index, index2)
