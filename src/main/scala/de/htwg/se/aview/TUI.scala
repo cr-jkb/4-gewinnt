@@ -1,9 +1,9 @@
-package aview
+package de.htwg.se.aview
 
-import controller.controllerComponent.ControllerInterface
-import model.moveComponent.Move
+import de.htwg.se.controller.controllerComponent.ControllerInterface
+import de.htwg.se.model.moveComponent.Move
 import scala.io.StdIn.readLine
-import util.Observer
+import de.htwg.se.util.Observer
 import scala.util.{Try,Success,Failure}
 
 class TUI(controller: ControllerInterface) extends Observer:

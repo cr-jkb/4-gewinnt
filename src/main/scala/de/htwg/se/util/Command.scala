@@ -1,4 +1,4 @@
-package util
+package de.htwg.se.util
 
 trait Command[T]:
   def noStep(t: T): T

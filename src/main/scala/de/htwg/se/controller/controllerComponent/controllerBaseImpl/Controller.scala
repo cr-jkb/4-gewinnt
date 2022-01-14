@@ -1,15 +1,16 @@
-package controller.controllerComponent.controllerBaseImpl
+package de.htwg.se.controller.controllerComponent.controllerBaseImpl
 
-import model.fieldComponent.fieldBaseImpl.Field
-import model.fieldComponent.FieldInterface
-import controller.controllerComponent.ControllerInterface
-import util.Observable
-import util.ModeStrategy
-import util.Command
-import util.UndoManager
+import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
+import de.htwg.se.model.fieldComponent.FieldInterface
+import de.htwg.se.controller.controllerComponent.ControllerInterface
+import de.htwg.se.MainModule
+import de.htwg.se.util.Observable
+import de.htwg.se.util.ModeStrategy
+import de.htwg.se.util.Command
+import de.htwg.se.util.UndoManager
 import scala.languageFeature.existentials
 
-case class Controller(var field: FieldInterface) extends ControllerInterface with Observable:
+case class Controller (var field: FieldInterface) extends ControllerInterface with Observable:
   val undoManager = new UndoManager[FieldInterface]
   def newField =
     field = new Field()

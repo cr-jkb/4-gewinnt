@@ -1,8 +1,8 @@
-package controller.controllerComponent
+package de.htwg.se.controller.controllerComponent
 
-import util.ModeStrategy
-import model.fieldComponent.FieldInterface
-import util.Observable
+import de.htwg.se.util.ModeStrategy
+import de.htwg.se.model.fieldComponent.FieldInterface
+import de.htwg.se.util.Observable
 
 trait ControllerInterface extends Observable {
   def field: FieldInterface

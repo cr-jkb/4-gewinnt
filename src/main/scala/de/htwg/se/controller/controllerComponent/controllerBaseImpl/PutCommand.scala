@@ -1,8 +1,8 @@
-package controller.controllerComponent.controllerBaseImpl
+package de.htwg.se.controller.controllerComponent.controllerBaseImpl
 
-import model.fieldComponent.FieldInterface
-import util.Command
-import util.UndoManager
+import de.htwg.se.model.fieldComponent.FieldInterface
+import de.htwg.se.util.Command
+import de.htwg.se.util.UndoManager
 
 class PutCommand(x: Int, y: Int, controller: Controller) extends Command[FieldInterface]:
   override def noStep(field: FieldInterface): FieldInterface = controller.field

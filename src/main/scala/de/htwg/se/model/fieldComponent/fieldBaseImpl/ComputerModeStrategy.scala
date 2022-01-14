@@ -1,8 +1,8 @@
-package model.fieldComponent.fieldBaseImpl
+package de.htwg.se.model.fieldComponent.fieldBaseImpl
 
-import util.ModeStrategy
-import util.PlayerState
-import model.fieldComponent.FieldInterface
+import de.htwg.se.util.ModeStrategy
+import de.htwg.se.util.PlayerState
+import de.htwg.se.model.fieldComponent.FieldInterface
 
 case class ComputerModeStrategy() extends ModeStrategy {
   override def put(x: Int, y: Int, field: Field): Field = {

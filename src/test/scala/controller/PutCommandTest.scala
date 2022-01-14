@@ -1,6 +1,6 @@
-package controller.controllerComponent.controllerBaseImpl
+package de.htwg.se.controller.controllerComponent.controllerBaseImpl
 
-import model.fieldComponent.fieldBaseImpl.Field
+import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers.*
 

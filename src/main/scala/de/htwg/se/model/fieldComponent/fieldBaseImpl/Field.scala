@@ -1,8 +1,8 @@
-package model.fieldComponent.fieldBaseImpl
+package de.htwg.se.model.fieldComponent.fieldBaseImpl
 
-import model.fieldComponent.FieldInterface
-import util.PlayerState
-import util.ModeStrategy
+import de.htwg.se.model.fieldComponent.FieldInterface
+import de.htwg.se.util.PlayerState
+import de.htwg.se.util.ModeStrategy
 
 case class Field(matrix: Matrix[Stone], var player: PlayerState, var mode: ModeStrategy) extends FieldInterface:
   def this(row: Int = 6, column: Int = 7, filling: Stone = Stone.Empty) = this(new Matrix(row, column, filling), TruePlayerState(), PlayerModeStrategy())

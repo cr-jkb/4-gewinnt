@@ -1,8 +1,8 @@
-package aview
+package de.htwg.se.aview
 
-import controller.controllerComponent.ControllerInterface
+import de.htwg.se.controller.controllerComponent.ControllerInterface
 import scala.swing._
-import util.Observer
+import de.htwg.se.util.Observer
 import scala.swing.event._
 import scala.swing.Swing.LineBorder
 

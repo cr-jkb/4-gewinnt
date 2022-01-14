@@ -1,8 +1,8 @@
-package model.fieldComponent
+package de.htwg.se.model.fieldComponent
 
-import model.fieldComponent.fieldBaseImpl.Stone
-import model.fieldComponent.fieldBaseImpl.Field
-import util.ModeStrategy
+import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
+import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
+import de.htwg.se.util.ModeStrategy
 trait FieldInterface {
   def size: Int
   def size2: Int

@@ -1,7 +1,7 @@
-package aview
+package de.htwg.se.aview
 
-import controller.controllerComponent.controllerBaseImpl.Controller
-import model.fieldComponent.fieldBaseImpl._
+import de.htwg.se.controller.controllerComponent.controllerBaseImpl.Controller
+import de.htwg.se.model.fieldComponent.fieldBaseImpl._
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers.*
 import java.io.{BufferedReader, ByteArrayInputStream, ByteArrayOutputStream, PrintStream, StringReader}
