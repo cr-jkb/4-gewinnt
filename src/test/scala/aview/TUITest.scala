@@ -1,4 +1,4 @@
-package de.htwg.se.aview
+/* package de.htwg.se.aview
 
 import de.htwg.se.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.model.fieldComponent.fieldBaseImpl._
@@ -122,3 +122,4 @@ class TuiSpec extends AnyWordSpec {
     }
   }
 }
+*/
