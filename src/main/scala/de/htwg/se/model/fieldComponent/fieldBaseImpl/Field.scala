@@ -1,5 +1,4 @@
 // Implemented 1-Instance Class for Field State
-// Layer-Skipping Implementations are: undo (writes new field state immediately)
 
 package de.htwg.se.model.fieldComponent.fieldBaseImpl
 
