@@ -14,7 +14,7 @@ class GUI(controller: ControllerInterface) extends Observer:
   override def kill: Unit = System.exit(0)
 
   //val icon = new java.awt.Image() {
-    
+    // OUR GAME ICON IS STILL UNDER CONSTRUCTION
   //}
   val frame = new Frame {
     title = "4-Gewinnt - Gruppe 15"

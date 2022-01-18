@@ -1,3 +1,5 @@
+// Dependency Injection Class
+
 package de.htwg.se
 
 import com.google.inject.AbstractModule

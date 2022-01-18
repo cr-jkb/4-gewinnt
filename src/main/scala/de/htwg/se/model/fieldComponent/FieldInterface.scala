@@ -1,3 +1,4 @@
+// Interface to be implemented into Field.scala
 package de.htwg.se.model.fieldComponent
 
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone

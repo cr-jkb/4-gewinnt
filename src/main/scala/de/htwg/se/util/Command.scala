@@ -1,16 +1,16 @@
 package de.htwg.se.util
 
-trait Command[T]:
+trait Command[T]: // Interface to be implemented in /controller/PutCommand.scala
   def noStep(t: T): T
   def doStep(t: T): T
   def undoStep(t: T): T
   def redoStep(t: T): T
 
-class UndoManager[T]:
+class UndoManager[T]: // Implemented Class
   private var undoStack: List[Command[T]] = Nil
   private var redoStack: List[Command[T]] = Nil
   def doStep(t: T, command: Command[T]) =
-    undoStack = command :: undoStack
+    undoStack = command :: undoStack // '::' nimmt den command vom UndoStack
     command.doStep(t)
   def undoStep(t: T): T =
     undoStack match {
@@ -22,7 +22,7 @@ class UndoManager[T]:
         result
       }
     }
-  def redoStep(t: T): T =
+  def redoStep(t: T): T = //same as above but on the redoStack
     redoStack match {
       case Nil => t
       case head :: stack => {

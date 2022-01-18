@@ -29,13 +29,13 @@ class TUI(controller: ControllerInterface) extends Observer:
           case 'e' => println("Bitte Eingabe ueberpruefen.")
         inputLoop()
 
-  def analyseInput(input: String): Option[Move] =
+  def analyseInput(input: String): Option[Move] = // String Interpretation
     input match
       case "q" => None
       case "r" => Some(Move('r', 0, 0))
       case "u" => Some(Move('u', 0, 0))
-      case "computer" => Some(Move('c', 0, 0))
-      case "player" => Some(Move('p', 0, 0))
+      case "singleplayer" | "Singleplayer" => Some(Move('c', 0, 0))
+      case "multiplayer" | "Multiplayer" => Some(Move('p', 0, 0))
       case _ => {
         getCharArray(input) match
           case Success(chars) =>
@@ -52,9 +52,10 @@ class TUI(controller: ControllerInterface) extends Observer:
           case Failure(err) => println("Eingabe entspricht nicht der vorgegebenen Laenge."); Some(Move('e', 0, 0))
       }
 
-  def getInt(input: Char): Try[Int] = Try(input.toString.toInt)
-  def getCharArray(input: String): Try[Array[Char]] = Try {
+  def getCharArray(input: String): Try[Array[Char]] = Try { // if insert command then split x and y
     if (input.length != 5)
       return Failure(new ArrayIndexOutOfBoundsException)
     input.toCharArray
   }
+
+  def getInt(input: Char): Try[Int] = Try(input.toString.toInt) // convertable to INT?

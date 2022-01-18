@@ -1,3 +1,5 @@
+// Implements Command.scala Interface and uses UndoManager
+// PutCommand -> Controller -> Command
 package de.htwg.se.controller.controllerComponent.controllerBaseImpl
 
 import de.htwg.se.model.fieldComponent.FieldInterface
