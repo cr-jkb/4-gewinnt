@@ -1,3 +1,5 @@
+// Implemented 1-Instance Class
+
 package de.htwg.se.model.fieldComponent.fieldBaseImpl
 
 case class Matrix[T](rows: Vector[Vector[T]]):

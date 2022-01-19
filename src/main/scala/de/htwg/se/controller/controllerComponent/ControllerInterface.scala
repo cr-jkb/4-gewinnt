@@ -1,3 +1,4 @@
+// Interface to be used in GUI, TUI and Main
 package de.htwg.se.controller.controllerComponent
 
 import de.htwg.se.util.ModeStrategy
