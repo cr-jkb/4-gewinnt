@@ -5,6 +5,8 @@ import scala.swing._
 import de.htwg.se.util.Observer
 import scala.swing.event._
 import scala.swing.Swing.LineBorder
+import javax.imageio.ImageIO
+import java.io.File
 
 class GUI(controller: ControllerInterface) extends Observer:
   controller.add(this)
@@ -13,13 +15,12 @@ class GUI(controller: ControllerInterface) extends Observer:
   override def update: Unit = redraw()
   override def kill: Unit = System.exit(0)
 
-  //val icon = new java.awt.Image() {
-    // OUR GAME ICON IS STILL UNDER CONSTRUCTION
-  //}
+  val icon = ImageIO.read(new File("res/logo.jpg"))
+  
   val frame = new Frame {
     title = "4-Gewinnt - Gruppe 15"
     override def closeOperation(): Unit = controller.quit
-    //iconImage = icon
+    iconImage = icon
 
     val spielfeld = new GridPanel(controller.field.size, controller.field.size2) {
       border = LineBorder(java.awt.Color.GRAY, 2)
@@ -53,14 +54,14 @@ class GUI(controller: ControllerInterface) extends Observer:
       redoButton.preferredSize_=(new Dimension(30,50))
       contents += redoButton
       val ModeSelect = new GridPanel(2,1) {
-        val playerRadioButton = new RadioButton("Player") {
+        val playerRadioButton = new RadioButton("Singleplayer") {
           reactions += { case event.ButtonClicked(_) =>
             controller.setMode("player")
           }
         }
         playerRadioButton.preferredSize_=(new Dimension(30, 50))
         contents += playerRadioButton
-        val computerRadioButton = new RadioButton("Computer") {          
+        val computerRadioButton = new RadioButton("Multiplayer") {          
           reactions += { case event.ButtonClicked(_) =>
             controller.setMode("computer")
           }
