@@ -13,7 +13,11 @@ case class Controller (var field: FieldInterface) extends ControllerInterface wi
   val undoManager = new UndoManager[FieldInterface]
   
   def newField =
-    field = new Field()
+    field = new Field() //???? CASE CLASS!?!?!?!?
+    notifyObservers
+
+  def loadField =
+    field = field.meshFromXml("startUp.xml") //Dependency Injection here (?)
     notifyObservers
   
   def put(x: Int, y: Int) =

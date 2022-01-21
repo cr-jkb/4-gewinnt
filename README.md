@@ -12,7 +12,7 @@ Jahr: WiSe 2021-2022
 - 'Interfaces' for Traits (Interfaces are used as templates for standarized methods and variables), 'Implemented Interfaces' if there are full working methods inside, Classes, ... 
 - You will not find any Object Notations as everything is an object in Scala. Instead you may find '1-Instance Classes' as an alias for case classes. 1-Instance refers to the immutability of those. 
 - 'Wrapper Classes' can be also called "State-Holders" or "State-Save-Objects" and by that function like Placeholders that may be used as "Swap-In Classes/Objects". 
-\
+
 
 ### Anleitung:
 
@@ -22,12 +22,12 @@ Der Spieler der es als erstes schafft 4 Steine seiner eigenen Farbe bzw. in unse
 #### Wie spielen?
 Tippe auf die Steine in der GUI \
 oder spiele in der TUI per: 
-- Befehl 'i 4 5' => Setze Stein auf x=4,y=5 
-- Befehl 'singleplayer' => Wechsle Modus auf SinglePlayer 
-- Befehl 'multiplayer' => Wechsle Modus aus Multiplayer 
-- Befehl 'u' => Undo 
-- Befehl 'r' => Redo
-- Befehl 'q' => Programm beenden 
+- Befehl `i 4 5` => Setze Stein auf x=4, y=5 
+- Befehl `singleplayer` => Wechsle Modus auf SinglePlayer 
+- Befehl `multiplayer` => Wechsle Modus aus Multiplayer 
+- Befehl `u` => Undo 
+- Befehl `r` => Redo
+- Befehl `q` => Programm beenden 
 
 ___ in production
 Notation for good style (agility compatible):
@@ -39,7 +39,9 @@ LAYER Order when placing a Stone in /view: (descending = from above)
 |
 v
 - Controller
+
 \
+
 - Field
 - ModeStrategy
 - Player

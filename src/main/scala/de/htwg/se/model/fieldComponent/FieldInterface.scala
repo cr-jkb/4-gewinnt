@@ -12,4 +12,5 @@ trait FieldInterface {
   def getPlayerState(): Boolean
   def setMode(str: String): ModeStrategy
   def undo(x: Int, y: Int): FieldInterface
+  def meshFromXml(fileName : String) : Field
 }
