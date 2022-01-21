@@ -22,12 +22,12 @@ Der Spieler der es als erstes schafft 4 Steine seiner eigenen Farbe bzw. in unse
 #### Wie spielen?
 Tippe auf die Steine in der GUI \
 oder spiele in der TUI per: 
-- Befehl `i 4 5` => Setze Stein auf x=4, y=5 
-- Befehl `singleplayer` => Wechsle Modus auf SinglePlayer 
-- Befehl `multiplayer` => Wechsle Modus aus Multiplayer 
-- Befehl `u` => Undo 
-- Befehl `r` => Redo
-- Befehl `q` => Programm beenden 
+- `i 4 5` => Setze Stein auf x=4, y=5 
+- `singleplayer` => Wechsle Modus auf SinglePlayer 
+- `multiplayer` => Wechsle Modus aus Multiplayer 
+- `u` => Undo 
+- `r` => Redo
+- `q` => Programm beenden 
 
 ___ in production
 Notation for good style (agility compatible):
