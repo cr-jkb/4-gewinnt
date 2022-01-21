@@ -7,11 +7,18 @@ import de.htwg.se.util.Observable
 import de.htwg.se.util.Command
 import de.htwg.se.util.UndoManager
 import de.htwg.se.util.ModeStrategy
+import com.google.inject.Guice
+import de.htwg.se.MainModule
+import de.htwg.se.model.fileIOComponent.FileIOInterface
+import com.google.inject.Inject
+import com.google.inject.name.Named
 
-case class Controller (var field: FieldInterface) extends ControllerInterface with Observable:
+case class Controller @Inject()(@Named("DefField") var field: FieldInterface) extends ControllerInterface with Observable:
 
   val undoManager = new UndoManager[FieldInterface]
-  
+  val injector = Guice.createInjector(new MainModule)
+  val fileIo = injector.getInstance(classOf[FileIOInterface])
+
   def newField =
     field = new Field()
     notifyObservers
@@ -32,5 +39,13 @@ case class Controller (var field: FieldInterface) extends ControllerInterface wi
  
   def quit = 
     killObservers
+
+  def save: Unit =
+    fileIo.save(field)
+    notifyObservers
+
+  def load: Unit =
+    field = fileIo.load
+    notifyObservers
 
   override def toString = field.toString

@@ -1,0 +1,45 @@
+<field mode="player" player="false">
+      <cell row="0" col="0" value="X">
+    </cell><cell row="0" col="1" value="O">
+    </cell><cell row="0" col="2" value=" ">
+    </cell><cell row="0" col="3" value=" ">
+    </cell><cell row="0" col="4" value=" ">
+    </cell><cell row="0" col="5" value=" ">
+    </cell><cell row="0" col="6" value=" ">
+    </cell><cell row="1" col="0" value=" ">
+    </cell><cell row="1" col="1" value=" ">
+    </cell><cell row="1" col="2" value=" ">
+    </cell><cell row="1" col="3" value=" ">
+    </cell><cell row="1" col="4" value=" ">
+    </cell><cell row="1" col="5" value=" ">
+    </cell><cell row="1" col="6" value=" ">
+    </cell><cell row="2" col="0" value=" ">
+    </cell><cell row="2" col="1" value=" ">
+    </cell><cell row="2" col="2" value=" ">
+    </cell><cell row="2" col="3" value=" ">
+    </cell><cell row="2" col="4" value=" ">
+    </cell><cell row="2" col="5" value=" ">
+    </cell><cell row="2" col="6" value=" ">
+    </cell><cell row="3" col="0" value=" ">
+    </cell><cell row="3" col="1" value=" ">
+    </cell><cell row="3" col="2" value=" ">
+    </cell><cell row="3" col="3" value=" ">
+    </cell><cell row="3" col="4" value=" ">
+    </cell><cell row="3" col="5" value=" ">
+    </cell><cell row="3" col="6" value=" ">
+    </cell><cell row="4" col="0" value=" ">
+    </cell><cell row="4" col="1" value=" ">
+    </cell><cell row="4" col="2" value=" ">
+    </cell><cell row="4" col="3" value=" ">
+    </cell><cell row="4" col="4" value=" ">
+    </cell><cell row="4" col="5" value=" ">
+    </cell><cell row="4" col="6" value=" ">
+    </cell><cell row="5" col="0" value=" ">
+    </cell><cell row="5" col="1" value=" ">
+    </cell><cell row="5" col="2" value="X">
+    </cell><cell row="5" col="3" value=" ">
+    </cell><cell row="5" col="4" value=" ">
+    </cell><cell row="5" col="5" value="X">
+    </cell><cell row="5" col="6" value="O">
+    </cell>
+    </field>

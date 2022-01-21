@@ -27,6 +27,8 @@ class TUI(controller: ControllerInterface) extends Observer:
           case 'r' => controller.redo; println("Redo erfolgreich.")
           case 'u' => controller.undo; println("Undo erfolgreich.")
           case 'e' => println("Bitte Eingabe ueberpruefen.")
+          case 's' => controller.save; println("Spiel gespeichert.")
+          case 'l' => controller.load; println("Spiel geladen.")
         inputLoop()
 
   def analyseInput(input: String): Option[Move] = // String Interpretation
@@ -34,6 +36,8 @@ class TUI(controller: ControllerInterface) extends Observer:
       case "q" => None
       case "r" => Some(Move('r', 0, 0))
       case "u" => Some(Move('u', 0, 0))
+      case "l" => Some(Move('l', 0, 0))
+      case "s" => Some(Move('s', 0, 0))
       case "singleplayer" | "Singleplayer" => Some(Move('c', 0, 0))
       case "multiplayer" | "Multiplayer" => Some(Move('p', 0, 0))
       case _ => {

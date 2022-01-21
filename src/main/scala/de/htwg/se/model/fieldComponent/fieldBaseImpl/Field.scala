@@ -6,7 +6,7 @@ import de.htwg.se.model.fieldComponent.FieldInterface
 import de.htwg.se.util.PlayerState
 import de.htwg.se.util.ModeStrategy
 
-case class Field(matrix: Matrix[Stone], var player: PlayerState, var mode: ModeStrategy) extends FieldInterface:
+case class Field(var matrix: Matrix[Stone], var player: PlayerState, var mode: ModeStrategy) extends FieldInterface:
 
   def this(row: Int = 6, column: Int = 7, filling: Stone = Stone.Empty) = this(new Matrix(row, column, filling), TruePlayerState(), PlayerModeStrategy())
 
@@ -30,9 +30,18 @@ case class Field(matrix: Matrix[Stone], var player: PlayerState, var mode: ModeS
   def put(x: Int, y: Int): Field =
     mode.put(x, y, this)
 
+  def set(x: Int, y: Int, filling: String): FieldInterface =
+    filling match {
+      case " " => copy(matrix.replaceCell(x, y, Stone.Empty))
+      case "X" => copy(matrix.replaceCell(x, y, Stone.X))
+      case "O" => copy(matrix.replaceCell(x, y, Stone.O))
+    }
+
   def get(x: Int, y: Int): Stone = matrix.cell(x, y)
 
   def getPlayerState(): Boolean = if (player == TruePlayerState()) true else false
+
+  def getMode(): String = if (mode == PlayerModeStrategy()) "player" else "computer"
 
   def setMode(str: String): ModeStrategy =
     str match 
@@ -43,10 +52,24 @@ case class Field(matrix: Matrix[Stone], var player: PlayerState, var mode: ModeS
         mode = ComputerModeStrategy()
         mode
 
+  def setPlayer(str: String): PlayerState =
+    str match {
+      case "false" => player = FalsePlayerState()
+      case "true" => player = TruePlayerState()
+    }
+    player
+
   //--Field related:
   def undo(x: Int, y: Int): Field = //remove the stone at x,y
-    if (player == TruePlayerState())
-      player = FalsePlayerState()
+    if (mode == PlayerModeStrategy())
+      if (player == TruePlayerState())
+        player = FalsePlayerState()
+      else
+        player = TruePlayerState()
+      copy(matrix.replaceCell(x, y, Stone.Empty)) //write empty Stone
     else
-      player = TruePlayerState()
-    copy(matrix.replaceCell(x, y, Stone.Empty)) //write empty Stone
+      val field2 = copy(matrix.replaceCell(x, y, Stone.Empty))
+      if (y + 1 <= size2 - 1)
+        copy(field2.matrix.replaceCell(x, y + 1, Stone.Empty))
+      else
+        field2

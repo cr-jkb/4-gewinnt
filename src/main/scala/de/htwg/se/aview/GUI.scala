@@ -72,19 +72,21 @@ class GUI(controller: ControllerInterface) extends Observer:
       }
       contents += ModeSelect
       
-      val gameModes = new GridPanel(2,1) {
-        val singlePlayerRB = new RadioButton("SinglePlayer") {
-          enabled = false
+      val saveLoad = new GridPanel(2,1) {
+        val save = new Button("Save") {
+          reactions += { case event.ButtonClicked(_) =>
+            controller.save
+          }
         }
-        val multiPlayerRB = new RadioButton("Multiplayer") {
-          enabled = false
+        val load = new Button("Load") {
+          reactions += { case event.ButtonClicked(_) =>
+            controller.load
+          }
         }
-        val gruppe2 = new ButtonGroup(singlePlayerRB, multiPlayerRB)
-        gruppe2.select(singlePlayerRB)
-        contents += singlePlayerRB
-        contents += multiPlayerRB
+        contents += save
+        contents += load
       }
-      contents += gameModes
+      contents += saveLoad
     }
 
     val myMenu = new MenuBar {
