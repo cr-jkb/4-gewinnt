@@ -34,7 +34,7 @@ class GUI(controller: ControllerInterface) extends Observer:
   var selectors = Array.ofDim[Label](controller.field.size2)
   override def update: Unit = redraw()
   override def kill: Unit = {
-    task.cancel() 
+    //task.cancel() 
     System.exit(0)
   }
 
@@ -63,27 +63,30 @@ class GUI(controller: ControllerInterface) extends Observer:
     val selector = getSelector(controller.field.size2)
     
     val t = new java.util.Timer()
-    t.schedule(task, 1000L, 1000L)
+    //t.schedule(task, 1000L, 1000L)
     
 
     val optionen = new GridPanel(2, 2) {
       border = LineBorder(java.awt.Color.WHITE, 20)
       background = java.awt.Color.WHITE
       val undoButton = new Button("Undo") {
+        icon = new ImageIcon(ImageIO.read(new File("res/undo.png")))
         reactions += { case event.ButtonClicked(_) =>
           controller.undo
         }
       }
       undoButton.preferredSize_=(new Dimension(30,50))
       contents += undoButton
-      val redoButton = new Button("Redo") {        
+      val redoButton = new Button("Redo") { 
+        icon = new ImageIcon(ImageIO.read(new File("res/redo2.png")))
         reactions += { case event.ButtonClicked(_) =>
           controller.redo
         }
       }
       redoButton.preferredSize_=(new Dimension(30,50))
       contents += redoButton
-      val ModeSelect = new GridPanel(2,1) {
+      val ModeSelect = new GridPanel(1,2) {
+        border = BorderFactory.createEmptyBorder(0,20,10,0)
         val playerRadioButton = new RadioButton("Singleplayer") {
           reactions += { case event.ButtonClicked(_) =>
             controller.setMode("player")
@@ -100,20 +103,35 @@ class GUI(controller: ControllerInterface) extends Observer:
         val gruppe1 = new ButtonGroup(playerRadioButton, computerRadioButton)
         gruppe1.select(playerRadioButton)
         contents += computerRadioButton
+        //listenTo(keys)
+        reactions += { 
+          case event.KeyPressed(_, Key.Left, _, _) => moveSelLeft
+          case event.KeyPressed(_, Key.Right, _, _) => moveSelRight
+          case KeyPressed(_, Key.Enter, _, _) => putSel
+        }
       }
       contents += ModeSelect
       
-      val gameModes = new GridPanel(2,1) {
-        val singlePlayerRB = new RadioButton("SinglePlayer") {
+      val gameModes = new GridPanel(1,2) {
+        border = BorderFactory.createEmptyBorder(20, 50, 0, 0)
+        val easyRB = new RadioButton("Easy") {
           enabled = false
         }
-        val multiPlayerRB = new RadioButton("Multiplayer") {
+        val mediumRB = new RadioButton("Medium") {
           enabled = false
         }
-        val gruppe2 = new ButtonGroup(singlePlayerRB, multiPlayerRB)
-        gruppe2.select(singlePlayerRB)
-        contents += singlePlayerRB
-        contents += multiPlayerRB
+        val hardRB = new RadioButton("Hard") {
+          enabled = false
+        }
+        val fullRB = new RadioButton("Invincible") {
+          enabled = false
+        }
+        //val gruppe2 = new ButtonGroup(singlePlayerRB, multiPlayerRB)
+        //gruppe2.select(singlePlayerRB)
+        contents += easyRB
+        contents += mediumRB
+        contents += hardRB
+        contents += fullRB
       }
       contents += gameModes
     }
@@ -126,6 +144,11 @@ class GUI(controller: ControllerInterface) extends Observer:
         controller.quit
         close})
       }
+      contents += new Menu("Difficulty") {
+        mnemonic = Key.D
+        contents += new MenuItem(Action("Easy") { controller.newField })
+        contents += new MenuItem(Action("Medium") { controller.quit })
+      }
     }
     
 
@@ -136,11 +159,7 @@ class GUI(controller: ControllerInterface) extends Observer:
       contents += spielfeld
       contents += optionen
     }
-    reactions += { 
-      case event.KeyPressed(_, Key.Left, _, _) => moveSelLeft
-      case event.KeyPressed(_, Key.Right, _, _) => moveSelRight
-      case KeyPressed(_, Key.Enter, _, _) => putSel
-    }
+    
 
     contents = frameContents
     
@@ -159,6 +178,8 @@ class GUI(controller: ControllerInterface) extends Observer:
           button(index)(index2).icon = new ImageIcon(ImageIO.read(new File("res/slotyellow.png")))
         } else if (controller.field.get(index, index2).toString.equals("O")) {
           button(index)(index2).icon = new ImageIcon(ImageIO.read(new File("res/slotred.png")))                    
+        } else {
+          button(index)(index2).icon = new ImageIcon(ImageIO.read(new File("res/slot2.png")))
         }
 
   //def closeOperation(): Unit =
@@ -167,14 +188,18 @@ class GUI(controller: ControllerInterface) extends Observer:
   def getField(size: Int, size2: Int): GridPanel = 
     new GridPanel(size, size2) {
         //border = LineBorder(java.awt.Color.GRAY, 2)
-        background = java.awt.Color.BLACK
+        background = new Color(0,131,255)
         for (index <- 0 until controller.field.size;
             index2 <- 0 until controller.field.size2)
             button(index)(index2) = new Label(controller.field.get(index, index2).toString) {
-              background = java.awt.Color.white
-              icon = new ImageIcon(ImageIO.read(new File("res/slot.png")))
-              reactions += { case event.ButtonClicked(_) =>
+              //background = java.awt.Color.white
+              //icon = new ImageIcon(ImageIO.read(new File("res/slot.png")))
+              listenTo(mouse.clicks)
+              reactions += { case m: MousePressed => 
                 controller.put(index, index2)
+              }
+              reactions += { case event.ButtonClicked(_) =>
+                
                 //button(index)(index2).text = controller.field.get(index, index2).toString
                 /*if (controller.field.get(index, index2).toString.equals("X")) {
                   icon = new ImageIcon(ImageIO.read(new File("res/slotyellow.png")))
