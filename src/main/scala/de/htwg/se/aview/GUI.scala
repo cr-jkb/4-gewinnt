@@ -7,16 +7,48 @@ import scala.swing.event._
 import javax.swing.{BorderFactory, ImageIcon}
 import scala.swing.Swing.LineBorder
 import javax.imageio.ImageIO
+import scala.util.{Try, Success, Failure}
+//import scala.language.postfixOps
 import java.io.File
+import scala.swing.{
+  Alignment,
+  Label,
+  Orientation,
+  GridPanel,
+  FlowPanel,
+  BoxPanel,
+  Dimension
+}
 
 //GridPanels new GridPanel(rows, cols)
+val empty = new ImageIcon(ImageIO.read(new File("res/empty.png")))
+val selector_red = new ImageIcon(ImageIO.read(new File("res/red2-lq.png")))
+val selector_yellow = new ImageIcon(ImageIO.read(new File("res/yellow2-lq.png")))
+var selector_visible:Boolean = false
+var selector_pos = 0
 
 class GUI(controller: ControllerInterface) extends Observer:
   controller.add(this)
   //border = BorderFactory.createLineBorder(Color.BLACK, 5)
-  var button = Array.ofDim[Button](controller.field.size, controller.field.size2)
+  var button = Array.ofDim[Label](controller.field.size, controller.field.size2)
+  var selectors = Array.ofDim[Label](controller.field.size2)
   override def update: Unit = redraw()
-  override def kill: Unit = System.exit(0)
+  override def kill: Unit = {
+    task.cancel() 
+    System.exit(0)
+  }
+
+  val task = new java.util.TimerTask {
+      def run() = println(s"Beep! ${selector_pos}")
+      /*try {
+      if (selector_visible) {
+        selectors(selector_pos).icon = selector_red
+      } else {
+        selectors(selector_pos).icon = empty
+      }*/
+      selector_visible = !selector_visible /*} match {
+        case f: Failure[String] => "fail" }*/
+  }
 
   val MainIcon = ImageIO.read(new File("res/logo.jpg"))
   
@@ -24,9 +56,15 @@ class GUI(controller: ControllerInterface) extends Observer:
     title = "4-Gewinnt - Gruppe 15"
     override def closeOperation(): Unit = controller.quit
     iconImage = MainIcon
+    minimumSize = new java.awt.Dimension(900,1000)
+    centerOnScreen
 
     val spielfeld = getField(controller.field.size, controller.field.size2)
-    val selector = getSelector(controller.field.size)
+    val selector = getSelector(controller.field.size2)
+    
+    val t = new java.util.Timer()
+    t.schedule(task, 1000L, 1000L)
+    
 
     val optionen = new GridPanel(2, 2) {
       border = LineBorder(java.awt.Color.WHITE, 20)
@@ -98,6 +136,11 @@ class GUI(controller: ControllerInterface) extends Observer:
       contents += spielfeld
       contents += optionen
     }
+    reactions += { 
+      case event.KeyPressed(_, Key.Left, _, _) => moveSelLeft
+      case event.KeyPressed(_, Key.Right, _, _) => moveSelRight
+      case KeyPressed(_, Key.Enter, _, _) => putSel
+    }
 
     contents = frameContents
     
@@ -106,6 +149,7 @@ class GUI(controller: ControllerInterface) extends Observer:
     centerOnScreen()
     open()
   }
+  
 
   def redraw(): Unit =
     for (index <- 0 to controller.field.size - 1)
@@ -126,7 +170,7 @@ class GUI(controller: ControllerInterface) extends Observer:
         background = java.awt.Color.BLACK
         for (index <- 0 until controller.field.size;
             index2 <- 0 until controller.field.size2)
-            button(index)(index2) = new Button(controller.field.get(index, index2).toString) {
+            button(index)(index2) = new Label(controller.field.get(index, index2).toString) {
               background = java.awt.Color.white
               icon = new ImageIcon(ImageIO.read(new File("res/slot.png")))
               reactions += { case event.ButtonClicked(_) =>
@@ -141,12 +185,38 @@ class GUI(controller: ControllerInterface) extends Observer:
             }
             contents += button(index)(index2)
       }
+
+  def putSel = controller.put(0, selector_pos)
   
   def getSelector(sizeW: Int): GridPanel =
     new GridPanel(0, sizeW) {
       for (i <- 0 until sizeW)
-        val select = new Label {
-          icon = new ImageIcon(ImageIO.read(new File("res/red2-lq.png")))
+        selectors(i) = new Label {
+          icon = empty //new ImageIcon(ImageIO.read(new File("res/red2-lq.png")))
         }
-        contents += select
+        contents += selectors(i)
     }
+  /*  
+  def moveSelLeft: Int =
+    if (selector_pos > 0) selector_pos--
+
+  def moveSelRight: Int =
+    if (selector_pos > 0) selector_pos++*/
+
+  def moveSelLeft =
+    //optionally pause timer here
+    if (selector_pos > 0) {
+      selectors(selector_pos).icon = empty
+      selector_pos = selector_pos -1      
+    }
+    updateSelImg
+  
+  def updateSelImg = selectors(selector_pos).icon = selector_red
+
+  def moveSelRight =
+    if (selector_pos < controller.field.size2) {
+      selectors(selector_pos).icon = empty
+      selector_pos = selector_pos +1
+    }
+    updateSelImg
+  
