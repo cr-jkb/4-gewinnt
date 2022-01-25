@@ -20,7 +20,6 @@ import scala.swing.{
   Dimension
 }
 
-//GridPanels new GridPanel(rows, cols)
 val empty = new ImageIcon(ImageIO.read(new File("res/empty.png")))
 val selector_red = new ImageIcon(ImageIO.read(new File("res/red2-lq.png")))
 val selector_yellow = new ImageIcon(ImageIO.read(new File("res/yellow2-lq.png")))
@@ -29,7 +28,6 @@ var selector_pos = 0
 
 class GUI(controller: ControllerInterface) extends Observer:
   controller.add(this)
-  //border = BorderFactory.createLineBorder(Color.BLACK, 5)
   var button = Array.ofDim[Label](controller.field.size, controller.field.size2)
   var selectors = Array.ofDim[Label](controller.field.size2)
   override def update: Unit = redraw()
@@ -38,6 +36,7 @@ class GUI(controller: ControllerInterface) extends Observer:
     System.exit(0)
   }
 
+  /*
   val task = new java.util.TimerTask {
       def run() = println(s"Beep! ${selector_pos}")
       /*try {
@@ -48,7 +47,7 @@ class GUI(controller: ControllerInterface) extends Observer:
       }*/
       selector_visible = !selector_visible /*} match {
         case f: Failure[String] => "fail" }*/
-  }
+  } */
 
   val MainIcon = ImageIO.read(new File("res/logo.jpg"))
   
@@ -62,7 +61,7 @@ class GUI(controller: ControllerInterface) extends Observer:
     val spielfeld = getField(controller.field.size, controller.field.size2)
     val selector = getSelector(controller.field.size2)
     
-    val t = new java.util.Timer()
+    //val t = new java.util.Timer()
     //t.schedule(task, 1000L, 1000L)
     
 
@@ -103,7 +102,7 @@ class GUI(controller: ControllerInterface) extends Observer:
         val gruppe1 = new ButtonGroup(playerRadioButton, computerRadioButton)
         gruppe1.select(playerRadioButton)
         contents += computerRadioButton
-        //listenTo(keys)
+        //listenTo(keys) KNOWN BUG (does not catch) // also mouse can replace existings
         reactions += { 
           case event.KeyPressed(_, Key.Left, _, _) => moveSelLeft
           case event.KeyPressed(_, Key.Right, _, _) => moveSelRight
@@ -120,7 +119,7 @@ class GUI(controller: ControllerInterface) extends Observer:
         val mediumRB = new RadioButton("Medium") {
           enabled = false
         }
-        val hardRB = new RadioButton("Hard") {
+        val hardRB = new RadioButton("Difficult") {
           enabled = false
         }
         val fullRB = new RadioButton("Invincible") {
@@ -144,10 +143,10 @@ class GUI(controller: ControllerInterface) extends Observer:
         controller.quit
         close})
       }
-      contents += new Menu("Difficulty") {
+      contents += new Menu("Difficulty/Sound") {
         mnemonic = Key.D
-        contents += new MenuItem(Action("Easy") { controller.newField })
-        contents += new MenuItem(Action("Medium") { controller.quit })
+        //contents += new MenuItem(Action("Easy") { controller.newField })
+        //contents += new MenuItem(Action("Medium") { controller.quit })
       }
     }
     
@@ -167,13 +166,12 @@ class GUI(controller: ControllerInterface) extends Observer:
     size = new Dimension(500, 500)
     centerOnScreen()
     open()
+    redraw()
   }
-  
 
   def redraw(): Unit =
     for (index <- 0 to controller.field.size - 1)
       for (index2 <- 0 to controller.field.size2 - 1)
-        //button(index)(index2).icon = controller.field.get(index, index2).toString
         if (controller.field.get(index, index2).toString.equals("X")) {
           button(index)(index2).icon = new ImageIcon(ImageIO.read(new File("res/slotyellow.png")))
         } else if (controller.field.get(index, index2).toString.equals("O")) {
@@ -182,30 +180,15 @@ class GUI(controller: ControllerInterface) extends Observer:
           button(index)(index2).icon = new ImageIcon(ImageIO.read(new File("res/slot2.png")))
         }
 
-  //def closeOperation(): Unit =
-    //controller.quit
-
   def getField(size: Int, size2: Int): GridPanel = 
     new GridPanel(size, size2) {
-        //border = LineBorder(java.awt.Color.GRAY, 2)
         background = new Color(0,131,255)
         for (index <- 0 until controller.field.size;
             index2 <- 0 until controller.field.size2)
             button(index)(index2) = new Label(controller.field.get(index, index2).toString) {
-              //background = java.awt.Color.white
-              //icon = new ImageIcon(ImageIO.read(new File("res/slot.png")))
               listenTo(mouse.clicks)
               reactions += { case m: MousePressed => 
                 controller.put(index, index2)
-              }
-              reactions += { case event.ButtonClicked(_) =>
-                
-                //button(index)(index2).text = controller.field.get(index, index2).toString
-                /*if (controller.field.get(index, index2).toString.equals("X")) {
-                  icon = new ImageIcon(ImageIO.read(new File("res/slotyellow.png")))
-                } else if (controller.field.get(index, index2).toString.equals("O")) {
-                  icon = new ImageIcon(ImageIO.read(new File("res/slotred.png")))                    
-                }*/
               }
             }
             contents += button(index)(index2)
