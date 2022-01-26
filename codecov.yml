@@ -1,0 +1,10 @@
+ignore:
+  - "**/aview/GUI.scala"
+  - "**/Main.scala"
+  - "**/res/"
+
+coverage:
+  status:
+    patch:
+      default:
+        target: 90%
