@@ -1,28 +1,22 @@
-## Willkommen zum Software-Engineering Projekt der HTWG Konstanz!
-Spieltitel: 4 Gewinnt \
-Autoren: Julian Mennel & Chris Jakob \
-Jahr: WiSe 2021-2022
 
-Description | Badge
---------|--------
-Git-Hub Actions | [![Scala CI](https://github.com/cr-jkb/4-gewinnt/actions/workflows/scala.yml/badge.svg)](https://github.com/cr-jkb/4-gewinnt/actions/workflows/scala.yml)
-CoverAlls.io | [![Coverage Status](https://coveralls.io/repos/github/cr-jkb/4-gewinnt/badge.svg)](https://coveralls.io/github/cr-jkb/4-gewinnt)
-Regenschirm | Badge
-Excluded | Main.scala GUI.scala
+<h1 align="center">Willkommen zum Software-Engineering Projekt</h1> <h3 align="center">aus SPO3 bei AIN3 der HTWG Konstanz</h3>
 
+<p align="center">Jahr: WiSe 2021-2022</p>
+<h4 align="center">Spieltitel: 4 Gewinnt<br> Julian Mennel & Chris Jakob </br></h3>
 
-#### Comment Notations relate to Java Definitions:
-- 'Interfaces' for Traits (Interfaces are used as templates for standarized methods and variables), 'Implemented Interfaces' if there are full working methods inside, Classes, ... 
-- You will not find any Object Notations as everything is an object in Scala. Instead you may find '1-Instance Classes' as an alias for case classes. 1-Instance refers to the immutability of those. 
-- 'Wrapper Classes' can be also called "State-Holders" or "State-Save-Objects" and by that function like Placeholders that may be used as "Swap-In Classes/Objects". 
+<p align="center">
+  <img src="https://github.com/cr-jkb/4-gewinnt/actions/workflows/scala.yml/badge.svg" /> 
+  <a href="https://coveralls.io/github/cr-jkb/4-gewinnt">
+    <img src="https://coveralls.io/repos/github/cr-jkb/4-gewinnt/badge.svg?branch=mainn" alt='Coverage Status' />
+  </a>
+ </p>
+ 
+# Anleitung:
 
-
-### Anleitung:
-
-#### Wie gewinnen?
+### Wie gewinnen?
 Der Spieler der es als erstes schafft 4 Steine seiner eigenen Farbe bzw. in unserem Fall Form (O oder X) entweder diagonal, horizontal oder vertikal zu positionieren gewinnt und wird belohnt mit unserem eigenen Soundtrack. Wer verliert muss stattdessen einen weniger motivierenden Track über sich ergehen lassen. 
 
-#### Wie spielen?
+### Wie spielen?
 Tippe auf die Steine in der GUI \
 oder spiele in der TUI per: 
 Command | Description 
@@ -34,10 +28,12 @@ Command | Description
  r            | Redo
  q            | Programm beenden
  
- ### TUI
+ ## TUI
  
- ### GUI
+ ## GUI
  
- ### Authors
+ ## Authors
 [@Chris Jakob](https://github.com/cr-jkb "Chris sein GitHub") <br/>
 [@Julian Mennel](https://github.com/JulianMennel "Julian sein GitHub")
+
+credits to ShutTheBox and Uno for Inspiration for this ReadMe Structure & Title Style
