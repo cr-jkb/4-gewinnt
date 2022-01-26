@@ -4,7 +4,8 @@ on:
   pull_request:
   push:
     branches:
-      - main
+      - production-(beta)
+      - dev-(alpha)
 
 jobs:
   build:
@@ -27,6 +28,13 @@ jobs:
       - name: Build Project and export Coverage
         env:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         run: |
           export CI_BRANCH="${GITHUB_REF#refs/heads/}"
           sbt clean jacoco jacocoCoveralls
+      - name: Download Codecov
+        run: curl -Os https://uploader.codecov.io/latest/linux/codecov
+      - name: Add x Flag
+        run: chmod +x codecov
+      - name: Run Codecov
+        run: ./codecov -t ${{ secrets.CODECOV_TOKEN }}
