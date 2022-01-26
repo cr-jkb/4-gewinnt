@@ -14,5 +14,7 @@ trait ControllerInterface extends Observable {
   def redo: Unit
   def setMode(str: String): ModeStrategy
   def quit: Unit
-  def toString: String
+  def save: Unit
+  def load: Unit
+  def toString: String  
 }

@@ -161,10 +161,10 @@ class GUI(controller: ControllerInterface) extends Observer:
         controller.quit
         close})
       }
-      contents += new Menu("Difficulty/Sound") {
-        mnemonic = Key.D
-        //contents += new MenuItem(Action("Easy") { controller.newField })
-        //contents += new MenuItem(Action("Medium") { controller.quit })
+      contents += new Menu("SaveGame") {
+        mnemonic = Key.S
+        contents += new MenuItem(Action("Import") { controller.load })
+        contents += new MenuItem(Action("Export") { controller.save })
       }
     }
     
