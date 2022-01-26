@@ -15,6 +15,14 @@ lazy val root = project
     libraryDependencies += ("com.google.inject" % "guice"% "4.2.3"),
     libraryDependencies += ("org.scala-lang.modules" %% "scala-xml" % "2.0.0"),
     libraryDependencies += ("com.typesafe.play" %% "play-json" % "2.9.2").cross(CrossVersion.for3Use2_13), 
+    addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.1")
+
+     jacocoReportSettings := JacocoReportSettings(
+      "Jacoco Coverage Report",
+      None,
+      JacocoThresholds(),
+      Seq(JacocoReportFormats.ScalaHTML, JacocoReportFormats.XML), // note XML formatter
+    "utf-8"),
     jacocoCoverallsServiceName := "github-actions", 
     jacocoCoverallsBranch := sys.env.get("CI_BRANCH"),
     jacocoCoverallsPullRequest := sys.env.get("GITHUB_EVENT_NAME"),
