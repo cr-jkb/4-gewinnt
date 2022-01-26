@@ -28,6 +28,7 @@ class TUI(controller: ControllerInterface) extends Observer:
           case 'r' => controller.redo; println("Redo erfolgreich.")
           case 'u' => controller.undo; println("Undo erfolgreich.")
           case 'e' => println("Bitte Eingabe ueberpruefen.")
+          case 'b' => println("Moegliche Eingaben: 1-7 - Eingabe war nicht innerhalb des Spielfeldes.") 
         inputLoop()
 
   def analyseInput(input: String): Option[Move] = // String Interpretation
@@ -39,22 +40,16 @@ class TUI(controller: ControllerInterface) extends Observer:
       case "multiplayer" | "Multiplayer" => Some(Move('p', 0, 0))
       case _ => {
         getCharArray(input) match
-          case Success(chars) =>
-            chars(0) match {
-              case 'i' =>
-                getInt(chars(2)) match
-                  case Success(x) =>
-                    getInt(chars(4)) match
-                      case Success(y) => Some(Move('i', x - 1, y - 1))
-                      case Failure(y) => Some(Move('e', 0, 0))
-                  case Failure(x) => Some(Move('e', 0, 0))
-              case _ => Some(Move('e', 0, 0))
-            }
+          case Success(chars) => //länge passt
+              getInt(chars(0)) match //integer parsed
+                case Success(x) =>
+                  if (x > 0 & x <= 7) Some(Move('i', 5, x-1)) else Some(Move('b', 0, 0)) //within bounds
+                case Failure(x) => Some(Move('e', 0, 0))            
           case Failure(err) => println("Eingabe entspricht nicht der vorgegebenen Laenge."); Some(Move('e', 0, 0))
       }
 
-  def getCharArray(input: String): Try[Array[Char]] = Try { // if insert command then split x and y
-    if (input.length != 5)
+  def getCharArray(input: String): Try[Array[Char]] = Try {
+    if (input.length != 1)
       return Failure(new ArrayIndexOutOfBoundsException)
     input.toCharArray
   }

@@ -19,6 +19,8 @@ import scala.swing.{
   BoxPanel,
   Dimension
 }
+import java.net.URL
+import javax.sound.sampled._
 
 val empty = new ImageIcon(ImageIO.read(new File("res/empty.png")))
 val selector_red = new ImageIcon(ImageIO.read(new File("res/red2-lq.png")))
@@ -84,24 +86,61 @@ class GUI(controller: ControllerInterface) extends Observer:
       }
       redoButton.preferredSize_=(new Dimension(30,50))
       contents += redoButton
+
+
+      val easyRB = new RadioButton("Easy") {
+        enabled = false
+      }
+      val mediumRB = new RadioButton("Medium") {
+        enabled = false
+      }
+      val hardRB = new RadioButton("Difficult") {
+        enabled = false
+      }
+      val fullRB = new RadioButton("Invincible") {
+        reactions += { case event.ButtonClicked(_) => ShowWin }
+        enabled = false
+      }
+      val gameModes = new GridPanel(1,2) {
+        border = BorderFactory.createEmptyBorder(20, 50, 0, 0)       
+        val gruppe2 = new ButtonGroup(easyRB, mediumRB, hardRB, fullRB)
+        gruppe2.select(easyRB)
+        contents += easyRB
+        contents += mediumRB
+        contents += hardRB
+        contents += fullRB
+      }
+
       val ModeSelect = new GridPanel(1,2) {
         border = BorderFactory.createEmptyBorder(0,20,10,0)
-        val playerRadioButton = new RadioButton("Singleplayer") {
+        val playerRadioButton = new RadioButton("Multiplayer") {
           reactions += { case event.ButtonClicked(_) =>
             controller.setMode("player")
+            if (easyRB.enabled) {
+              easyRB.enabled = !easyRB.enabled
+              mediumRB.enabled = !mediumRB.enabled
+              hardRB.enabled = !hardRB.enabled
+              fullRB.enabled = !fullRB.enabled
+            }
           }
         }
-        playerRadioButton.preferredSize_=(new Dimension(30, 50))
-        contents += playerRadioButton
-        val computerRadioButton = new RadioButton("Multiplayer") {          
+        playerRadioButton.preferredSize_=(new Dimension(30, 50))        
+        val computerRadioButton = new RadioButton("Singleplayer") {          
           reactions += { case event.ButtonClicked(_) =>
             controller.setMode("computer")
+            if (!easyRB.enabled) {
+              easyRB.enabled = !easyRB.enabled
+              mediumRB.enabled = !mediumRB.enabled
+              hardRB.enabled = !hardRB.enabled
+              fullRB.enabled = !fullRB.enabled
+            }
           }
         }
         computerRadioButton.preferredSize_=(new Dimension(30, 50))
         val gruppe1 = new ButtonGroup(playerRadioButton, computerRadioButton)
         gruppe1.select(playerRadioButton)
-        contents += computerRadioButton
+        contents += playerRadioButton
+        contents += computerRadioButton        
         //listenTo(keys) KNOWN BUG (does not catch) // also mouse can replace existings
         reactions += { 
           case event.KeyPressed(_, Key.Left, _, _) => moveSelLeft
@@ -110,29 +149,8 @@ class GUI(controller: ControllerInterface) extends Observer:
         }
       }
       contents += ModeSelect
-      
-      val gameModes = new GridPanel(1,2) {
-        border = BorderFactory.createEmptyBorder(20, 50, 0, 0)
-        val easyRB = new RadioButton("Easy") {
-          enabled = false
-        }
-        val mediumRB = new RadioButton("Medium") {
-          enabled = false
-        }
-        val hardRB = new RadioButton("Difficult") {
-          enabled = false
-        }
-        val fullRB = new RadioButton("Invincible") {
-          enabled = false
-        }
-        //val gruppe2 = new ButtonGroup(singlePlayerRB, multiPlayerRB)
-        //gruppe2.select(singlePlayerRB)
-        contents += easyRB
-        contents += mediumRB
-        contents += hardRB
-        contents += fullRB
-      }
       contents += gameModes
+      
     }
 
     val myMenu = new MenuBar {
@@ -227,4 +245,17 @@ class GUI(controller: ControllerInterface) extends Observer:
       selector_pos = selector_pos +1
     }
     updateSelImg
+
+  def ShowWin =
+    val url = new File("res/win.wav")
+    val audioIn = AudioSystem.getAudioInputStream(url)
+    val clip = AudioSystem.getClip
+    clip.open(audioIn)
+    clip.start
+
+  def ShowLose = //Singleplayer only
+    print("lost")
+
+  def MenuMusic =
+    print("not online")
   
