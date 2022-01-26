@@ -2,11 +2,11 @@
 <h1 align="center">Willkommen zum Software-Engineering Projekt</h1> <h3 align="center">aus SPO3 bei AIN3 der HTWG Konstanz</h3>
 
 <p align="center">Jahr: WiSe 2021-2022</p>
-<h4 align="center">Spieltitel: 4 Gewinnt<br>Julian Mennel & Chris Jakob</br></h3>
+<h4 align="center">Spieltitel: 4 Gewinnt<br> Julian Mennel & Chris Jakob </br></h3>
 
 <p align="center">
   <img src="https://github.com/cr-jkb/4-gewinnt/actions/workflows/scala.yml/badge.svg" /> 
-  <a href="https://coveralls.io/github/JannisLiebscher/shutthebox?branch=master">
+  <a href="https://coveralls.io/github/cr-jkb/4-gewinnt">
     <img src="https://coveralls.io/repos/github/cr-jkb/4-gewinnt/badge.svg?branch=mainn" alt='Coverage Status' />
   </a>
  </p>
