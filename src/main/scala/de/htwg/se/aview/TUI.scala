@@ -50,7 +50,7 @@ class TUI(controller: ControllerInterface) extends Observer:
                 case Success(x) =>
                   if (x > 0 & x <= 7) Some(Move('i', 5, x-1)) else Some(Move('b', 0, 0)) //within bounds
                 case Failure(x) => Some(Move('e', 0, 0))            
-          case Failure(err) => println("Eingabe entspricht nicht der vorgegebenen Laenge."); Some(Move('e', 0, 0))
+          case Failure(err) => Some(Move('e', 0, 0))
       }
 
   def getCharArray(input: String): Try[Array[Char]] = Try {

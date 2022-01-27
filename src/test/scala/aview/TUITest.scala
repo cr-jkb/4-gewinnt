@@ -1,125 +1,58 @@
-/* package de.htwg.se.aview
+
+package de.htwg.se.aview
 
 import de.htwg.se.controller.controllerComponent.controllerBaseImpl.Controller
 import de.htwg.se.model.fieldComponent.fieldBaseImpl._
+import com.google.inject.Guice
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers.*
 import java.io.{BufferedReader, ByteArrayInputStream, ByteArrayOutputStream, PrintStream, StringReader}
+import de.htwg.se.MainModule
+import de.htwg.se.controller.controllerComponent.ControllerInterface
+import de.htwg.se.model.moveComponent.Move
+import scala.util.Failure
+import scala.util.Success
 
 class TuiSpec extends AnyWordSpec {
   "TUI of 4-Gewinnt" should {
-    val controller = new Controller(new Field())
+    val injector = Guice.createInjector(new MainModule)
+    val controller = injector.getInstance(classOf[ControllerInterface])
     val tui = TUI(controller)
     val eol = sys.props("line.separator")
 
-    "run" in {
-      val in = new BufferedReader(new StringReader("q"))
-      val source = new ByteArrayOutputStream()
-      val printer = new PrintStream(source)
-      Console.withOut(printer) {
-        Console.withIn(in) {
-          val tui2 = tui
-        }
-      }
-      source.toString should be(eol + "Hochschule fuer Technik, Wirtschaft & Gestaltung" + eol + "AIN SOFTWARE-ENGINEERING WiSe 21/22" + eol + "        ### GRUPPE 15 ###" + eol + eol + ">  Willkommen zu 4-Gewinnt  <" + eol + controller.field.toString)
+    "be able to analyse 'q' input" in {
+      tui.analyseInput("q") should be(None)
+    }
+    "be able to analyse 'r' input" in {
+      tui.analyseInput("r") should be(Some(Move('r', 0, 0)))
+    }
+    "be able to analyse 'u' input" in {
+      tui.analyseInput("u") should be(Some(Move('u', 0, 0)))
+    }
+    "be able to analyse 'Singelpayer' or 'singleplayer' input" in {
+      tui.analyseInput("singleplayer") should be(Some(Move('c', 0, 0)))
+      tui.analyseInput("Singleplayer") should be(Some(Move('c', 0, 0)))
+    }
+    "be able to analyse 'Multipayer' or 'multiplayer' input" in {
+      tui.analyseInput("multiplayer") should be(Some(Move('p', 0, 0)))
+      tui.analyseInput("Multiplayer") should be(Some(Move('p', 0, 0)))
+    }
+    "be able to analyse 's' input" in {
+      tui.analyseInput("s") should be(Some(Move('s', 0, 0)))
+    }
+    "be able to analyse 'l' input" in {
+      tui.analyseInput("l") should be(Some(Move('l', 0, 0)))
+    }
+    "be able to analyse a valid input" in {
+      tui.analyseInput("1") should be(Some(Move('i', 5, 0)))
+    }
+    "be able to analyse a invalid input" in {
+      tui.analyseInput("10") should be(Some(Move('e', 0, 0)))
+      tui.analyseInput("9") should be(Some(Move('b', 0, 0)))
     }
 
-    "have a valid input for stone X" in {
-      val in = new BufferedReader(new StringReader("i 1 1" + eol + "q" + eol))
-      val source = new ByteArrayOutputStream()
-      val printer = new PrintStream(source)
-      Console.withOut(printer) {
-        Console.withIn(in) {
-          tui.inputLoop()
-        }
-      }
-      tui.size1 should be(6)
-      tui.size2 should be(7)
-      controller.field.get(0, 0) should be(Stone.X)
-    }
-    "have a valid input for stone O" in {
-      val in = new BufferedReader(new StringReader("i 1 1" + eol + "q" + eol))
-      val source = new ByteArrayOutputStream()
-      val printer = new PrintStream(source)
-      Console.withOut(printer) {
-        Console.withIn(in) {
-          tui.inputLoop()
-        }
-      }
-      tui.size1 should be(6)
-      tui.size2 should be(7)
-      controller.field.get(0, 0) should be(Stone.O)
-    }
-    "have a valid input for stone x" in {
-      val in = new BufferedReader(new StringReader("i 1 1" + eol + "q" + eol))
-      val source = new ByteArrayOutputStream()
-      val printer = new PrintStream(source)
-      Console.withOut(printer) {
-        Console.withIn(in) {
-          tui.inputLoop()
-        }
-      }
-      tui.size1 should be(6)
-      tui.size2 should be(7)
-      controller.field.get(0, 0) should be(Stone.X)
-    }
-    "have a valid input for stone o" in {
-      val in = new BufferedReader(new StringReader("i 1 1" + eol + "q" + eol))
-      val source = new ByteArrayOutputStream()
-      val printer = new PrintStream(source)
-      Console.withOut(printer) {
-        Console.withIn(in) {
-          tui.inputLoop()
-        }
-      }
-      tui.size1 should be(6)
-      tui.size2 should be(7)
-      controller.field.get(0, 0) should be(Stone.O)
-    }
-    "have a valid input for computer" in {
-      val in = new BufferedReader(new StringReader("computer" + eol + "q" + eol))
-      val source = new ByteArrayOutputStream()
-      val printer = new PrintStream(source)
-      Console.withOut(printer) {
-        Console.withIn(in) {
-          tui.inputLoop()
-        }
-      }
-      source.toString should be("Modus wurde gewechselt." + eol)
-    }
-    "have a valid input for player" in {
-      val in = new BufferedReader(new StringReader("player" + eol + "q" + eol))
-      val source = new ByteArrayOutputStream()
-      val printer = new PrintStream(source)
-      Console.withOut(printer) {
-        Console.withIn(in) {
-          tui.inputLoop()
-        }
-      }
-      source.toString should be("Modus wurde gewechselt." + eol)
-    }
-    "have a valid undo input" in {
-      val in = new BufferedReader(new StringReader("u" + eol + "q" + eol))
-      val source = new ByteArrayOutputStream()
-      val printer = new PrintStream(source)
-      Console.withOut(printer) {
-        Console.withIn(in) {
-          tui.inputLoop()
-        }
-      }
-      source.toString should be(controller.toString() + eol + "Undo erfolgreich." + eol)
-    }
-    "have a valid redo input" in {
-      val in = new BufferedReader(new StringReader("r" + eol + "q" + eol))
-      val source = new ByteArrayOutputStream()
-      val printer = new PrintStream(source)
-      Console.withOut(printer) {
-        Console.withIn(in) {
-          tui.inputLoop()
-        }
-      }
-      source.toString should be(controller.toString() + eol + "Redo erfolgreich." + eol)
+    "have a getInt function" in{
+      tui.getInt('1') should be(Success(1))
     }
   }
 }
-*/
