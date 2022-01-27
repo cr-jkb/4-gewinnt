@@ -2,6 +2,7 @@ package de.htwg.se.controller.controllerComponent.controllerBaseImpl
 
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
+import de.htwg.se.model.fieldComponent.fieldBaseImpl.ErrorField
 import de.htwg.se.model.fieldComponent.FieldInterface
 import de.htwg.se.controller.controllerComponent.ControllerInterface
 import de.htwg.se.util.Observable
@@ -22,6 +23,7 @@ case class Controller @Inject()(@Named("DefField") var field: FieldInterface) ex
   val undoManager = new UndoManager[FieldInterface]
   val injector = Guice.createInjector(new MainModule)
   val fileIo = injector.getInstance(classOf[FileIOInterface])
+  var error = ""
   
   def newField =
     field = new Field() //no need for new if "instance-ized" with parameters
