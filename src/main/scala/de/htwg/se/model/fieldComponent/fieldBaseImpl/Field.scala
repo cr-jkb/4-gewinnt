@@ -13,6 +13,7 @@ case class Field(var matrix: Matrix[Stone], var player: PlayerState, var mode: M
   val size = matrix.size //vertical
   val size2 = matrix.size2 //horizontal
   val eol = sys.props("line.separator")
+  var error = ""
 
   //--String Building:
   def bar(cellWidth: Int = 3, cellNum: Int = 3) : String = (("+" + "-" * cellWidth) * cellNum) + "+" + eol //barrier created horizontally (One Line Text)
@@ -45,7 +46,9 @@ case class Field(var matrix: Matrix[Stone], var player: PlayerState, var mode: M
   //--Mode Layer related:
 
   def put(x: Int, y: Int): Field =
-    mode.put(x, y, this)
+    val errorfield = mode.put(x, y, this)
+    errorfield.field.error = errorfield.error
+    errorfield.field
 
   def get(x: Int, y: Int): Stone = matrix.cell(x, y)
 

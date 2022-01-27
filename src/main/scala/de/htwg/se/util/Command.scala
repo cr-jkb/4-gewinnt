@@ -32,3 +32,5 @@ class UndoManager[T]: // Implemented Class
         result
       }
     }
+  def clearRedo() = 
+    redoStack = Nil
