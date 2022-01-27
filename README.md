@@ -7,7 +7,7 @@
 <p align="center">
   <img src="https://github.com/cr-jkb/4-gewinnt/actions/workflows/scala.yml/badge.svg" /> 
   <a href="https://coveralls.io/github/cr-jkb/4-gewinnt">
-    <img src="https://coveralls.io/repos/github/cr-jkb/4-gewinnt/badge.svg?branch=mainn" alt='Coverage Status' />
+    <img src="https://coveralls.io/repos/github/cr-jkb/4-gewinnt/badge.svg?branch=master" alt='Coverage Status' />
   </a>
  </p>
  
@@ -21,9 +21,11 @@ Tippe auf die Steine in der GUI \
 oder spiele in der TUI per: 
 Command | Description 
 --------|--------
- `[1-7]`        | Setze Stein auf Reihe X 
+ `1` ... `7`  | Setze Stein auf eingegebene Reihe 
  singleplayer | Wechsle Modus auf SinglePlayer 
  multiplayer  | Wechsle Modus aus Multiplayer 
+ s            | Exportiere den aktuellen Spielzustand
+ l            | Importiere einen Spielstand aus XML oder JSON
  u            | Undo 
  r            | Redo
  q            | Programm beenden
