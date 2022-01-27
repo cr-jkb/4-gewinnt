@@ -26,10 +26,6 @@ case class Controller @Inject()(@Named("DefField") var field: FieldInterface) ex
   def newField =
     field = new Field() //no need for new if "instance-ized" with parameters
     notifyObservers
-
-  def loadField =
-    field = field.meshFromXml("startUp.xml") //convert to Dependency Injection
-    notifyObservers
   
   def put(x: Int, y: Int) = //Here put instead of x low_x in the PutCommand
 

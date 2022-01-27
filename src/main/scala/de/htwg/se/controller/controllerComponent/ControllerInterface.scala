@@ -8,7 +8,6 @@ import de.htwg.se.util.Observable
 trait ControllerInterface extends Observable {
   def field: FieldInterface
   def newField: Unit
-  def loadField: Unit
   def put(x: Int, y: Int): Unit
   def undo: Unit
   def redo: Unit
