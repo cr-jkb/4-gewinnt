@@ -17,7 +17,6 @@ import com.google.inject.name.Named
 object SpaceFound extends Exception
 object FullRow extends Exception
 
-
 case class Controller @Inject()(@Named("DefField") var field: FieldInterface) extends ControllerInterface with Observable:
 
   val undoManager = new UndoManager[FieldInterface]
@@ -33,14 +32,13 @@ case class Controller @Inject()(@Named("DefField") var field: FieldInterface) ex
     var low_x = field.size-1
     try {      
       for (try_x <- field.size-1 to 0 by -1) { //gehe von unten los
-        if (field.get(try_x, y) == Stone.Empty) { low_x = try_x; throw SpaceFound; } //never triggeres but is correct
+        if (field.get(try_x, y) == Stone.Empty) { low_x = try_x; throw SpaceFound; }
       }
       throw FullRow
     } catch {
-    case SpaceFound => field = undoManager.doStep(field, new PutCommand(low_x, y, this)) //print(s"will put to ${low_x}\n")
+    case SpaceFound => undoManager.clearRedo(); field = undoManager.doStep(field, new PutCommand(low_x, y, this))  //print(s"will put to ${low_x}\n")
     case FullRow => print(s"the vertical row at ${y+1} is full\n") //throw noAction
     }    
-    //redoManager should be cleared here    
     notifyObservers
   
   def undo = 
