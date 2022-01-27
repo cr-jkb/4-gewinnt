@@ -120,7 +120,7 @@ class GUI(controller: ControllerInterface) extends Observer:
               easyRB.enabled = !easyRB.enabled
               mediumRB.enabled = !mediumRB.enabled
               hardRB.enabled = !hardRB.enabled
-              fullRB.enabled = !fullRB.enabled
+              //fullRB.enabled = !fullRB.enabled
             }
           }
         }
@@ -132,7 +132,7 @@ class GUI(controller: ControllerInterface) extends Observer:
               easyRB.enabled = !easyRB.enabled
               mediumRB.enabled = !mediumRB.enabled
               hardRB.enabled = !hardRB.enabled
-              fullRB.enabled = !fullRB.enabled
+              //fullRB.enabled = !fullRB.enabled
             }
           }
         }
@@ -257,5 +257,5 @@ class GUI(controller: ControllerInterface) extends Observer:
     print("lost")
 
   def MenuMusic =
-    print("not online")
+    print("Menu Page in AIN 5")
   

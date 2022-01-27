@@ -13,11 +13,15 @@ case class PlayerModeStrategy() extends ModeStrategy {
     mF
   }
 
-  def checkCombination(player: Stone, field: Field, h: List[(Int, Int)]): Boolean =
-    for (i <- h) {
-      if (field.get(i._1, i._2) != player) { false }
-    }
-    true
+  var notifyEstWin = false
+  def checkCombination(player: Stone, field: Field, h: List[(Int, Int)]): Boolean = //move to global
+    if (!notifyEstWin)
+      for (i <- h) {
+        if (field.get(i._1, i._2) != player) { false }
+      }
+      true
+    else
+      true 
 
   def determineWin(field: Field): Boolean = // O(8)*7*6
     val limitV = field.matrix.size
