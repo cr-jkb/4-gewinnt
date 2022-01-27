@@ -27,23 +27,18 @@ case class Controller @Inject()(@Named("DefField") var field: FieldInterface) ex
     field = new Field() //no need for new if "instance-ized" with parameters
     notifyObservers
   
-  def put(x: Int, y: Int) = //Here put instead of x low_x in the PutCommand
-
-    var low_x = field.size2-1
-    try {
-      for (low_x <- field.size2-1 until 0) { //gehe von unten los !!!!!JAVA GIBT EINEN FICK AUF DIESE LOOP
-        print(s"(${low_x}/${field.size2})#${field.get(low_x, y).toString}#")
-        if (field.get(low_x, y) == Stone.Empty) throw SpaceFound; //never triggeres but is correct
+  def put(x: Int, y: Int) =
+    var low_x = field.size-1
+    try {      
+      for (try_x <- field.size-1 to 0 by -1) { //gehe von unten los
+        if (field.get(try_x, y) == Stone.Empty) { low_x = try_x; throw SpaceFound; } //never triggeres but is correct
       }
       throw FullRow
     } catch {
-    case SpaceFound => print(s"will put to ${low_x+1}")
-    case FullRow => print(s"the vertical row at ${y+1} is full")
-    }
-
-    field = undoManager.doStep(field, new PutCommand(x, y, this))
-    //redoManager should be cleared here
-    
+    case SpaceFound => field = undoManager.doStep(field, new PutCommand(low_x, y, this)) //print(s"will put to ${low_x}\n")
+    case FullRow => print(s"the vertical row at ${y+1} is full\n") //throw noAction
+    }    
+    //redoManager should be cleared here    
     notifyObservers
   
   def undo = 
