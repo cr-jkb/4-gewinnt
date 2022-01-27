@@ -23,11 +23,11 @@ class TUI(controller: ControllerInterface) extends Observer:
       case None => controller.quit
       case Some(move) => 
         move.m match
-          case 'i' => controller.put(move.x, move.y)
+          case 'i' => controller.put(move.x, move.y); println(controller.error)
           case 'c' => controller.setMode("computer"); println("Modus wurde gewechselt.")
           case 'p' => controller.setMode("player"); println("Modus wurde gewechselt.")
-          case 'r' => controller.redo; println("Redo erfolgreich.")
-          case 'u' => controller.undo; println("Undo erfolgreich.")
+          case 'r' => controller.redo; println(controller.error)
+          case 'u' => controller.undo; println(controller.error)
           case 'e' => println("Bitte Eingabe ueberpruefen.")
           case 'b' => println("Moegliche Eingaben: 1-7 - Eingabe war nicht innerhalb des Spielfeldes.")
           case 's' => controller.save; println("Spiel gespeichert.")

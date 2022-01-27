@@ -36,17 +36,27 @@ case class Controller @Inject()(@Named("DefField") var field: FieldInterface) ex
       }
       throw FullRow
     } catch {
-    case SpaceFound => undoManager.clearRedo(); field = undoManager.doStep(field, new PutCommand(low_x, y, this))  //print(s"will put to ${low_x}\n")
-    case FullRow => print(s"the vertical row at ${y+1} is full\n") //throw noAction
+    case SpaceFound => undoManager.clearRedo(); field = undoManager.doStep(field, new PutCommand(low_x, y, this)); error = "Stone successfully set"  //print(s"will put to ${low_x}\n")
+    case FullRow => error = (s"the vertical row at ${y+1} is full\n") //throw noAction
     }    
     notifyObservers
   
   def undo = 
+    val oldfield = field
     field = undoManager.undoStep(field)
+    if (field == oldfield)
+      error = "Undo fehler!"
+    else
+      error = "Undo erfolgreich"
     notifyObservers
   
   def redo = 
+    val oldfield = field
     field = undoManager.redoStep(field)
+    if (field == oldfield)
+      error = "Redo fehler!"
+    else
+      error = "Redo erfolgreich"
     notifyObservers
   
   def setMode(str: String): ModeStrategy = field.setMode(str)
