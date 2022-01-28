@@ -21,6 +21,7 @@ import scala.swing.{
 }
 import java.net.URL
 import javax.sound.sampled._
+import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
 
 val empty = new ImageIcon(ImageIO.read(new File("res/empty.png")))
 val selector_red = new ImageIcon(ImageIO.read(new File("res/red2-lq.png")))
@@ -206,8 +207,9 @@ class GUI(controller: ControllerInterface) extends Observer:
             index2 <- 0 until controller.field.size2)
             button(index)(index2) = new Label(controller.field.get(index, index2).toString) {
               listenTo(mouse.clicks)
-              reactions += { case m: MousePressed => 
-                controller.put(index, index2)
+              reactions += { 
+              case m: MousePressed => controller.put(index, index2); selector_pos = index2; selector_fullyRefresh
+              case h: MouseMoved => if(selector_pos != index2) selector_pos = index2; selector_fullyRefresh
               }
             }
             contents += button(index)(index2)
@@ -219,7 +221,7 @@ class GUI(controller: ControllerInterface) extends Observer:
     new GridPanel(0, sizeW) {
       for (i <- 0 until sizeW)
         selectors(i) = new Label {
-          icon = new ImageIcon(ImageIO.read(new File("res/red2-lq.png"))) //empty 
+          icon = empty 
         }
         contents += selectors(i)
     }
@@ -246,6 +248,12 @@ class GUI(controller: ControllerInterface) extends Observer:
       selector_pos = selector_pos +1
     }
     updateSelImg
+
+  def selector_fullyRefresh = 
+    for (i <- 0 until selectors.size) { 
+      selectors(i).icon = empty
+      if (i==selector_pos) {if (controller.getPlayer == Stone.X) selectors(i).icon = selector_yellow else selectors(i).icon = selector_red}
+    }
 
   def ShowWin =
     val url = new File("res/win.wav")
