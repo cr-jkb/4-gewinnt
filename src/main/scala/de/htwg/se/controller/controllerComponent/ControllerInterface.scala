@@ -7,6 +7,7 @@ import de.htwg.se.util.Observable
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
 
 trait ControllerInterface extends Observable {
+  def setGameState(won: Boolean): Unit
   def field: FieldInterface
   def error: String
   def newField: Unit

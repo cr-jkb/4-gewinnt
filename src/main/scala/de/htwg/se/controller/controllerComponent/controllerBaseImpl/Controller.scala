@@ -23,8 +23,11 @@ case class Controller @Inject()(@Named("DefField") var field: FieldInterface) ex
   val injector = Guice.createInjector(new MainModule)
   val fileIo = injector.getInstance(classOf[FileIOInterface])
   var error = ""
+  var gameWon = false
   
+  override def setGameState(won: Boolean) = {gameWon = won}
   def newField =
+    gameWon = false
     field = new Field() //no need for new if "instance-ized" with parameters
     notifyObservers
   

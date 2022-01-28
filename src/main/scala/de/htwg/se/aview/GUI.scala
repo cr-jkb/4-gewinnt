@@ -190,6 +190,9 @@ class GUI(controller: ControllerInterface) extends Observer:
   }
 
   def redraw(): Unit =
+    if (true) { //(controller.gameWon) {
+      winPop(controller).ret.open()
+    }
     for (index <- 0 to controller.field.size - 1)
       for (index2 <- 0 to controller.field.size2 - 1)
         if (controller.field.get(index, index2).toString.equals("X")) {
