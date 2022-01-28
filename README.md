@@ -17,12 +17,16 @@
 Der Spieler der es als erstes schafft 4 Steine seiner eigenen Farbe entweder diagonal, horizontal oder vertikal zu positionieren gewinnt und wird belohnt mit unserem eigenen Soundtrack. Wer verliert muss stattdessen einen weniger motivierenden Track über sich ergehen lassen. 
 
 ### Wie spielen?
-Tippe auf die Steine in der GUI \
+Nutze unsere herausragende GUI \
 oder spiele in der TUI per: 
 Command | Description 
 --------|--------
  `1` ... `7`  | Setze Stein auf eingegebene Reihe 
  singleplayer | Wechsle Modus auf SinglePlayer 
+ easy         | Setze Stärke des Computers auf Einfach
+ medium       | Setze Stärke des Computers auf Medium
+ hard         | Setze Stärke des Computers auf Schwer
+ invincible   | Setze Stärke des Computers auf Maximum
  multiplayer  | Wechsle Modus aus Multiplayer 
  s            | Exportiere den aktuellen Spielzustand
  l            | Importiere einen Spielstand aus XML oder JSON

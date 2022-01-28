@@ -62,6 +62,8 @@ case class Field(var matrix: Matrix[Stone], var player: PlayerState, var mode: M
       case "computer" =>
         mode = ComputerModeStrategy()
         mode
+  
+  def setDifficulty(d: Int) = {mode.setDifficulty(d)}
 
   //--Field related:
   def undo(x: Int, y: Int): Field = //remove the stone at x,y

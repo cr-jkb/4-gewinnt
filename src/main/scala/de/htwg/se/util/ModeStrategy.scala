@@ -6,4 +6,6 @@ import de.htwg.se.model.fieldComponent.fieldBaseImpl.ErrorField
 
 trait ModeStrategy {
   def put(x: Int, y: Int, field: Field): ErrorField
+
+  def setDifficulty(diff: Int): Unit
 }

@@ -12,4 +12,6 @@ case class PlayerModeStrategy() extends ModeStrategy {
     //val won = determineWin(mF) //destroys field somehow (not handed through afterwards) probably because of the warning
     mF
   }
+
+  override def setDifficulty(diff: Int) = { println("Sorry, you need to be in SinglePlayer Mode to set the difficulty. \n(Enter in TUI: singleplayer)") } //not needed
 }

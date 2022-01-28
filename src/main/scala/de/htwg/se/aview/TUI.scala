@@ -32,6 +32,7 @@ class TUI(controller: ControllerInterface) extends Observer:
           case 'b' => println("Moegliche Eingaben: 1-7 - Eingabe war nicht innerhalb des Spielfeldes.")
           case 's' => controller.save; println("Spiel gespeichert.")
           case 'l' => controller.load; println("Spiel geladen.") 
+          case 'S' => controller.setStrength(move.x)
         inputLoop()
 
   def analyseInput(input: String): Option[Move] = // String Interpretation
@@ -41,6 +42,10 @@ class TUI(controller: ControllerInterface) extends Observer:
       case "u" => Some(Move('u', 0, 0))
       case "singleplayer" | "Singleplayer" => Some(Move('c', 0, 0))
       case "multiplayer" | "Multiplayer" => Some(Move('p', 0, 0))
+      case "easy" => Some(Move('S', 0, 0))
+      case "medium" => Some(Move('S', 1, 0))
+      case "hard" | "difficult" => Some(Move('S', 2, 0))
+      case "invincible" => Some(Move('S', 3, 0))
       case "l" => Some(Move('l', 0, 0))
       case "s" => Some(Move('s', 0, 0))
       case _ => {

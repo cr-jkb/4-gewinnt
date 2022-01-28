@@ -13,6 +13,7 @@ trait ControllerInterface extends Observable {
   def undo: Unit
   def redo: Unit
   def setMode(str: String): ModeStrategy
+  def setStrength(d: Int): Unit
   def quit: Unit
   def save: Unit
   def load: Unit

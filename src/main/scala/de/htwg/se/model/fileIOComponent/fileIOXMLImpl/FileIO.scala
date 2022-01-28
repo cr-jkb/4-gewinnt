@@ -8,8 +8,9 @@ import com.fasterxml.jackson.core.PrettyPrinter
 import scala.xml.XML
 
 class FileIO extends FileIOInterface {
+
   override def load: FieldInterface = {
-    val file = scala.xml.XML.loadFile("field.xml")
+    val file = scala.xml.XML.loadFile("res/field.xml")
     val injector = Guice.createInjector(new MainModule)
     var field = injector.getInstance(classOf[FieldInterface])
     val cellNodes = (file \\ "cell")
@@ -24,7 +25,7 @@ class FileIO extends FileIOInterface {
     field
   }
 
-  override def save(field: FieldInterface): Unit = XML.save("field.xml", fieldToXml(field))
+  override def save(field: FieldInterface): Unit = XML.save("res/field.xml", fieldToXml(field))
 
   def fieldToXml(field: FieldInterface): xml.Node = {
     <field mode= { field.getMode() } player={ if (field.getPlayerState()) "true" else "false" }>
@@ -32,13 +33,16 @@ class FileIO extends FileIOInterface {
         for {
           row <- 0 until field.size
           col <- 0 until field.size2
-        } yield cellToXml(field, row, col)
+        } yield cellToXml(field, row, col) //+ sys.props("line.separator")
       }
     </field>
   }
 
   def cellToXml(field: FieldInterface, row: Int, col: Int) = {
-    <cell row={ row.toString } col={ col.toString } value={ field.get(row, col).toString }>
+    <cell row={ row.toString } col={ col.toString } value={ field.get(row, col).toString }> {
+        
+    }
     </cell>
+
   }
 } 

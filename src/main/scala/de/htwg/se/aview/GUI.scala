@@ -55,7 +55,7 @@ class GUI(controller: ControllerInterface) extends Observer:
   
   val frame = new Frame {
     title = "4-Gewinnt - Gruppe 15"
-    override def closeOperation(): Unit = controller.quit
+    override def closeOperation(): Unit = { controller.quit } //does not work - needs a 'q' in TUI to really quit
     iconImage = MainIcon
     minimumSize = new java.awt.Dimension(900,1000)
     centerOnScreen
@@ -89,12 +89,15 @@ class GUI(controller: ControllerInterface) extends Observer:
 
 
       val easyRB = new RadioButton("Easy") {
+        reactions += { case event.ButtonClicked(_) => controller.setStrength(0) }
         enabled = false
       }
       val mediumRB = new RadioButton("Medium") {
+        reactions += { case event.ButtonClicked(_) => controller.setStrength(1) }
         enabled = false
       }
       val hardRB = new RadioButton("Difficult") {
+        reactions += { case event.ButtonClicked(_) => controller.setStrength(2) }
         enabled = false
       }
       val fullRB = new RadioButton("Invincible") {
@@ -141,7 +144,7 @@ class GUI(controller: ControllerInterface) extends Observer:
         gruppe1.select(playerRadioButton)
         contents += playerRadioButton
         contents += computerRadioButton        
-        //listenTo(keys) KNOWN BUG (does not catch) // also mouse can replace existings
+        //listenTo(keys) KNOWN BUG (does not catch)
         reactions += { 
           case event.KeyPressed(_, Key.Left, _, _) => moveSelLeft
           case event.KeyPressed(_, Key.Right, _, _) => moveSelRight
@@ -157,14 +160,12 @@ class GUI(controller: ControllerInterface) extends Observer:
       contents += new Menu("Options") {
         mnemonic = Key.O
         contents += new MenuItem(Action("New Game") { controller.newField })
-        contents += new MenuItem(Action("Quit") {
-        controller.quit
-        close})
+        contents += new MenuItem(Action("Quit") { controller.quit; kill})
       }
       contents += new Menu("SaveGame") {
         mnemonic = Key.S
-        contents += new MenuItem(Action("Import") { controller.load })
-        contents += new MenuItem(Action("Export") { controller.save })
+        contents += new MenuItem(Action("Import") { controller.load; println("Spiel geladen.")})
+        contents += new MenuItem(Action("Export") { controller.save; println("Spiel gespeichert.")})
       }
     }
     
@@ -218,7 +219,7 @@ class GUI(controller: ControllerInterface) extends Observer:
     new GridPanel(0, sizeW) {
       for (i <- 0 until sizeW)
         selectors(i) = new Label {
-          icon = empty //new ImageIcon(ImageIO.read(new File("res/red2-lq.png")))
+          icon = new ImageIcon(ImageIO.read(new File("res/red2-lq.png"))) //empty 
         }
         contents += selectors(i)
     }

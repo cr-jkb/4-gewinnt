@@ -19,11 +19,11 @@ case class ComputerModeStrategy() extends ModeStrategy {
       field2
   }
 
-  def setDifficulty(diff: Int) = {
+  override def setDifficulty(diff: Int) = {
     diff match
-      case 0 => myDifficulty = easyStrategy()
-      case 1 => myDifficulty = mediumStrategy()
-      case 2 => myDifficulty = difficultStrategy()
-      case 3 => print("Verfügbar ab AIN 5")
+      case 0 => myDifficulty = easyStrategy() ; println("Computer spielt ab jetzt auf Easy")
+      case 1 => myDifficulty = mediumStrategy() ; println("Computer spielt ab jetzt auf Medium")
+      case 2 => myDifficulty = difficultStrategy() ; println("Computer spielt ab jetzt auf Schwer")
+      case 3 => println("Verfuegbar ab AIN 5")
   }
 }

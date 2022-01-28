@@ -60,6 +60,7 @@ case class Controller @Inject()(@Named("DefField") var field: FieldInterface) ex
     notifyObservers
   
   def setMode(str: String): ModeStrategy = field.setMode(str)
+  def setStrength(d: Int) = field.setDifficulty(d)
  
   def quit = 
     killObservers

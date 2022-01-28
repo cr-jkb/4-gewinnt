@@ -9,8 +9,9 @@ import com.google.inject.Guice
 import java.io._
 
 class FileIO extends FileIOInterface {
+    
   override def load: FieldInterface = {
-    val source: String = Source.fromFile("field.json").getLines.mkString
+    val source: String = Source.fromFile("res/field.json").getLines.mkString
     val json: JsValue = Json.parse(source)
     val injector = Guice.createInjector(new MainModule)
     var field = injector.getInstance(classOf[FieldInterface])
@@ -25,7 +26,7 @@ class FileIO extends FileIOInterface {
   }
 
   override def save(field: FieldInterface): Unit = {
-    val pw = new PrintWriter(new File("field.json"))
+    val pw = new PrintWriter(new File("res/field.json"))
     pw.write(Json.prettyPrint(fieldToJson(field)))
     pw.close
   }
