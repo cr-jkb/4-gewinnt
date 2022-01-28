@@ -50,7 +50,7 @@ case class Field(var matrix: Matrix[Stone], var player: PlayerState, var mode: M
     errorfield.field.error = errorfield.error
     errorfield.field
 
-  def get(x: Int, y: Int): Stone = matrix.cell(x, y)
+  def get(x: Int, y: Int): Stone = if(x == -1 | y == -1) Stone.X else matrix.cell(x, y) //-1 when ComputerStrategy finds a FullRow
 
   def getPlayerState(): Boolean = if (player == TruePlayerState()) true else false
 
