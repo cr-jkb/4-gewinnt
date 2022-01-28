@@ -103,7 +103,7 @@ class GUI(controller: ControllerInterface) extends Observer:
       }
       val fullRB = new RadioButton("Invincible") {
         reactions += { case event.ButtonClicked(_) => ShowWin }
-        enabled = false
+        //enabled = false
       }
       val gameModes = new GridPanel(1,2) {
         border = BorderFactory.createEmptyBorder(20, 50, 0, 0)       
@@ -191,7 +191,8 @@ class GUI(controller: ControllerInterface) extends Observer:
 
   def redraw(): Unit =
     if (true) { //(controller.gameWon) {
-      winPop(controller).ret.open()
+      
+      ShowWin
     }
     for (index <- 0 to controller.field.size - 1)
       for (index2 <- 0 to controller.field.size2 - 1)
@@ -258,12 +259,13 @@ class GUI(controller: ControllerInterface) extends Observer:
       if (i==selector_pos) {if (controller.getPlayer == Stone.X) selectors(i).icon = selector_yellow else selectors(i).icon = selector_red}
     }
 
-  def ShowWin =
+  def ShowWin =    
     val url = new File("res/win.wav")
     val audioIn = AudioSystem.getAudioInputStream(url)
     val clip = AudioSystem.getClip
     clip.open(audioIn)
     clip.start
+    winPop(controller).ret.open()
 
   def ShowLose = //Singleplayer only
     print("lost")
