@@ -59,8 +59,8 @@ class TUI(controller: ControllerInterface) extends Observer:
       }
 
   def getCharArray(input: String): Try[Array[Char]] = Try {
-    if (input.length != 1)
-      return Failure(new ArrayIndexOutOfBoundsException)
+    /* if (input.length != 1)
+      return Failure(new ArrayIndexOutOfBoundsException) */
     input.toCharArray
   }
 

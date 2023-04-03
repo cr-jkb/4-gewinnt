@@ -1,9 +1,6 @@
 *.class
 *.log
-*.jar
 *.tasty
-*.vscode
-*.json
 *.db
 *.bloop
 *.bsp
