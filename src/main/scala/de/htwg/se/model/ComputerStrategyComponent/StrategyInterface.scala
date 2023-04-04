@@ -39,7 +39,7 @@ trait Strategy { // concept uses Strategy Pattern but is in its own Folder
       }
       throw FullRow
     } match {
-      case Success(_) => low_x
+      case Success(x) => x
       case Failure(e) =>
         e match {
           case SpaceFound => low_x
