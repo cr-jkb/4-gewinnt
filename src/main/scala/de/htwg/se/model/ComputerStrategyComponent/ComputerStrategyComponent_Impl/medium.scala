@@ -19,47 +19,23 @@ case class mediumStrategy()
     if (evalNext(field)) plannedNext else evalNew(field)
   }
 
-  def evalNext(field: FieldInterface): Boolean = { // true if there is a better reaction (prioritizing)
-    object FoundWin extends Exception
-
-    val myDataSet = WinCheck.checkWinWithNumber(
-      field,
-      ComputerStone
-    ) // limit Scanning on my own Stones
-    try {
-      if (myDataSet._2 == 3) { // 3er Row found
-        for (x <- myDataSet._3) { // jede Row
-          var possiblePos = (0, 0)
-          if (x._1 == 3) { // Wenn Set aus 3*StonePos besteht
-            val freePossibilities = relevantPos(
-              field,
-              predict(x._2)
-            ) // übergebe Set; bekomme freie Möglichkeiten
-            for (i <- 1 until freePossibilities.size) { // skip ZombieElement
-              possiblePos = freePossibilities(i)
-              val matchedPos = matchx(possiblePos._1, field)
-              if (matchedPos == possiblePos._1) {
-                plannedNext = possiblePos; throw FoundWin
-              }
-            }
-          }
-        }
-        plannedNext = (0, 0)
-        false
-      } else false
-    } catch { case FoundWin => true }
-  }
-
-//   def evalNext(field: FieldInterface): Boolean = {
+//   def evalNext(field: FieldInterface): Boolean = { // true if there is a better reaction (prioritizing)
 //     object FoundWin extends Exception
-//     val myDataSet = WinCheck.checkWinWithNumber(field, ComputerStone)
-//     val result = Try {
-//       if (myDataSet._2 == 3) {
-//         for (x <- myDataSet._3) {
+
+//     val myDataSet = WinCheck.checkWinWithNumber(
+//       field,
+//       ComputerStone
+//     ) // limit Scanning on my own Stones
+//     try {
+//       if (myDataSet._2 == 3) { // 3er Row found
+//         for (x <- myDataSet._3) { // jede Row
 //           var possiblePos = (0, 0)
-//           if (x._1 == 3) {
-//             val freePossibilities = relevantPos(field, predict(x._2))
-//             for (i <- 1 until freePossibilities.size) {
+//           if (x._1 == 3) { // Wenn Set aus 3*StonePos besteht
+//             val freePossibilities = relevantPos(
+//               field,
+//               predict(x._2)
+//             ) // übergebe Set; bekomme freie Möglichkeiten
+//             for (i <- 1 until freePossibilities.size) { // skip ZombieElement
 //               possiblePos = freePossibilities(i)
 //               val matchedPos = matchx(possiblePos._1, field)
 //               if (matchedPos == possiblePos._1) {
@@ -71,14 +47,33 @@ case class mediumStrategy()
 //         plannedNext = (0, 0)
 //         false
 //       } else false
-//     } match {
-//       case Success(_)        => true
-//       case Failure(FoundWin) => true
-//       case Failure(_)        => false
-
-//     }
-//     result
+//     } catch { case FoundWin => true }
 //   }
+
+  def evalNext(field: FieldInterface): Boolean = {
+    object FoundWin extends Exception
+    val myDataSet = WinCheck.checkWinWithNumber(field, ComputerStone)
+
+    Try {
+      if (myDataSet._2 == 3) {
+        myDataSet._3.find { x =>
+          x._1 == 3 && {
+            val freePossibilities = relevantPos(field, predict(x._2))
+            freePossibilities.drop(1).exists { possiblePos =>
+              val matchedPos = matchx(possiblePos._1, field)
+              if (matchedPos == possiblePos._1) {
+                plannedNext = possiblePos
+                throw FoundWin
+              } else false
+            }
+          }
+        }
+
+        plannedNext = (0, 0)
+        false
+      } else false
+    }.getOrElse(true)
+  }
 
   /* returned jetzt an Pos 0 ein leeres Element */
   def relevantPos(
