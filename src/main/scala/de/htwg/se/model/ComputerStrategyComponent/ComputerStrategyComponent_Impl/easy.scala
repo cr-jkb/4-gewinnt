@@ -16,7 +16,7 @@ case class easyStrategy() extends de.htwg.se.model.fieldComponent.fieldBaseImpl.
         try {            
             while(true) {
                 globalY = Random.nextInt(field.size2)
-                print(globalY)
+                //print(globalY)
                 var randomPos = (matchx(Random.nextInt(field.size2), field), globalY)
                 if (field.get(randomPos._1, randomPos._2) == Stone.Empty) { validPos = randomPos; throw end }
             }
