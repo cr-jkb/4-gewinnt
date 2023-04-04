@@ -13,39 +13,47 @@ case class easyStrategy()
     findRandom(field)
   }
 
-  // def findRandom(field: FieldInterface) : (Int, Int) = {
-  //     var validPos = (0,0)
-  //     try {
-  //         while(true) {
-  //             globalY = Random.nextInt(field.size2)
-  //             //print(globalY)
-  //             var randomPos = (matchx(Random.nextInt(field.size2), field), globalY)
-  //             if (field.get(randomPos._1, randomPos._2) == Stone.Empty) { validPos = randomPos; throw end }
-  //         }
-  //         validPos
-  //     } catch { case end => return validPos case _ => print("UNHANDLED EXCEPTION"); (-1, -1) }
-  // }
-
   def findRandom(field: FieldInterface): (Int, Int) = {
-
     var validPos = (0, 0)
-    val result = Try {
+    try {
       while (true) {
         globalY = Random.nextInt(field.size2)
-        val randomPos = (matchx(Random.nextInt(field.size2), field), globalY)
+        // print(globalY)
+        var randomPos = (matchx(Random.nextInt(field.size2), field), globalY)
         if (field.get(randomPos._1, randomPos._2) == Stone.Empty) {
-          validPos = randomPos
-          throw end
+          validPos = randomPos; throw end
         }
-
       }
       validPos
-    } match {
-      case Success(validPos) => validPos
-      case Failure(_)        => println("UNHANDLED EXCEPTION"); (-1, -1)
-
+    } catch {
+      case end => return validPos
+      case _   => print("UNHANDLED EXCEPTION"); (-1, -1)
     }
-    result
   }
+
+//   def findRandom(field: FieldInterface): (Int, Int) = {
+
+//     var validPos = (0, 0)
+//     val result = Try {
+//       while (true) {
+//         globalY = Random.nextInt(field.size2)
+//         val randomPos = (matchx(Random.nextInt(field.size2), field), globalY)
+//         if (field.get(randomPos._1, randomPos._2) == Stone.Empty) {
+//           validPos = randomPos
+//           throw end
+//         }
+
+//       }
+//       validPos
+
+//     } match {
+//       case Success(validPos) => validPos
+//       case Failure(end)      => validPos
+//       case Failure(e)        => println("UNHANDLED EXCEPTION"); (-1, -1)
+
+//     }
+//     result
+
+//   }
 
 }
