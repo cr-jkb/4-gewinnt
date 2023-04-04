@@ -64,7 +64,7 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
       }
       throw FullRow
     } match {
-      case Success(x) =>
+      case Success(low_x) => low_x
       case Failure(e) =>
         e match {
           case SpaceFound =>

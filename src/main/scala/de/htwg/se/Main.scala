@@ -9,7 +9,7 @@ import com.google.inject.Guice
 def main: Unit = {
   val injector = Guice.createInjector(new MainModule)
   val controller = injector.getInstance(classOf[ControllerInterface])
-  val gui = GUI(controller)
+  // val gui = GUI(controller)
   val tui = TUI(controller)
   tui.start
 }
