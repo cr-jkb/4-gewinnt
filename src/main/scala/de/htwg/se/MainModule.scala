@@ -16,8 +16,12 @@ import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
 
 class MainModule extends AbstractModule {
   override def configure() = {
-    bind(classOf[ControllerInterface]).to(classOf[controllerBaseImpl.Controller])
-    bind(classOf[FieldInterface]).annotatedWith(Names.named("DefField")).toInstance(new Field())
+    bind(classOf[ControllerInterface]).to(
+      classOf[controllerBaseImpl.Controller]
+    )
+    bind(classOf[FieldInterface])
+      .annotatedWith(Names.named("DefField"))
+      .toInstance(new Field())
     bind(classOf[FieldInterface]).toInstance(new fieldBaseImpl.Field())
     bind(classOf[FileIOInterface]).toInstance(fileIOXMLImpl.FileIO())
   }

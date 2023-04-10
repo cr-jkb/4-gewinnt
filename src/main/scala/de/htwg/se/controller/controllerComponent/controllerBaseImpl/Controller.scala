@@ -8,12 +8,13 @@ import de.htwg.se.controller.controllerComponent.ControllerInterface
 import de.htwg.se.util.Observable
 import de.htwg.se.util.Command
 import de.htwg.se.util.UndoManager
-import de.htwg.se.util.ModeStrategy
+import de.htwg.se.util.GameMode
 import com.google.inject.Guice
 import de.htwg.se.MainModule
 import de.htwg.se.model.fileIOComponent.FileIOInterface
 import com.google.inject.Inject
 import com.google.inject.name.Named
+
 object SpaceFound extends Exception
 object FullRow extends Exception
 import scala.util.{Try, Success, Failure}
@@ -35,9 +36,9 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
     notifyObservers
 
   // def put(x: Int, y: Int) =
-  //   var low_x = field.size - 1
+  //   var low_x = field.sizeOfDimY - 1
   //   try {
-  //     for (try_x <- field.size - 1 to 0 by -1) { // gehe von unten los
+  //     for (try_x <- field.sizeOfDimY - 1 to 0 by -1) { // gehe von unten los
   //       if (field.get(try_x, y) == Stone.Empty) {
   //         low_x = try_x; throw SpaceFound;
   //       }
@@ -54,9 +55,10 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
   //   notifyObservers
 
   def put(x: Int, y: Int) =
-    var low_x = field.size - 1
+    var low_x = field.sizeOfDimY - 1
     val result = Try {
-      for (try_x <- field.size - 1 to 0 by -1) {
+      /* .find() */
+      for (try_x <- field.sizeOfDimY - 1 to 0 by -1) {
         if (field.get(try_x, y) == Stone.Empty) {
           low_x = try_x
           throw SpaceFound
@@ -94,7 +96,7 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
       error = "Redo erfolgreich"
     notifyObservers
 
-  def setMode(str: String): ModeStrategy = field.setMode(str)
+  def setMode(str: String): GameMode = field.setMode(str)
   def getPlayer: Stone = if (field.getPlayerState()) Stone.X else Stone.O
   def setStrength(d: Int) = field.setDifficulty(d)
 

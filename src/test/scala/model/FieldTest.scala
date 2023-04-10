@@ -31,7 +31,9 @@ class FieldSpec extends AnyWordSpec {
         "|X|" +
         "+-+" in {
           field1.mesh(1) should be("+-+" + eol + "|X|" + eol + "+-+" + eol)
-          field2.mesh(1) should be("+-+-+" + eol + "|X|X|" + eol + "+-+-+" + eol + "|X|X|" + eol + "+-+-+" + eol)
+          field2.mesh(1) should be(
+            "+-+-+" + eol + "|X|X|" + eol + "+-+-+" + eol + "|X|X|" + eol + "+-+-+" + eol
+          )
         }
       "be able to set a new Mode" in {
         field1.setMode("computer") should be(ComputerModeStrategy())
@@ -64,7 +66,9 @@ class FieldSpec extends AnyWordSpec {
         "|O|" +
         "+-+" in {
           field1.mesh(1) should be("+-+" + eol + "|O|" + eol + "+-+" + eol)
-          field2.mesh(1) should be("+-+-+" + eol + "|O|O|" + eol + "+-+-+" + eol + "|O|O|" + eol + "+-+-+" + eol)
+          field2.mesh(1) should be(
+            "+-+-+" + eol + "|O|O|" + eol + "+-+-+" + eol + "|O|O|" + eol + "+-+-+" + eol
+          )
         }
       "be able to set a new Mode" in {
         field1.setMode("computer") should be(ComputerModeStrategy())
@@ -72,7 +76,7 @@ class FieldSpec extends AnyWordSpec {
       }
     }
     "filled with Empty" should {
-      var field = new Field(3, 3, Stone.Empty)
+      val field = new Field(3, 3, Stone.Empty)
       "be empty initially" in {
         field.toString should be(("""#+---+---+---+
           #|   |   |   |

@@ -25,24 +25,27 @@ class FileIO extends FileIOInterface {
     field
   }
 
-  override def save(field: FieldInterface): Unit = XML.save("res/field.xml", fieldToXml(field))
+  override def save(field: FieldInterface): Unit =
+    XML.save("res/field.xml", fieldToXml(field))
 
   def fieldToXml(field: FieldInterface): xml.Node = {
-    <field mode= { field.getMode() } player={ if (field.getPlayerState()) "true" else "false" }>
+    <field mode= {field.getMode()} player={
+      if (field.getPlayerState()) "true" else "false"
+    }>
       {
-        for {
-          row <- 0 until field.size
-          col <- 0 until field.size2
-        } yield cellToXml(field, row, col) //+ sys.props("line.separator")
-      }
+      for {
+        row <- 0 until field.sizeOfDimY
+        col <- 0 until field.sizeOfDimX
+      } yield cellToXml(field, row, col) //+ sys.props("line.separator")
+    }
     </field>
   }
 
   def cellToXml(field: FieldInterface, row: Int, col: Int) = {
-    <cell row={ row.toString } col={ col.toString } value={ field.get(row, col).toString }> {
-        
-    }
+    <cell row={row.toString} col={col.toString} value={
+      field.get(row, col).toString
+    }> {}
     </cell>
 
   }
-} 
+}

@@ -6,7 +6,7 @@ import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
 import java.lang.reflect.Field
 import scala.util.{Try, Success, Failure}
 
-trait Strategy { // concept uses Strategy Pattern but is in its own Folder
+trait ComputerStrategy { // concept uses Strategy Pattern but is in its own Folder
   var globalY: Int = -1
   // abstract var globalField : FieldInterface
   var ComputerStone: Stone = Stone.O
@@ -31,7 +31,7 @@ trait Strategy { // concept uses Strategy Pattern but is in its own Folder
   def matchx(wantedX: Int, field: FieldInterface): Int =
     var low_x = 8
     val result = Try {
-      for (try_x <- field.size - 1 to 0 by -1) {
+      for (try_x <- field.sizeOfDimY - 1 to 0 by -1) {
         if (field.get(try_x, globalY) == Stone.Empty) {
           low_x = try_x
           throw SpaceFound

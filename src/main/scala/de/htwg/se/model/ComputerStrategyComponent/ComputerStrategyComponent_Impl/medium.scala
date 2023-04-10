@@ -8,14 +8,14 @@ import scala.languageFeature.postfixOps
 import scala.util.{Try, Success, Failure}
 
 case class mediumStrategy()
-    extends de.htwg.se.model.fieldComponent.fieldBaseImpl.difficulties.Strategy {
+    extends de.htwg.se.model.fieldComponent.fieldBaseImpl.difficulties.ComputerStrategy {
   var plannedNext = (0, 0)
   val WinCheck: WinDetectorInterface = WinStub()
   var limitV = 0
   var limitH = 0
 
   override def put(field: FieldInterface) = {
-    limitV = field.size; limitH = field.size2;
+    limitV = field.sizeOfDimY; limitH = field.sizeOfDimX;
     if (evalNext(field)) plannedNext else evalNew(field)
   }
 

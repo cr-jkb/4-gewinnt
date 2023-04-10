@@ -1,4 +1,3 @@
-
 package de.htwg.se.aview
 
 import de.htwg.se.controller.controllerComponent.controllerBaseImpl.Controller
@@ -6,7 +5,13 @@ import de.htwg.se.model.fieldComponent.fieldBaseImpl._
 import com.google.inject.Guice
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers.*
-import java.io.{BufferedReader, ByteArrayInputStream, ByteArrayOutputStream, PrintStream, StringReader}
+import java.io.{
+  BufferedReader,
+  ByteArrayInputStream,
+  ByteArrayOutputStream,
+  PrintStream,
+  StringReader
+}
 import de.htwg.se.MainModule
 import de.htwg.se.controller.controllerComponent.ControllerInterface
 import de.htwg.se.model.moveComponent.Move
@@ -51,8 +56,8 @@ class TuiSpec extends AnyWordSpec {
       tui.analyseInput("9") should be(Some(Move('b', 0, 0)))
     }
 
-    "have a getInt function" in{
-      tui.getInt('1') should be(Success(1))
+    "have a getInt function" in {
+      tui.getIntFrom('1') should be(Success(1))
     }
   }
 }

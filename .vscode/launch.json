@@ -11,7 +11,9 @@
             "mainClass": "de.htwg.se.main",
             "args": [],
             "jvmOptions": [],
-            "env": {}
+            "env": {},
+            /* "cwd": "${workspaceFolder}", */
+            /* "console": "internalConsole", */
         }
     ]
 }

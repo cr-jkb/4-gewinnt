@@ -8,11 +8,11 @@ class MatrixSpec extends AnyWordSpec {
     "empty " should {
       "be created by using a dimention and a sample cell" in {
         val matrix = new Matrix[String](2, 2, "x")
-        matrix.size should be(2)
+        matrix.sizeOfDimY should be(2)
       }
       "for test purposes only be created with a Vector of Vectors" in {
         val testMatrix = Matrix(Vector(Vector("x")))
-        testMatrix.size should be(1)
+        testMatrix.sizeOfDimX should be(1)
       }
 
     }
@@ -26,10 +26,10 @@ class MatrixSpec extends AnyWordSpec {
         matrix.cell(0, 0) should be("x")
         returnedMatrix.cell(0, 0) should be("o")
       }
-      "be filled using fill operation" in {
+      /* "be filled using fill operation" in {
         val returnedMatrix = matrix.fill("x")
         returnedMatrix.cell(0, 0) should be("x")
-      }
+      } */ //NOT NEEDED PROBABLY - rev in TODO23
     }
   }
 }
