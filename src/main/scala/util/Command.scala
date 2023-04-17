@@ -1,4 +1,6 @@
-package de.htwg.se.util
+package util
+
+import de.htwg.se.util.Command
 
 trait Command[T]: // Interface to be implemented in /controller/PutCommand.scala
   def noStep(t: T): T
@@ -6,7 +8,7 @@ trait Command[T]: // Interface to be implemented in /controller/PutCommand.scala
   def undoStep(t: T): T
   def redoStep(t: T): T
 
-class UndoManager[T]: // Implemented Class
+class UndoManager[T]: // Implemented Class as Object
   private var undoStack: List[Command[T]] = Nil
   private var redoStack: List[Command[T]] = Nil
   def doStep(t: T, command: Command[T]) =

@@ -1,14 +1,14 @@
-package de.htwg.se.model.fieldComponent.fieldBaseImpl.difficulties
+package de.htwg.se.model.fieldComponent.gameState.difficulties
 
 import de.htwg.se.model.fieldComponent.FieldInterface
 import de.htwg.se.model.WinDetectorComponent.WinStub
 import de.htwg.se.model.WinDetectorComponent.WinDetectorInterface
-import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
+import de.htwg.se.util.Stone
 import scala.languageFeature.postfixOps
 import scala.util.{Try, Success, Failure}
 
 case class mediumStrategy()
-    extends de.htwg.se.model.fieldComponent.fieldBaseImpl.difficulties.ComputerStrategy {
+    extends de.htwg.se.model.fieldComponent.gameState.difficulties.ComputerStrategy {
   var plannedNext = (0, 0)
   val WinCheck: WinDetectorInterface = WinStub()
   var limitV = 0
@@ -91,7 +91,7 @@ case class mediumStrategy()
   // def checkStonePosIfEmpty(field: FieldInterface, x: (Int, Int)) : Boolean = field.get(x._1, x._2) == Stone.Empty
 
   /* predict takes scalable StoneSet of minSize = 2 */
-  /* returns always List of size 2 containing PosTuples of -1 if impossible due to Field Dimensions */
+  /* returns always List of size 2 containing PosTuples of -1 if impossible due to Game Dimensions */
   def predict(StoneSet: List[(Int, Int)]): List[(Int, Int)] = {
     val xDiff = (StoneSet(0)._1 - StoneSet(1)._1) // Delta X
     val yDiff = (StoneSet(0)._2 - StoneSet(1)._2) // Delta Y

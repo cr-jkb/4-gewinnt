@@ -1,14 +1,15 @@
 package de.htwg.se.aview
 
 import de.htwg.se.controller.controllerComponent.ControllerInterface
+import util.Observer
 import scala.swing._
-import de.htwg.se.util.Observer
 import scala.swing.event._
 import javax.swing.{BorderFactory, ImageIcon}
 import scala.swing.Swing.LineBorder
 import javax.imageio.ImageIO
 import scala.util.{Try, Success, Failure}
 //import scala.language.postfixOps
+import de.htwg.se.util.Stone
 import java.io.File
 import scala.swing.{
   Alignment,
@@ -21,7 +22,6 @@ import scala.swing.{
 }
 import java.net.URL
 import javax.sound.sampled._
-import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
 
 val empty = new ImageIcon(ImageIO.read(new File("res/empty.png")))
 val selector_red = new ImageIcon(ImageIO.read(new File("res/red2-lq.png")))
@@ -33,8 +33,8 @@ var selector_pos = 0
 class GUI(controller: ControllerInterface) extends Observer:
   controller.add(this)
   val button =
-    Array.ofDim[Label](controller.field.sizeOfDimY, controller.field.sizeOfDimX)
-  val selectors = Array.ofDim[Label](controller.field.sizeOfDimX)
+    Array.ofDim[Label](controller.gameState.sizeOfDimY, controller.gameState.sizeOfDimX)
+  val selectors = Array.ofDim[Label](controller.gameState.sizeOfDimX)
   override def update: Unit = redraw()
   override def kill: Unit = {
     //task.cancel()
@@ -67,8 +67,8 @@ class GUI(controller: ControllerInterface) extends Observer:
     centerOnScreen
 
     val spielfeld =
-      getField(controller.field.sizeOfDimY, controller.field.sizeOfDimX)
-    val selector = getSelector(controller.field.sizeOfDimX)
+      getField(controller.gameState.sizeOfDimY, controller.gameState.sizeOfDimX)
+    val selector = getSelector(controller.gameState.sizeOfDimX)
 
     //val t = new java.util.Timer()
     //t.schedule(task, 1000L, 1000L)
@@ -170,7 +170,7 @@ class GUI(controller: ControllerInterface) extends Observer:
     val myMenu = new MenuBar {
       contents += new Menu("Options") {
         mnemonic = Key.O
-        contents += new MenuItem(Action("New Game") { controller.newField })
+        contents += new MenuItem(Action("New Game") { controller.newGame })
         contents += new MenuItem(Action("Quit") { controller.quit; kill })
       }
       contents += new Menu("SaveGame") {
@@ -204,13 +204,13 @@ class GUI(controller: ControllerInterface) extends Observer:
 
       ShowWin
     }
-    for (index <- 0 to controller.field.sizeOfDimY - 1)
-      for (index2 <- 0 to controller.field.sizeOfDimX - 1)
-        if (controller.field.get(index, index2).toString.equals("X")) {
+    for (index <- 0 until controller.gameState.sizeOfDimY - 1)
+      for (index2 <- 0 until controller.gameState.sizeOfDimX - 1)
+        if (controller.gameState.get(index, index2).toString.equals("X")) {
           button(index)(index2).icon = new ImageIcon(
             ImageIO.read(new File("res/slotyellow.png"))
           )
-        } else if (controller.field.get(index, index2).toString.equals("O")) {
+        } else if (controller.gameState.get(index, index2).toString.equals("O")) {
           button(index)(index2).icon = new ImageIcon(
             ImageIO.read(new File("res/slotred.png"))
           )
@@ -224,11 +224,11 @@ class GUI(controller: ControllerInterface) extends Observer:
     new GridPanel(sizeOfDimY, sizeOfDimX) {
       background = new Color(0, 131, 255)
       for (
-        index <- 0 until controller.field.sizeOfDimY;
-        index2 <- 0 until controller.field.sizeOfDimX
+        index <- 0 until controller.gameState.sizeOfDimY;
+        index2 <- 0 until controller.gameState.sizeOfDimX
       ) {
         button(index)(index2) = new Label(
-          controller.field.get(index, index2).toString
+          controller.gameState.get(index, index2).toString
         ) {
           listenTo(mouse.clicks)
           reactions += {
@@ -273,14 +273,14 @@ class GUI(controller: ControllerInterface) extends Observer:
   def updateSelImg = selectors(selector_pos).icon = selector_red
 
   def moveSelRight =
-    if (selector_pos < controller.field.sizeOfDimX) {
+    if (selector_pos < controller.gameState.sizeOfDimX) {
       selectors(selector_pos).icon = empty
       selector_pos = selector_pos + 1
     }
     updateSelImg
 
   def selector_fullyRefresh =
-    for (i <- 0 until selectors.size) {
+    for (i <- 0 until selectors.length) {
       selectors(i).icon = empty
       if (i == selector_pos) {
         if (controller.getPlayer == Stone.X) selectors(i).icon = selector_yellow

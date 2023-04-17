@@ -1,0 +1,17 @@
+package model
+
+import org.scalatest.wordspec.AnyWordSpec
+
+class testEasyModule extends AnyWordSpec {
+  "A TESTOBJECT" when {
+    "being called to set a stone" should {
+      " " in (
+        
+        )
+
+      /* "do " in ( ) */
+      /* "do " in ( ) */
+    }
+  }
+
+}

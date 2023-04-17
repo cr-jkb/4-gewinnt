@@ -1,16 +1,16 @@
+/*package vierGewinnt.view*/
 package de.htwg.se.aview
+import de.htwg.globals.*
 
 import de.htwg.se.controller.controllerComponent.ControllerInterface
-import de.htwg.se.model.moveComponent.Move
+import util.Observer
 import scala.io.StdIn.readLine
-import de.htwg.se.util.Observer
 import scala.util.{Try, Success, Failure}
 
 class TUI(controller: ControllerInterface) extends Observer:
-  val eol = sys.props("line.separator")
-  /* val size1 = controller.field.sizeOfDimY */
-  /* val sizeOfDimX = controller.field.sizeOfDimX */
   controller.add(this)
+  override def update: Unit = println(controller.toString)
+  override def kill: Unit = System.exit(0);
 
   def start =
     print(
@@ -19,25 +19,22 @@ class TUI(controller: ControllerInterface) extends Observer:
         "AIN SOFTWARE-ENGINEERING WiSe 21/22" + eol +
         "        ### GRUPPE 15 ###" + eol + eol +
         ">  Willkommen zu 4-Gewinnt  <" + eol +
-        controller.field.toString
+        controller.gameState.toString
     )
     inputLoop()
-
-  override def update: Unit = println(controller.toString)
-  override def kill: Unit = System.exit(0);
 
   def inputLoop(): Unit =
     analyseInput(readLine) match
       case None => controller.quit
       case Some(move) =>
         move.m match
-          case 'i' => controller.put(move.x, move.y); println(controller.error)
+          case 'i' => controller.put(move.x, move.y); println(controller.CommandFeedbackPipe)
           case 'c' =>
             controller.setMode("computer"); println("Modus wurde gewechselt.")
           case 'p' =>
             controller.setMode("player"); println("Modus wurde gewechselt.")
-          case 'r' => controller.redo; println(controller.error)
-          case 'u' => controller.undo; println(controller.error)
+          case 'r' => controller.redo; println(controller.CommandFeedbackPipe)
+          case 'u' => controller.undo; println(controller.CommandFeedbackPipe)
           case 'e' => println("Bitte Eingabe ueberpruefen.")
           case 'b' =>
             println(
@@ -81,3 +78,6 @@ class TUI(controller: ControllerInterface) extends Observer:
   def getIntFrom(input: Char): Try[Int] = Try(
     input.toString.toInt
   )
+
+
+case class Move(m: Char, x: Int, y: Int)

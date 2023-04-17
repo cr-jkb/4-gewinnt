@@ -1,10 +1,10 @@
-package de.htwg.se.model.fieldComponent.fieldBaseImpl.difficulties
+package de.htwg.se.model.fieldComponent.gameState.difficulties
 
 import de.htwg.se.model.fieldComponent.FieldInterface
 import org.scalactic.Bool
 
 case class difficultStrategy()
-    extends de.htwg.se.model.fieldComponent.fieldBaseImpl.difficulties.ComputerStrategy {
+    extends de.htwg.se.model.fieldComponent.gameState.difficulties.ComputerStrategy {
   var plannedNext = (0, 0)
   var alertNext = (-1, 0)
   val alertVal = 2

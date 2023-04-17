@@ -1,4 +1,4 @@
-package de.htwg.se.model.fieldComponent.fieldBaseImpl
+package de.htwg.se.model.fieldComponent.gameState
 
 import org.scalatest.matchers.should.Matchers._
 import org.scalatest.wordspec.AnyWordSpec
@@ -27,7 +27,7 @@ class MatrixSpec extends AnyWordSpec {
         returnedMatrix.cell(0, 0) should be("o")
       }
       /* "be filled using fill operation" in {
-        val returnedMatrix = matrix.fill("x")
+        val returnedMatrix = field.fill("x")
         returnedMatrix.cell(0, 0) should be("x")
       } */ //NOT NEEDED PROBABLY - rev in TODO23
     }

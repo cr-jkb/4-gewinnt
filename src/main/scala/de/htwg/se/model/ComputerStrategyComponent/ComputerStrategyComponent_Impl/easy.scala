@@ -1,14 +1,14 @@
-package de.htwg.se.model.fieldComponent.fieldBaseImpl.difficulties
+package de.htwg.se.model.fieldComponent.gameState.difficulties
 import scala.util.Random
 import de.htwg.se.model.fieldComponent.FieldInterface
-import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
+import de.htwg.se.util.Stone
 import scala.util.{Try, Success, Failure}
 import scala.compiletime.ops.boolean
 object SpaceFound extends Exception
 object FullRow extends Exception
 
 case class easyStrategy()
-    extends de.htwg.se.model.fieldComponent.fieldBaseImpl.difficulties.ComputerStrategy {
+    extends de.htwg.se.model.fieldComponent.gameState.difficulties.ComputerStrategy {
   override def put(field: FieldInterface) = {
     findRandom(field)
   }

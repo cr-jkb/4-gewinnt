@@ -1,7 +1,7 @@
 package de.htwg.se.aview
 
 import de.htwg.se.controller.controllerComponent.controllerBaseImpl.Controller
-import de.htwg.se.model.fieldComponent.fieldBaseImpl._
+import de.htwg.se.model.fieldComponent.gameState._
 import com.google.inject.Guice
 import org.scalatest.wordspec.AnyWordSpec
 import org.scalatest.matchers.should.Matchers.*

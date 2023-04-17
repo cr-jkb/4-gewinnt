@@ -1,12 +1,11 @@
 package de.htwg.se.model.WinDetectorComponent
 
-import de.htwg.se.model.fieldComponent.FieldInterface
-import de.htwg.se.util.PlayerState
-import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
+import de.htwg.se.model.fieldComponent.{FieldInterface, PlayerState}
+import de.htwg.se.util.Stone
 import java.lang.reflect.Field
 
 trait WinDetectorInterface {
-  def checkWin(field: FieldInterface): (Boolean, Stone) //checks the whole Field
+  def checkWin(field: FieldInterface): (Boolean, Stone) //checks the whole Game
 
   def checkWinFor( //checks given Stones only
       field: FieldInterface,

@@ -1,8 +1,8 @@
-package de.htwg.se.model.fieldComponent.fieldBaseImpl.difficulties
+package de.htwg.se.model.fieldComponent.gameState.difficulties
 
 import scala.compiletime.ops.int
 import de.htwg.se.model.fieldComponent.FieldInterface
-import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
+import de.htwg.se.util.Stone
 import java.lang.reflect.Field
 import scala.util.{Try, Success, Failure}
 

@@ -1,7 +1,7 @@
 package de.htwg.se.model.WinDetectorComponent
 
 import de.htwg.se.model.fieldComponent.FieldInterface
-import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
+import de.htwg.se.util.Stone
 
 case class WinAlert()
     extends de.htwg.se.model.WinDetectorComponent.WinDetectorInterface {
@@ -14,7 +14,7 @@ case class WinAlert()
 
   override def checkWin(field: FieldInterface): (Boolean, Stone) = {
     (determineWin(field, Stone.Empty), winner)
-  } //checks the whole Field
+  } //checks the whole Game
 
   override def checkWinFor(field: FieldInterface, player: Stone): (Boolean) = {
     determineWin(field, player)

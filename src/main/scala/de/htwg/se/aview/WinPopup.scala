@@ -42,7 +42,7 @@ case class winPop(controller: ControllerInterface) {
         foreground = Color.RED
         border = BorderFactory.createRaisedBevelBorder
         reactions += { case e: MouseClicked =>
-          controller.newField
+          controller.newGame
           dispose()
         }
       }

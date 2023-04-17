@@ -1,14 +1,16 @@
-package de.htwg.se.model.fieldComponent.fieldBaseImpl
+package de.htwg.se.model.fieldComponent.gameState
 
-import org.scalatest.matchers.should.Matchers._
+import de.htwg.se.model.fieldComponent.fieldElements.Game
+import de.htwg.se.util.Stone
+import org.scalatest.matchers.should.Matchers.*
 import org.scalatest.wordspec.AnyWordSpec
 
-class FieldSpec extends AnyWordSpec {
-  "A TicTacToe Field" when {
+class GameSpec extends AnyWordSpec {
+  "A TicTacToe Game" when {
     "filled with X" should {
-      val field1 = new Field(1, 1, Stone.X)
-      val field2 = new Field(2, 2, Stone.X)
-      val field3 = new Field(3, 3, Stone.X)
+      val field1 = new Game(1, 1, Stone.X)
+      val field2 = new Game(2, 2, Stone.X)
+      val field3 = new Game(3, 3, Stone.X)
       val eol = sys.props("line.separator")
       "have a bar as String of form '+---+---+---+'" in {
         field3.bar() should be("+---+---+---+" + eol)
@@ -41,9 +43,9 @@ class FieldSpec extends AnyWordSpec {
       }
     }
     "filled with O" should {
-      val field1 = new Field(1, 1, Stone.O)
-      val field2 = new Field(2, 2, Stone.O)
-      val field3 = new Field(3, 3, Stone.O)
+      val field1 = new Game(1, 1, Stone.O)
+      val field2 = new Game(2, 2, Stone.O)
+      val field3 = new Game(3, 3, Stone.O)
       val eol = sys.props("line.separator")
       "have a bar as String of form '+---+---+---+'" in {
         field3.bar() should be("+---+---+---+" + eol)
@@ -76,7 +78,7 @@ class FieldSpec extends AnyWordSpec {
       }
     }
     "filled with Empty" should {
-      val field = new Field(3, 3, Stone.Empty)
+      val field = new Game(3, 3, Stone.Empty)
       "be empty initially" in {
         field.toString should be(("""#+---+---+---+
           #|   |   |   |

@@ -1,65 +1,44 @@
 package de.htwg.se.controller.controllerComponent.controllerBaseImpl
 
-import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
-import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
-import de.htwg.se.model.fieldComponent.fieldBaseImpl.ErrorField
-import de.htwg.se.model.fieldComponent.FieldInterface
+import de.htwg.se.model.fieldComponent.{FieldInterface, GameModeInterface}
 import de.htwg.se.controller.controllerComponent.ControllerInterface
-import de.htwg.se.util.Observable
-import de.htwg.se.util.Command
-import de.htwg.se.util.UndoManager
-import de.htwg.se.util.GameMode
 import com.google.inject.Guice
 import de.htwg.se.MainModule
 import de.htwg.se.model.fileIOComponent.FileIOInterface
 import com.google.inject.Inject
 import com.google.inject.name.Named
+import de.htwg.se.model.fieldComponent.fieldElements.Game
+import de.htwg.se.util.Stone
+import util.{Command, Observable, UndoManager}
 
 object SpaceFound extends Exception
 object FullRow extends Exception
 import scala.util.{Try, Success, Failure}
 
-case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
+case class Controller @Inject() (@Named("DefField") var gameState: FieldInterface)
     extends ControllerInterface
     with Observable:
-
-  val undoManager = new UndoManager[FieldInterface]
-  val injector = Guice.createInjector(new MainModule)
-  val fileIo = injector.getInstance(classOf[FileIOInterface])
-  var error = ""
   var gameWon = false
+  var CommandFeedbackPipe = ""
 
-  override def setGameState(won: Boolean) = { gameWon = won }
-  def newField =
+  def newGame =
     gameWon = false
-    field = new Field() // no need for new if "instance-ized" with parameters
+    gameState = new Game() // no need for new if "instance-ized" with parameters
     notifyObservers
 
-  // def put(x: Int, y: Int) =
-  //   var low_x = field.sizeOfDimY - 1
-  //   try {
-  //     for (try_x <- field.sizeOfDimY - 1 to 0 by -1) { // gehe von unten los
-  //       if (field.get(try_x, y) == Stone.Empty) {
-  //         low_x = try_x; throw SpaceFound;
-  //       }
-  //     }
-  //     throw FullRow
-  //   } catch {
-  //     case SpaceFound =>
-  //       undoManager.clearRedo();
-  //       field = undoManager.doStep(field, new PutCommand(low_x, y, this));
-  //       error = "Stone successfully set" // print(s"will put to ${low_x}\n")
-  //     case FullRow =>
-  //       error = (s"the vertical row at ${y + 1} is full\n") // throw noAction
-  //   }
-  //   notifyObservers
+  private val undoManager = new UndoManager[FieldInterface]
+  private val injector = Guice.createInjector(new MainModule)
+  private val fileIo = injector.getInstance(classOf[FileIOInterface])
 
-  def put(x: Int, y: Int) =
-    var low_x = field.sizeOfDimY - 1
+  def put(x: Int) =
+
+
+  def put(x: Int, y: Int) = //TODO23 REFACTOR: Enthält schon 4 Gewinnt Spiel Logik: sollte allgemeines put erlauben
+    var low_x = gameState.sizeOfDimY - 1
     val result = Try {
       /* .find() */
-      for (try_x <- field.sizeOfDimY - 1 to 0 by -1) {
-        if (field.get(try_x, y) == Stone.Empty) {
+      for (try_x <- gameState.sizeOfDimY - 1 to 0 by -1) {
+        if (gameState.get(try_x, y) == Stone.Empty) {
           low_x = try_x
           throw SpaceFound
         }
@@ -71,44 +50,45 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
         e match {
           case SpaceFound =>
             undoManager.clearRedo();
-            field = undoManager.doStep(field, new PutCommand(low_x, y, this));
-            error = "Stone successfully set"
-          case FullRow => error = (s"the vertical row at ${y + 1} is full\n")
+            gameState = undoManager.doStep(gameState, new PutCommand(low_x, y, this));
+            CommandFeedbackPipe = "Stone successfully set"
+          case FullRow => CommandFeedbackPipe = (s"the vertical row at ${y + 1} is full\n")
         }
     }
     notifyObservers
 
   def undo =
-    val oldfield = field
-    field = undoManager.undoStep(field)
-    if (field == oldfield)
-      error = "Undo fehler!"
+    val oldfield = gameState
+    gameState = undoManager.undoStep(gameState)
+    if (gameState == oldfield)
+      CommandFeedbackPipe = "Undo fehler!"
     else
-      error = "Undo erfolgreich"
+      CommandFeedbackPipe = "Undo erfolgreich"
     notifyObservers
 
   def redo =
-    val oldfield = field
-    field = undoManager.redoStep(field)
-    if (field == oldfield)
-      error = "Redo fehler!"
+    val oldfield = gameState
+    gameState = undoManager.redoStep(gameState)
+    if (gameState == oldfield)
+      CommandFeedbackPipe = "Redo fehler!"
     else
-      error = "Redo erfolgreich"
+      CommandFeedbackPipe = "Redo erfolgreich"
     notifyObservers
 
-  def setMode(str: String): GameMode = field.setMode(str)
-  def getPlayer: Stone = if (field.getPlayerState()) Stone.X else Stone.O
-  def setStrength(d: Int) = field.setDifficulty(d)
+  override def setGameState(won: Boolean) = { gameWon = won }
+  def setMode(str: String) = { GameModeInterface = gameState.setMode(str) }//TODO23 success?
+  def getPlayer: Stone = if (gameState.getPlayerState()) Stone.X else Stone.O
+  def setStrength(d: Int) = { gameState.setDifficulty(d) }
 
   def quit =
     killObservers
 
   def save: Unit =
-    fileIo.save(field)
+    fileIo.save(gameState)
     notifyObservers
 
   def load: Unit =
-    field = fileIo.load
+    gameState = fileIo.load
     notifyObservers
 
-  override def toString = field.toString
+  override def toString = gameState.toString

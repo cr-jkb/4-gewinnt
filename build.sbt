@@ -1,4 +1,5 @@
 val scala3Version = "3.2.2"
+ideaPort in Global := 65337
 
 lazy val root = project
   .in(file("."))
@@ -35,3 +36,4 @@ lazy val root = project
     jacocoCoverallsRepoToken := sys.env.get("REPO_TOKEN")
   )
   .enablePlugins(JacocoCoverallsPlugin)
+  

@@ -1,7 +1,8 @@
 package de.htwg.se.util
 
-import org.scalatest.matchers.should.Matchers._
+import org.scalatest.matchers.should.Matchers.*
 import org.scalatest.wordspec.AnyWordSpec
+import util.UndoManager
 
 class UndoManagerSpec extends AnyWordSpec {
 
