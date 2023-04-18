@@ -33,8 +33,8 @@ lazy val settings = Seq(
 
 lazy val root = project
   .in(file("."))
-  .dependsOn(view, model, control)
-  .aggregate(view, model, control)
+  .dependsOn(view, control)
+  .aggregate(view, control)
   .settings(
     name := "4-Gewinnt (CJ, YH)",
     version := "1",
