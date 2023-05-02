@@ -10,14 +10,13 @@ import scala.concurrent.ExecutionContextExecutor
 import scala.util.Failure
 
 object fileIOAPI {
-  def main(args: Array[String]): Unit =
-    val system: ActorSystem[Any] =
+  def main(args: Array[String]): Unit = {
+    implicit val system: ActorSystem[Any] =
       ActorSystem(Behaviors.empty, "fileIO")
-    given ActorSystem[Any] = system
 
     // needed for the future flatMap/onComplete in the end
-    val executionContext: ExecutionContextExecutor = system.executionContext
-    given ExecutionContextExecutor = executionContext
+    implicit val executionContext: ExecutionContextExecutor =
+      system.executionContext
 
     val route = path("fileio" / "load") {
 
@@ -46,5 +45,6 @@ object fileIOAPI {
         println(s"FileIO Rest service couldnt be started!Error: ${exception}")
 
     }
+  }
 
 }
