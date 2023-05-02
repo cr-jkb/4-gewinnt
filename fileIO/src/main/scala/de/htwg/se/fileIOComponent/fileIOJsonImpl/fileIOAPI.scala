@@ -11,8 +11,9 @@ import scala.util.Failure
 
 object fileIOAPI {
   def main(args: Array[String]): Unit =
-    implicit val system: ActorSystem[Any] =
+    val system: ActorSystem[Any] =
       ActorSystem(Behaviors.empty, "fileIO")
+    given ActorSystem[Any] = system
 
     // needed for the future flatMap/onComplete in the end
     val executionContext: ExecutionContextExecutor = system.executionContext
