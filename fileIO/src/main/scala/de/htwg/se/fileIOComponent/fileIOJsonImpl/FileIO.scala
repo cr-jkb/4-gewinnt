@@ -1,7 +1,7 @@
 package de.htwg.se
 package fileIOComponent.fileIOJsonImpl
 
-import de.htwg.se.fileIOComponent.FileIOInterface
+/*import de.htwg.se.fileIOComponent.FileIOInterface
 import scala.io.Source
 import de.htwg.se.MainModule
 import de.htwg.se.model.fieldComponent.FieldInterface
@@ -54,4 +54,4 @@ class FileIO extends FileIOInterface {
       )
     )
   }
-}
+}*/

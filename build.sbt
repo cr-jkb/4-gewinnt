@@ -7,6 +7,11 @@ lazy val settings = Seq(
     "org.scalactic" %% "scalactic" % "3.2.10",
     "org.scalatest" %% "scalatest" % "3.2.10" % "test"
   ),
+  libraryDependencies ++= Seq(
+    "com.typesafe.akka" %% "akka-http" % "10.5.0",
+    "com.typesafe.akka" %% "akka-actor-typed" % "2.8.0",
+    "com.typesafe.akka" %% "akka-http-spray-json" % "10.5.0"
+  ),
   libraryDependencies += ("org.scala-lang.modules" %% "scala-swing" % "3.0.0")
     .cross(CrossVersion.for3Use2_13),
   /* libraryDependencies += ("com.google.inject" % "guice" % "5.1.0"), */
@@ -33,6 +38,7 @@ lazy val settings = Seq(
 
 lazy val root = project
   .in(file("."))
+  .aggregate(fileIO)
   .settings(
     name := "4-Gewinnt (CJ, YH)",
     version := "1",
@@ -41,7 +47,7 @@ lazy val root = project
   .enablePlugins(JacocoCoverallsPlugin)
 
 lazy val fileIO = (project in file("fileIO"))
-  .dependsOn(root)
+  .dependsOn()
   .settings(
     name := "4-Gewinntttt-MODEL",
     version := "1",
