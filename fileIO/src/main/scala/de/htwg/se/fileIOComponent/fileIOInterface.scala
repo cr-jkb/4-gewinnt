@@ -1,9 +1,9 @@
 package de.htwg.se
 package fileIOComponent
 
-import de.htwg.se.model.fieldComponent.FieldInterface
+import play.api.libs.json.JsValue
 
 trait FileIOInterface {
-  def load: FieldInterface
-  def save(field: FieldInterface): Unit
+  def load: JsValue
+  def save(json: JsValue): Unit
 }

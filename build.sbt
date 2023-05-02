@@ -7,13 +7,15 @@ lazy val settings = Seq(
     "org.scalactic" %% "scalactic" % "3.2.10",
     "org.scalatest" %% "scalatest" % "3.2.10" % "test"
   ),
-  libraryDependencies ++= Seq(
-    "com.typesafe.akka" %% "akka-http" % "10.5.0",
+  libraryDependencies +=
     "com.typesafe.akka" %% "akka-actor-typed" % "2.8.0",
-    "com.typesafe.akka" %% "akka-http-spray-json" % "10.5.0"
-  ),
+  libraryDependencies +=
+    "com.typesafe.akka" %% "akka-stream" % "2.8.0",
+  libraryDependencies +=
+    "com.typesafe.akka" %% "akka-http" % "10.5.1",
   libraryDependencies += ("org.scala-lang.modules" %% "scala-swing" % "3.0.0")
     .cross(CrossVersion.for3Use2_13),
+  libraryDependencies += "org.slf4j" % "slf4j-nop" % "2.0.5",
   /* libraryDependencies += ("com.google.inject" % "guice" % "5.1.0"), */
   libraryDependencies += ("net.codingwell" %% "scala-guice" % "5.1.1"),
   libraryDependencies += ("com.google.inject.extensions" % "guice-assistedinject" % "5.1.0"),
@@ -38,6 +40,7 @@ lazy val settings = Seq(
 
 lazy val root = project
   .in(file("."))
+  .dependsOn(fileIO)
   .aggregate(fileIO)
   .settings(
     name := "4-Gewinnt (CJ, YH)",

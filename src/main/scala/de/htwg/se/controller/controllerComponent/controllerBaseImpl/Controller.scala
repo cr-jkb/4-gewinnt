@@ -13,6 +13,17 @@ import de.htwg.se.controller.controllerComponent.ControllerInterface
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
 import de.htwg.se.util.Command
 import de.htwg.se.util.GameMode
+import akka.actor.typed.scaladsl.Behaviors
+import akka.actor.typed.ActorSystem
+import akka.http.scaladsl.model.HttpMethods
+import akka.http.scaladsl.model.HttpRequest
+import akka.http.scaladsl.model.HttpResponse
+import akka.http.scaladsl.unmarshalling.Unmarshal
+import akka.http.scaladsl.Http
+import scala.concurrent.Future
+import scala.util.Failure
+import scala.util.Success
+import de.htwg.se.util.Util
 
 object SpaceFound extends Exception
 object FullRow extends Exception
@@ -21,6 +32,8 @@ import scala.util.{Try, Success, Failure}
 case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
     extends ControllerInterface
     with Observable:
+
+  val fileIOServer = "http://localhost:8080/fileio"
 
   val undoManager = new UndoManager[FieldInterface]
   // val injector = Guice.createInjector(new MainModule)
@@ -104,10 +117,43 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
 
   def save: Unit =
     // fileIo.save(field)
+    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+    implicit val executionContext = system.executionContext
+
+    val response: Future[HttpResponse] = Http().singleRequest(
+      HttpRequest(
+        method = HttpMethods.POST,
+        uri = fileIOServer + "/save",
+        entity = Util.toJsonString(field)
+      )
+    )
+    response.onComplete {
+      case Failure(e) => sys.error("Fail when loading field.")
+      case Success(value) =>
+        Unmarshal(value.entity).to[String].onComplete {
+          case Failure(e) => sys.error("Failed unmarshalling")
+          case Success(value) =>
+            printf("%s\n", value)
+            field = Util.jsonToField(value)
+        }
+    }
     notifyObservers
 
   def load: Unit =
     // field = fileIo.load
+    implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
+    implicit val executionContext = system.executionContext
+
+    val response: Future[HttpResponse] = Http().singleRequest(
+      HttpRequest(
+        uri = fileIOServer + "/load"
+      )
+    )
+    response.onComplete {
+      case Failure(e)     => sys.error("Fail when saving field.")
+      case Success(value) => printf("%s\n", value)
+    }
+
     notifyObservers
 
   override def toString = field.toString

@@ -1,5 +1,5 @@
 package de.htwg.se
-package fileIOComponent.fileIOJsonImpl
+package util
 
 /*import de.htwg.se.fileIOComponent.FileIOInterface
 import scala.io.Source
