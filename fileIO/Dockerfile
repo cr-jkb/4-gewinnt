@@ -2,8 +2,10 @@ FROM hseeberger/scala-sbt:17.0.2_1.6.2_3.1.1
 
 RUN apt-get update
 
-WORKDIR /src
+EXPOSE 8080
 
-ADD . /src
+WORKDIR /fileIO
+
+ADD . /fileIO
 
 CMD sbt run

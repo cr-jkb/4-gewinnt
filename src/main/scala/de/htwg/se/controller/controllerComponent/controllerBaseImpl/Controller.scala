@@ -128,15 +128,12 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
       )
     )
     response.onComplete {
-      case Failure(e) => sys.error("Fail when loading field.")
+      case Failure(e) => sys.error("Fail when saving field.")
       case Success(value) =>
-        Unmarshal(value.entity).to[String].onComplete {
-          case Failure(e) => sys.error("Failed unmarshalling")
-          case Success(value) =>
-            printf("%s\n", value)
-            field = Util.jsonToField(value)
-        }
+        println("Spiel ueber API gespeichert.")
+
     }
+
     notifyObservers
 
   def load: Unit =
@@ -150,8 +147,14 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
       )
     )
     response.onComplete {
-      case Failure(e)     => sys.error("Fail when saving field.")
-      case Success(value) => printf("%s\n", value)
+      case Failure(e) => sys.error("Fail when loading field.")
+      case Success(value) =>
+        Unmarshal(value.entity).to[String].onComplete {
+          case Failure(e) => sys.error("Failed unmarshalling")
+          case Success(value) =>
+            println("Spiel ueber API geladen.")
+            field = Util.jsonToField(value)
+        }
     }
 
     notifyObservers

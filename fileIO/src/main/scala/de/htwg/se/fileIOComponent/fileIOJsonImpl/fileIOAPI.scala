@@ -45,6 +45,10 @@ object fileIOAPI {
         println(s"FileIO Rest service couldnt be started!Error: ${exception}")
 
     }
+    scala.io.StdIn.readLine() // blocks the main thread until user input
+    server
+      .flatMap(_.unbind()) // unbind the server binding
+      .onComplete(_ => system.terminate()) // terminate the actor system
   }
 
 }
