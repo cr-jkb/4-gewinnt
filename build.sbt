@@ -33,8 +33,6 @@ lazy val settings = Seq(
 
 lazy val root = project
   .in(file("."))
-  .dependsOn(view, control)
-  .aggregate(view, control)
   .settings(
     name := "4-Gewinnt (CJ, YH)",
     version := "1",
@@ -42,26 +40,10 @@ lazy val root = project
   )
   .enablePlugins(JacocoCoverallsPlugin)
 
-lazy val view = (project in file("view"))
-  .dependsOn(model, control)
-  .aggregate(model, control)
-  .settings(
-    name := "4-Gewinnt-VIEW",
-    version := "1",
-    settings
-  )
-lazy val model = (project in file("model"))
-  .dependsOn()
+lazy val fileIO = (project in file("fileIO"))
+  .dependsOn(root)
   .settings(
     name := "4-Gewinntttt-MODEL",
-    version := "1",
-    settings
-  )
-lazy val control = (project in file("control"))
-  .dependsOn(model)
-  .aggregate(model)
-  .settings(
-    name := "4-Gewinnt-CONTROL",
     version := "1",
     settings
   )
