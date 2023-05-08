@@ -8,6 +8,7 @@ import akka.http.scaladsl.server.Directives.*
 import scala.util.Success
 import scala.concurrent.ExecutionContextExecutor
 import scala.util.Failure
+import java.time._
 
 object fileIOAPI {
   def main(args: Array[String]): Unit = {
@@ -41,11 +42,20 @@ object fileIOAPI {
         println(
           s"Server now online. Please navigate to http://localhost:8080/fileio\nPress RETURN to stop..."
         )
+        /*var quit = false
+        while (!quit) {
+          /* quit = true; */
+          Thread.sleep(1000L);
+        }*/        
       case Failure(exception) =>
         println(s"FileIO Rest service couldnt be started!Error: ${exception}")
 
     }
-    scala.io.StdIn.readLine() // blocks the main thread until user input
+    while (true) {
+        scala.io.StdIn.readLine() // blocks the main thread until user input
+        Thread.sleep(1000L);
+    }   
+    
     server
       .flatMap(_.unbind()) // unbind the server binding
       .onComplete(_ => system.terminate()) // terminate the actor system

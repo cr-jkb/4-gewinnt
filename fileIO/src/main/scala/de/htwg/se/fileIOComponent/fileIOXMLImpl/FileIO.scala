@@ -1,5 +1,5 @@
-package de.htwg.se
-package fileIOComponent.fileIOXMLImpl
+/* package de.htwg.se
+package fileIOComponent.fileIOXMLImpl */
 /*import com.google.inject.Guice
 import de.htwg.se.fileIOComponent.FileIOInterface
 import de.htwg.se.fieldComponent.FieldInterface
