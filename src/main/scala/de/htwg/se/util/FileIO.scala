@@ -1,5 +1,5 @@
-package de.htwg.se
-package util
+/* package de.htwg.se
+package util */
 
 /*import de.htwg.se.fileIOComponent.FileIOInterface
 import scala.io.Source
