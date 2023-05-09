@@ -35,27 +35,27 @@ object fileIOAPI {
 
     }
 
-    val server = Http().newServerAt("localhost", 8080).bind(route)
+    val server = Http().newServerAt("0.0.0.0", 8080).bind(route)
 
     server.onComplete {
       case Success(binding) =>
         println(
           s"Server now online. Please navigate to http://localhost:8080/fileio\nPress RETURN to stop..."
         )
-        /*var quit = false
+      /*var quit = false
         while (!quit) {
           /* quit = true; */
           Thread.sleep(1000L);
-        }*/        
+        }*/
       case Failure(exception) =>
         println(s"FileIO Rest service couldnt be started!Error: ${exception}")
 
     }
     while (true) {
-        scala.io.StdIn.readLine() // blocks the main thread until user input
-        Thread.sleep(1000L);
-    }   
-    
+      scala.io.StdIn.readLine() // blocks the main thread until user input
+      Thread.sleep(1000L);
+    }
+
     server
       .flatMap(_.unbind()) // unbind the server binding
       .onComplete(_ => system.terminate()) // terminate the actor system
