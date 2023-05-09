@@ -13,3 +13,5 @@ project/metals.sbt
 .scalafmt.conf
 .gitattributes
 *.sqlite
+.idea/
+.idea
