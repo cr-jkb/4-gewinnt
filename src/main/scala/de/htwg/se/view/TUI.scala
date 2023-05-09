@@ -49,6 +49,7 @@ class TUI(controller: ControllerInterface) extends Observer:
         inputLoop()
 
   def analyseInput(input: String): Option[Move] = // String Interpretation
+    if input == null then return None;
     input match
       case "q"                             => None
       case "r"                             => Some(Move('r', 0, 0))
