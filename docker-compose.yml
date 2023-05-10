@@ -9,35 +9,21 @@ services:
     ports:
       - "8080:8080"
     stdin_open: true
-    container_name: fileio_servic
+    container_name: fileio_service
     environment:
       FILEIO_SERVICE_HOST: persistence
       FILEIO_SERVICE_PORT: 8080
-    tty: true
-  tools:
-    image: madn-tools-service
-    build:
-      context: ./tools/
-      dockerfile: ./Dockerfile
-    ports:
-      - "8081:8081"
-    stdin_open: true
-    container_name: tools_service
-    environment:
-      FILEIO_SERVICE_HOST: tools
-      FILEIO_SERVICE_PORT: 8081
     tty: true
 
   main:
     image: connect4-game
     build:
-      context: ./src
-      dockerfile: ./Dockerfile
+      context: ./
+      dockerfile: ../Dockerfile
     stdin_open: true
     container_name: connect4_game
     depends_on:
       - persistence
-      - tools
     volumes:
       - /tmp/.X11-unix:/tmp/.X11-unix
     environment:
