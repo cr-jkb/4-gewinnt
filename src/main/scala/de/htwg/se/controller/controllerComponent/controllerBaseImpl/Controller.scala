@@ -154,6 +154,7 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
           case Success(value) =>
             println("Spiel ueber API geladen.")
             field = Util.jsonToField(value)
+            notifyObservers
         }
     }
 
