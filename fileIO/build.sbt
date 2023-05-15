@@ -21,7 +21,10 @@ lazy val settings = Seq(
   libraryDependencies += ("com.google.inject.extensions" % "guice-assistedinject" % "5.1.0"),
   /*libraryDependencies += ("com.google.inject" % "guice" % "4.2.3"), // incompatible with  jdk17*/
   libraryDependencies += ("org.scala-lang.modules" %% "scala-xml" % "2.1.0"),
-  libraryDependencies += ("com.typesafe.play" %% "play-json" % "2.10.0-RC7")
+  libraryDependencies += ("com.typesafe.play" %% "play-json" % "2.10.0-RC7"),
+  libraryDependencies += ("com.typesafe.slick" %% "slick" % "3.3.3")
+    .cross(CrossVersion.for3Use2_13),
+  libraryDependencies += "org.postgresql" % "postgresql" % "42.6.0"
 )
 
 lazy val root = project
