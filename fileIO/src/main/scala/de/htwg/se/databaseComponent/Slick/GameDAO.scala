@@ -38,10 +38,10 @@ class GameDAO extends DAOInterface {
   }
 
   override def create(jsonField: String): Int = {
-    Random rand = new Random();
-    Int id = rand.nextInt(900000);
+    val rand : Random = new Random();
+    val id = rand.nextInt(900000);
     fieldTable += (id, jsonField);
-
+    id
   }
   override def read(id: Int): String = {
     val query = fieldTable.filter(_.id === id).result.headOption

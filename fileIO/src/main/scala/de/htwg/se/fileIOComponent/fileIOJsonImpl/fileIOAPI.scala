@@ -12,8 +12,8 @@ import java.time._
 
 object fileIOAPI {
 
-  GameDao DAO_Object = new GameDAO();
-  Int latestID = -1;
+  val DAO_Object = new GameDAO();
+  var latestID : Int = -1;
 
   def main(args: Array[String]): Unit = {
     implicit val system: ActorSystem[Any] =
