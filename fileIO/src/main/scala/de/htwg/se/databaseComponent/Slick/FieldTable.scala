@@ -1,7 +1,6 @@
 package de.htwg.se.databaseComponent
 
 import slick.jdbc.PostgresProfile.api.*
-import slick.jdbc.JdbcProfile.*
 
 class FieldTable(tag: Tag) extends Table[String](tag, "field") {
 
@@ -9,6 +8,6 @@ class FieldTable(tag: Tag) extends Table[String](tag, "field") {
   def jsonField = column[String]("jsonField")
 
   // default projection
-  def * = (id, jsonField)
+  override def * = (id, jsonField)
 
 }

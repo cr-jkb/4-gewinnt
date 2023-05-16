@@ -15,7 +15,7 @@ class GameDAO extends DAOInterface {
   val port = "5432"
   val name = "fileio"
   val db = Database.forURL(
-    url = "jdbc:postgresql://" + ip + ":" + port + "/" + name,
+    url = "jdbc:postgresql://" + ip + ":" + port + "/" + name + "?serverTimezone=UTC",
     user = "username",
     password = "password",
     driver = "org.postgresql.Driver"
@@ -37,12 +37,23 @@ class GameDAO extends DAOInterface {
     case Failure(e) => println("Error: " + e)
   }
 
-  override def create(jsonField: String): Int = {
+  def create(jsonField: String): Int = {
     val rand : Random = new Random();
     val id = rand.nextInt(900000);
     fieldTable += (id, jsonField);
-    id
+    val query = DBIO.seq(
+      fieldTable.schema.createIfNotExists,
+    )
+    
+
+    val result = Future(Await.result(db.run(query)), Duration.Inf)
+
+    result.onComplete {
+      case Success(obj) => println(s"Del $obj with $id")
+      case Failure(exc) => println(s"error on delete: ${exc.getMessage}")
+    }
   }
+
   override def read(id: Int): String = {
     val query = fieldTable.filter(_.id === id).result.headOption
     val result = Await.result(db.run(query), Duration.Inf)
@@ -62,7 +73,12 @@ class GameDAO extends DAOInterface {
 
   override def delete(id: Int): Unit = {
     val query = fieldTable.filter(_.id === id).result.headOption
-    query.delete();
+    val result = db.run(query.delete())
+
+    result.onComplete {
+      case Success(obj) => println(s"Del $obj")
+      case Failure(exc) => println(s"error on delete: ${exc.getMessage}")
+    }
   }
 
 }
