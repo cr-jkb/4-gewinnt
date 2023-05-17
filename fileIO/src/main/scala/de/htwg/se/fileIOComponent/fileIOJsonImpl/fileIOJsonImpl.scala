@@ -8,6 +8,7 @@ object fileIOJsonImpl {
   def save(json: String): Unit = {
     val pw = PrintWriter(File("game.json"))
     pw.write(json)
+    var dao = fieldDAO.create()
     pw.close
 
   }

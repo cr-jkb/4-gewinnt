@@ -12,7 +12,6 @@ import java.time._
 
 object fileIOAPI {
 
-  val DAO_Object = new GameDAO();
   var latestID : Int = -1;
 
   def main(args: Array[String]): Unit = {

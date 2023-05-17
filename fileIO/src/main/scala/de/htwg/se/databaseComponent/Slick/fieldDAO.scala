@@ -46,7 +46,7 @@ class GameDAO extends DAOInterface {
     )
     
 
-    val result = Future(Await.result(db.run(query)), Duration.Inf)
+    var result = Future(Await.result(db.run(query)), Duration.Inf)
 
     result.onComplete {
       case Success(obj) => println(s"Del $obj with $id")
@@ -58,7 +58,7 @@ class GameDAO extends DAOInterface {
     val query = fieldTable.filter(_.id === id).result.headOption
     val result = Await.result(db.run(query), Duration.Inf)
     result match {
-      case Some(row) => row.jsonField
+      case Some(row) => row
       case None =>
         throw new NoSuchElementException(s"No record found for id=$id")
     }
@@ -72,8 +72,8 @@ class GameDAO extends DAOInterface {
   }
 
   override def delete(id: Int): Unit = {
-    val query = fieldTable.filter(_.id === id).result.headOption
-    val result = db.run(query.delete())
+    val query = fieldTable.filter(_.id === id).result.headOption.delete()
+    val result = db.run(query)
 
     result.onComplete {
       case Success(obj) => println(s"Del $obj")

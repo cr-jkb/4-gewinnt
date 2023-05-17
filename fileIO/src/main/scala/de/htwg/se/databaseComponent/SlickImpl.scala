@@ -6,7 +6,7 @@ import scala.concurrent.duration._
 object SlickImpl {
   
     def loadGame():JsValue = {
-        Await.result(IndexDAO.read,15.seconds)
+        Await.result(fieldDAO.read,15.seconds)
     }
 
 }
