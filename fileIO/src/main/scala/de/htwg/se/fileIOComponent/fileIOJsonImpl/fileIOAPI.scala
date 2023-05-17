@@ -10,9 +10,8 @@ import scala.concurrent.ExecutionContextExecutor
 import scala.util.Failure
 import java.time._
 
-object fileIOAPI {
 
-  var latestID : Int = -1;
+object fileIOAPI {
 
   def main(args: Array[String]): Unit = {
     implicit val system: ActorSystem[Any] =
@@ -24,13 +23,11 @@ object fileIOAPI {
 
     val route = path("fileio" / "load") {
       complete(
-        DAO_Object.read(latestID)
           HttpEntity (ContentTypes.`application/json`, fileIOJsonImpl.load())
       )
     } ~ path("fileio" / "save") {
       post {
         entity(as[String]) { game =>
-          latestID = DAO_Object.create(game);
           fileIOJsonImpl.save(game)
           complete("Game is saved!")
         }

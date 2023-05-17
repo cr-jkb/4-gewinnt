@@ -66,7 +66,8 @@ case class Field(
     player
 
   def getMode(): String =
-    if (mode == PlayerModeStrategy()) "player" else "computer"
+    if (mode == PlayerModeStrategy()) "player"
+     else "computer"
 
   override def toString = mesh()
 
