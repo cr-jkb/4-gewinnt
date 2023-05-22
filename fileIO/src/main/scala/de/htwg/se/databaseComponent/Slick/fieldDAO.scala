@@ -49,11 +49,11 @@ object fieldDAO extends DAOInterface {
     )
     val result = Future(Await.result(db.run(query), Duration.Inf))
     result.onComplete {
-      case Success(obj) => println(s"Create $obj with $id"); return id;
+      case Success(obj) => println(s"Create $obj with $id"); id;
       case Failure(exc) =>
-        println(s"error on create: ${exc.getMessage}"); return -1;
+        println(s"error on create: ${exc.getMessage}"); -1;
     }
-    return id;
+    id;
   }
 
   override def read(id: Int): String = {
