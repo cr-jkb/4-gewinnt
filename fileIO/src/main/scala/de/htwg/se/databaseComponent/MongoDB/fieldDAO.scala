@@ -1,0 +1,1 @@
+object fieldDAO extends DAOInterface {}
