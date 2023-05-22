@@ -24,65 +24,75 @@ object fieldDAO extends DAOInterface {
   )
   val fieldTable = TableQuery(new FieldTable(_))
 
-  /*val running = Future(
-    Await.result(
-      db.run(
-        DBIO.seq(
-          fieldTable.schema.create
-        )
-      ),
-      Duration.Inf
-    )
-  )*/
-  /*running.onComplete {
-    case Success(_) =>
-      println("Connection to DB & Creation of Tables successful!")
-    case Failure(e) => println("Error: " + e)
-  }*/
+  // the queries always return the number of rows affected
 
-  def create(jsonField: String): Int = {
+  def initiate(): Unit = {
+    val query = fieldTable.schema.createIfNotExists
+    val result = db.run(query)
+
+    result.onComplete {
+      case Success(_) =>
+        println("Connection to DB & Creation of FieldTable successful!")
+      case Failure(e) => println("Error: " + e)
+    }
+    Await.result(result, Duration.Inf)
+
+  }
+
+  override def create(jsonField: String): Int = {
     val rand: Random = new Random();
     val id = rand.nextInt(900000);
-    /*fieldTable += (id, jsonField);*/
-    val query = DBIO.seq(
-      fieldTable.schema.createIfNotExists
-    )
-    val result = Future(Await.result(db.run(query), Duration.Inf))
+    val query = fieldTable += (id, jsonField)
+
+    val result = db.run(query)
     result.onComplete {
-      case Success(obj) => println(s"Create $obj with $id"); id;
+      case Success(rowsCreated) =>
+        println(s"Created $rowsCreated entry with id= $id"); id;
       case Failure(exc) =>
         println(s"error on create: ${exc.getMessage}"); -1;
     }
-    id;
+    Await.result(result, Duration.Inf)
   }
 
   override def read(id: Int): String = {
-    val query = fieldTable.filter(_.id === id).result.headOption
-    val result = Await.result(db.run(query), atMost = 10.seconds)
-    /*Json.toJson()*/
-    result match {
-      case Some(row) => row.toString
-      case None =>
+    val query =
+      fieldTable.filter(_.id === id).map(_.jsonField).result.headOption
+    val result = db.run(query)
+
+    result.onComplete {
+      case Success(Some(jsonField)) =>
+        println(s"Entry with id= $id found."); jsonField.toString
+      case Success(None) =>
         throw new NoSuchElementException(s"No record found for id=$id"); ""
+      case Failure(exc) => println(s"error on getting entry with id= $id")
     }
+    Await.result(result, atMost = 10.seconds).getOrElse("")
 
   }
 
   override def update(id: Int, jsonField: String): Unit = {
     val query =
       fieldTable.filter(_.id === id).map(_.jsonField).update(jsonField)
-    val result = Await.result(db.run(query), Duration.Inf)
+    val result = db.run(query)
+
+    result.onComplete {
+      case Success(rowsUpdated) =>
+        println(s"Updated $rowsUpdated rows with id: $id")
+      case Failure(exc) => println(s"error on delete: ${exc.getMessage}")
+    }
+    Await.result(result, Duration.Inf)
   }
 
   override def delete(id: Int): Unit = {
     val query =
-      fieldTable.filter(_.id === id).result.headOption // .delete!?!?!?
+      fieldTable.filter(_.id === id).delete
     val result = db.run(query)
 
     result.onComplete {
-      case Success(obj) => println(s"Del $obj")
+      case Success(rowsDeleted) => println(s"Deleted $rowsDeleted records")
       case Failure(exc) => println(s"error on delete: ${exc.getMessage}")
     }
+    Await.result(result, Duration.Inf)
   }
 
 }
