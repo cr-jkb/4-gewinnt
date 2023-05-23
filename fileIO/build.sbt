@@ -24,7 +24,9 @@ lazy val settings = Seq(
   libraryDependencies += ("com.typesafe.play" %% "play-json" % "2.10.0-RC7"),
   libraryDependencies += ("com.typesafe.slick" %% "slick" % "3.3.3")
     .cross(CrossVersion.for3Use2_13),
-  libraryDependencies += "org.postgresql" % "postgresql" % "42.6.0"
+  libraryDependencies += "org.postgresql" % "postgresql" % "42.6.0",
+  libraryDependencies += ("org.mongodb.scala" %% "mongo-scala-driver" % "4.9.0")
+    .cross(CrossVersion.for3Use2_13)
 )
 
 lazy val root = project
