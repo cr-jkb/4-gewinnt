@@ -7,6 +7,7 @@ import org.mongodb.scala.model.Filters._
 import org.mongodb.scala.model.Updates._
 import org.mongodb.scala.model.UpdateOptions
 import org.mongodb.scala.model.Projections._
+import org.mongodb.scala.result.{DeleteResult, InsertOneResult, UpdateResult}
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
@@ -23,14 +24,33 @@ object mongoFieldDAO extends DAOInterface {
     val rand: Random = new Random()
     val id = rand.nextInt(900000)
     val document: Document = Document("_id" -> id, "field" -> jsonField)
-    val query = collection.insertOne(document)
+    val insertObservable: Observable[Completed] = collection.insertOne(document)
+
+    insertObservable.subscribe( new Observer[Completed]{
+      override def onNext(result: Completed): Unit = println(s"Inserted: $result")
+      override def onError(e: Throwable): Unit = println(s"Error: $e")
+      override def onComplete(): Unit = println("Completeed")
+
+    })
     id
 
   }
 
   def read(id: Int): String = {
     val filter = equal("_id", id)
-    val findObservable: Observable[Completed] = collection.find(filter).results()
+    val findObservable = collection.find(filter)
+    val resultField = ""
+
+    findObservable.subscribe(new Observer[Document]{
+      override def onNext(document : Document): Unit = 
+        println(s"found: $result"); 
+        val result = document.getString("field");
+        resultField = result;
+
+      override def onError(e: Throwable): Unit = println(s"Error: $e")
+      override def onComplete(): Unit = println("Completed")
+    })
+    resultField
     
  
   }
