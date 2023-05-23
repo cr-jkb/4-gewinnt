@@ -24,12 +24,14 @@ object mongoFieldDAO extends DAOInterface {
     val rand: Random = new Random()
     val id = rand.nextInt(900000)
     val document: Document = Document("_id" -> id, "field" -> jsonField)
-    val insertObservable: Observable[Completed] = collection.insertOne(document)
+    val insertObservable: Observable[InsertOneResult] =
+      collection.insertOne(document)
 
-    insertObservable.subscribe( new Observer[Completed]{
-      override def onNext(result: Completed): Unit = println(s"Inserted: $result")
+    insertObservable.subscribe(new Observer[InsertOneResult] {
+      override def onNext(result: InsertOneResult): Unit =
+        println(s"Inserted: $result")
       override def onError(e: Throwable): Unit = println(s"Error: $e")
-      override def onComplete(): Unit = println("Completeed")
+      override def onComplete(): Unit = println("Insertion completeed")
 
     })
     id
@@ -38,30 +40,46 @@ object mongoFieldDAO extends DAOInterface {
 
   def read(id: Int): String = {
     val filter = equal("_id", id)
-    val findObservable = collection.find(filter)
-    val resultField = ""
+    val findObservable: Observable[Document] = collection.find(filter)
+    var resultField = ""
 
-    findObservable.subscribe(new Observer[Document]{
-      override def onNext(document : Document): Unit = 
-        println(s"found: $result"); 
-        val result = document.getString("field");
-        resultField = result;
+    findObservable.subscribe(new Observer[Document] {
+      override def onNext(result: Document): Unit =
+        println(s"found: $result");
+        val field = result.getString("field");
+        resultField = field;
 
       override def onError(e: Throwable): Unit = println(s"Error: $e")
-      override def onComplete(): Unit = println("Completed")
+      override def onComplete(): Unit = println("Read completed")
     })
     resultField
-    
- 
+
   }
-    
 
   override def update(id: Int, jsonField: String): Unit = {
-    val updateAction = collection.updateOne(equal("_id", id), set("field", jsonField))
+    val updateObservable: Observable[UpdateResult] =
+      collection.updateOne(equal("_id", id), set("field", jsonField))
+
+    updateObservable.subscribe(new Observer[UpdateResult] {
+      override def onNext(result: UpdateResult): Unit =
+        println(s"Updated: $result")
+      override def onError(e: Throwable): Unit = println(s"Error: $e")
+      override def onComplete(): Unit = println("Update completed")
+
+    })
   }
 
   override def delete(id: Int): Unit = {
-    val deleteAction = collection.deleteOne(equal("_id", id))
+    val deleteObservable: Observable[DeleteResult] =
+      collection.deleteOne(equal("_id", id))
+
+    deleteObservable.subscribe(new Observer[DeleteResult] {
+      override def onNext(result: DeleteResult): Unit =
+        println(s"Deleted: $result")
+      override def onError(e: Throwable): Unit = println(s"Error: $e")
+      override def onComplete(): Unit = println("Deletion completed")
+
+    })
   }
-    
+
 }
