@@ -15,14 +15,15 @@ import java.util.Random
 
 object mongoFieldDAO extends DAOInterface {
 
-  val client: MongoClient = MongoClient()
+  val client: MongoClient = MongoClient("mongodb://localhost:27017")
   val database: MongoDatabase = client.getDatabase("mydb")
   val collection: MongoCollection[Document] =
     database.getCollection("savegames")
 
   def create(jsonField: String): Int = {
-    val rand: Random = new Random()
-    val id = rand.nextInt(900000)
+    // val rand: Random = new Random()
+    // val id = rand.nextInt(900000)
+    val id = 1
     val document: Document = Document("_id" -> id, "field" -> jsonField)
     val insertObservable: Observable[InsertOneResult] =
       collection.insertOne(document)
@@ -47,6 +48,7 @@ object mongoFieldDAO extends DAOInterface {
       override def onNext(result: Document): Unit =
         println(s"found: $result");
         val field = result.getString("field");
+        println(field)
         resultField = field;
 
       override def onError(e: Throwable): Unit = println(s"Error: $e")

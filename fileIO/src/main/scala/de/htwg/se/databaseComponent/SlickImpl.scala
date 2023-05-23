@@ -1,3 +1,5 @@
+package de.htwg.se.databaseComponent
+
 import scala.io.Source
 import play.api.libs.json._
 import scala.concurrent.Await
