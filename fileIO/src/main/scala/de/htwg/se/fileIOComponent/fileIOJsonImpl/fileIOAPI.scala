@@ -24,13 +24,20 @@ object fileIOAPI {
 
     val route = path("fileio" / "load") {
       complete(
-        HttpEntity(ContentTypes.`application/json`, MongodbImpl.load())
+        HttpEntity(
+          ContentTypes.`application/json`,
+          // fileIOJsonImpl.load()
+          // SlickImpl.load()
+          MongodbImpl.load()
+        )
       )
     } ~ path("fileio" / "save") {
       post {
         entity(as[String]) { game =>
           // fileIOJsonImpl.save(game)
+          // SlickImpl.save(game)
           MongodbImpl.save(game)
+
           complete("Game is saved!")
         }
 

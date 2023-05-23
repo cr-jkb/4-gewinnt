@@ -12,6 +12,7 @@ import java.util.Random;
 import play.api.libs.json
 
 object slickFieldDAO extends DAOInterface {
+  var counter = 1;
   val ip = "localhost"
   val port = "5432"
   val dbname = "fileio"
@@ -40,8 +41,9 @@ object slickFieldDAO extends DAOInterface {
   }
 
   override def create(jsonField: String): Int = {
-    val rand: Random = new Random();
-    val id = rand.nextInt(900000);
+    // val rand: Random = new Random();
+    // val id = rand.nextInt(900000);
+    val id = counter
     val query = fieldTable += (id, jsonField)
 
     val result = db.run(query)
@@ -51,6 +53,7 @@ object slickFieldDAO extends DAOInterface {
       case Failure(exc) =>
         println(s"error on create: ${exc.getMessage}"); -1;
     }
+    counter += 1
     Await.result(result, Duration.Inf)
   }
 

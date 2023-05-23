@@ -8,12 +8,13 @@ import org.mongodb.scala.model.Updates._
 import org.mongodb.scala.model.UpdateOptions
 import org.mongodb.scala.model.Projections._
 import org.mongodb.scala.result.{DeleteResult, InsertOneResult, UpdateResult}
-import scala.concurrent.Await
 import scala.concurrent.duration._
+import scala.concurrent.{Await, Future}
 
 import java.util.Random
 
 object mongoFieldDAO extends DAOInterface {
+  var counter = 2
 
   val client: MongoClient = MongoClient("mongodb://localhost:27017")
   val database: MongoDatabase = client.getDatabase("mydb")
@@ -23,7 +24,7 @@ object mongoFieldDAO extends DAOInterface {
   def create(jsonField: String): Int = {
     // val rand: Random = new Random()
     // val id = rand.nextInt(900000)
-    val id = 1
+    val id = counter
     val document: Document = Document("_id" -> id, "field" -> jsonField)
     val insertObservable: Observable[InsertOneResult] =
       collection.insertOne(document)
@@ -35,26 +36,24 @@ object mongoFieldDAO extends DAOInterface {
       override def onComplete(): Unit = println("Insertion completeed")
 
     })
+    counter += 1
     id
 
   }
 
   def read(id: Int): String = {
     val filter = equal("_id", id)
-    val findObservable: Observable[Document] = collection.find(filter)
-    var resultField = ""
 
-    findObservable.subscribe(new Observer[Document] {
-      override def onNext(result: Document): Unit =
-        println(s"found: $result");
-        val field = result.getString("field");
-        println(field)
-        resultField = field;
-
-      override def onError(e: Throwable): Unit = println(s"Error: $e")
-      override def onComplete(): Unit = println("Read completed")
-    })
-    resultField
+    val findObservable = collection.find(filter).first()
+    val result: Document =
+      Await.result(findObservable.toFuture(), 5.seconds)
+    // matching geht iwi nicht
+    // result match {
+    //   case Some(document: Document) =>
+    //     println(s"Found document: $document"); document.getString("field")
+    //   case None => throw new NoSuchElementException("Document not found")
+    // }
+    result.getString("field")
 
   }
 
