@@ -11,7 +11,7 @@ import scala.util.{Failure, Success, Try}
 import java.util.Random;
 import play.api.libs.json
 
-object fieldDAO extends DAOInterface {
+object slickFieldDAO extends DAOInterface {
   val ip = "localhost"
   val port = "5432"
   val dbname = "fileio"
