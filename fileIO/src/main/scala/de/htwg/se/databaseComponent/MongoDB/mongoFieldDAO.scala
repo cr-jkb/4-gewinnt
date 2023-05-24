@@ -14,7 +14,7 @@ import scala.concurrent.{Await, Future}
 import java.util.Random
 
 object mongoFieldDAO extends DAOInterface {
-  var counter = 2
+  var counter = 1
 
   val client: MongoClient = MongoClient("mongodb://localhost:27017")
   val database: MongoDatabase = client.getDatabase("mydb")
@@ -47,12 +47,7 @@ object mongoFieldDAO extends DAOInterface {
     val findObservable = collection.find(filter).first()
     val result: Document =
       Await.result(findObservable.toFuture(), 5.seconds)
-    // matching geht iwi nicht
-    // result match {
-    //   case Some(document: Document) =>
-    //     println(s"Found document: $document"); document.getString("field")
-    //   case None => throw new NoSuchElementException("Document not found")
-    // }
+    
     result.getString("field")
 
   }
