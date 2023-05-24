@@ -15,7 +15,7 @@ import scala.concurrent.{Await, Future}
 import java.util.Random
 
 object mongoFieldDAO extends DAOInterface {
-  var counter = 2
+  var counter = 1
 
   val client: MongoClient = MongoClient("mongodb://localhost:27017")
   val database: MongoDatabase = client.getDatabase("mydb")
@@ -29,10 +29,10 @@ object mongoFieldDAO extends DAOInterface {
     val vars = splitField(jsonField)
     val document: Document = Document(
       "_id" -> id,
-      "field" -> jsonField,
+      "field" -> jsonField/*,
       "mode" -> vars(0),
       "difficulty" -> vars(1),
-      "currentPlayer" -> vars(2)
+      "currentPlayer" -> vars(2)*/
     )
     val insertObservable: Observable[InsertOneResult] =
       collection.insertOne(document)
@@ -98,7 +98,7 @@ object mongoFieldDAO extends DAOInterface {
 
   def splitField(jsonField: String): Array[String] = {
     val json: JsValue = Json.parse(jsonField)
-    var myValues: Array[String] = Array("", "", "");
+    var myValues: Array[String] = Array("", "", "", "");
 
     /* val row = (json \\ "row")(index).as[Int]
     val col = (json \\ "col")(index).as[Int]
@@ -107,9 +107,11 @@ object mongoFieldDAO extends DAOInterface {
     myValues += (json \\ "mode")(0).as[String]
     myValues += (json \\ "difficulty")(0).as[Int]
     myValues += (json \\ "player")(0).as[Boolean] */
+
     myValues(0) = (json \\ "mode")(0).as[String]
     myValues(1) = (json \\ "difficulty")(0).as[String]
     myValues(2) = (json \\ "player")(0).as[String]
+    myValues(3) = (json \\ "cells")(0).as[String]
 
     myValues
   }

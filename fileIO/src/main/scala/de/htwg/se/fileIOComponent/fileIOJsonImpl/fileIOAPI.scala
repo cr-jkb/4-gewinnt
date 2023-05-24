@@ -27,9 +27,9 @@ object fileIOAPI {
         /* fileIOJsonImpl.load() */
         HttpEntity(
           ContentTypes.`application/json`,
-          fileIOJsonImpl.load()
+          //fileIOJsonImpl.load()
           // SlickImpl.load()
-          /* MongodbImpl.load() */
+          MongodbImpl.load()
         )
       )
     } ~ path("fileio" / "save") {
