@@ -28,10 +28,10 @@ Command | Description
  hard         | Setze Stärke des Computers auf Schwer
  invincible   | Setze Stärke des Computers auf Maximum
  multiplayer  | Wechsle Modus aus Multiplayer 
- s            | Exportiere den aktuellen Spielzustand
- l            | Importiere einen Spielstand aus XML oder JSON
- u            | Undo 
- r            | Redo
+ save         | Exportiere den aktuellen Spielzustand
+ load         | Importiere einen Spielstand aus XML oder JSON
+ undo         | Undo 
+ redo         | Redo
  q            | Programm beenden
  
  ## TUI

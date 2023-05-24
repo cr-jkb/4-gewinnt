@@ -176,10 +176,10 @@ class GUI(controller: ControllerInterface) extends Observer:
       contents += new Menu("SaveGame") {
         mnemonic = Key.S
         contents += new MenuItem(Action("Import") {
-          controller.load; println("Spiel geladen.")
+          controller.load; /* println("Spiel geladen.") */
         })
         contents += new MenuItem(Action("Export") {
-          controller.save; println("Spiel gespeichert.")
+          controller.save; /* println("Spiel gespeichert.") */
         })
       }
     }

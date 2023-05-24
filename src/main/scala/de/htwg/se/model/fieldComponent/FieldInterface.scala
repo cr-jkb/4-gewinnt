@@ -18,5 +18,6 @@ trait FieldInterface {
   def getMode(): String
   def setMode(str: String): GameMode
   def setDifficulty(d: Int): Unit
+  def getDifficulty(): Int
   def undo(x: Int, y: Int): FieldInterface
 }

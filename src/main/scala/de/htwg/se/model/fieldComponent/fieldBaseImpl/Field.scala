@@ -66,8 +66,8 @@ case class Field(
     player
 
   def getMode(): String =
-    if (mode == PlayerModeStrategy()) "player"
-     else "computer"
+    if (mode == PlayerModeStrategy()) "multiplayer"
+    else "singleplayer"
 
   override def toString = mesh()
 
@@ -86,14 +86,15 @@ case class Field(
 
   def setMode(str: String): GameMode =
     str match
-      case "player" =>
+      case "multiplayer" =>
         mode = PlayerModeStrategy()
         mode
-      case "computer" =>
+      case "singleplayer" =>
         mode = ComputerModeStrategy()
         mode
 
   def setDifficulty(d: Int) = { mode.setDifficulty(d) }
+  def getDifficulty() = { mode.getDifficulty() }
 
   // --Field related:
   def undo(x: Int, y: Int): Field = // remove the stone at x,y

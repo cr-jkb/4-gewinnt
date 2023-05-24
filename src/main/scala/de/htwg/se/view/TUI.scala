@@ -16,10 +16,10 @@ class TUI(controller: ControllerInterface) extends Observer:
     print(
       eol +
         "Hochschule fuer Technik, Wirtschaft & Gestaltung" + eol +
-        "AIN SOFTWARE-ENGINEERING WiSe 21/22" + eol +
-        "        ### GRUPPE 15 ###" + eol + eol +
+        "AIN SOFTWARE-ARCHITEKTUR SeSe 23" + eol +
+        "        ### GRUPPE 18 ###" + eol + eol +
         ">  Willkommen zu 4-Gewinnt  <" + eol +
-        controller.field.toString
+        controller.field.toString + eol + eol
     )
     inputLoop()
 
@@ -33,9 +33,11 @@ class TUI(controller: ControllerInterface) extends Observer:
         move.m match
           case 'i' => controller.put(move.x, move.y); println(controller.error)
           case 'c' =>
-            controller.setMode("computer"); println("Modus wurde gewechselt.")
+            controller.setMode("singleplayer");
+            println("Modus wurde gewechselt.")
           case 'p' =>
-            controller.setMode("player"); println("Modus wurde gewechselt.")
+            controller.setMode("multiplayer");
+            println("Modus wurde gewechselt.")
           case 'r' => controller.redo; println(controller.error)
           case 'u' => controller.undo; println(controller.error)
           case 'e' => println("Bitte Eingabe ueberpruefen.")
@@ -43,24 +45,24 @@ class TUI(controller: ControllerInterface) extends Observer:
             println(
               "Moegliche Eingaben: 1-7 - Eingabe war nicht innerhalb des Spielfeldes."
             )
-          case 's' => controller.save; println("Spiel gespeichert.")
-          case 'l' => controller.load; println("Spiel geladen.")
+          case 's' => controller.save; /* println("Spiel gespeichert.") */
+          case 'l' => controller.load; /* println("Spiel geladen.") */
           case 'S' => controller.setStrength(move.x)
         inputLoop()
 
   def analyseInput(input: String): Option[Move] = // String Interpretation
-    input match
-      case "q"                             => None
-      case "r"                             => Some(Move('r', 0, 0))
-      case "u"                             => Some(Move('u', 0, 0))
-      case "singleplayer" | "Singleplayer" => Some(Move('c', 0, 0))
-      case "multiplayer" | "Multiplayer"   => Some(Move('p', 0, 0))
-      case "easy"                          => Some(Move('S', 0, 0))
-      case "medium"                        => Some(Move('S', 1, 0))
-      case "hard" | "difficult"            => Some(Move('S', 2, 0))
-      case "invincible"                    => Some(Move('S', 3, 0))
-      case "l"                             => Some(Move('l', 0, 0))
-      case "s"                             => Some(Move('s', 0, 0))
+    input.toLowerCase() match
+      case "q" | "exit"              => None
+      case "r" | "redo"              => Some(Move('r', 0, 0))
+      case "u" | "undo"              => Some(Move('u', 0, 0))
+      case "singleplayer" | "single" => Some(Move('c', 0, 0))
+      case "multiplayer" | "multi"   => Some(Move('p', 0, 0))
+      case "easy"                    => Some(Move('S', 0, 0))
+      case "medium"                  => Some(Move('S', 1, 0))
+      case "hard" | "difficult"      => Some(Move('S', 2, 0))
+      case "invincible"              => Some(Move('S', 3, 0))
+      case "l" | "load"              => Some(Move('l', 0, 0))
+      case "s" | "save"              => Some(Move('s', 0, 0))
       case _ => {
         splitIntoChars(input) match
           case Success(chars) => // Länge passt

@@ -2,6 +2,7 @@ package de.htwg.se.databaseComponent
 
 import de.htwg.se.databaseComponent.DAOInterface
 import org.mongodb.scala._
+import play.api.libs.json._
 import org.mongodb.scala.model._
 import org.mongodb.scala.model.Filters._
 import org.mongodb.scala.model.Updates._
@@ -25,7 +26,14 @@ object mongoFieldDAO extends DAOInterface {
     // val rand: Random = new Random()
     // val id = rand.nextInt(900000)
     val id = counter
-    val document: Document = Document("_id" -> id, "field" -> jsonField)
+    val vars = splitField(jsonField)
+    val document: Document = Document(
+      "_id" -> id,
+      "field" -> jsonField,
+      "mode" -> vars(0),
+      "difficulty" -> vars(1),
+      "currentPlayer" -> vars(2)
+    )
     val insertObservable: Observable[InsertOneResult] =
       collection.insertOne(document)
 
@@ -59,7 +67,12 @@ object mongoFieldDAO extends DAOInterface {
 
   override def update(id: Int, jsonField: String): Unit = {
     val updateObservable: Observable[UpdateResult] =
-      collection.updateOne(equal("_id", id), set("field", jsonField))
+      collection.updateMany(
+        equal("_id", id),
+        set("field", jsonField) /*
+        set("currentPlayer", "false") */
+        /* set({"field": jsonField, "currentPlayer": "false"}); */
+      )
 
     updateObservable.subscribe(new Observer[UpdateResult] {
       override def onNext(result: UpdateResult): Unit =
@@ -81,6 +94,24 @@ object mongoFieldDAO extends DAOInterface {
       override def onComplete(): Unit = println("Deletion completed")
 
     })
+  }
+
+  def splitField(jsonField: String): Array[String] = {
+    val json: JsValue = Json.parse(jsonField)
+    var myValues: Array[String] = Array("", "", "");
+
+    /* val row = (json \\ "row")(index).as[Int]
+    val col = (json \\ "col")(index).as[Int]
+    val value = (json \\ "value")(index).as[String] */
+    /*
+    myValues += (json \\ "mode")(0).as[String]
+    myValues += (json \\ "difficulty")(0).as[Int]
+    myValues += (json \\ "player")(0).as[Boolean] */
+    myValues(0) = (json \\ "mode")(0).as[String]
+    myValues(1) = (json \\ "difficulty")(0).as[String]
+    myValues(2) = (json \\ "player")(0).as[String]
+
+    myValues
   }
 
 }

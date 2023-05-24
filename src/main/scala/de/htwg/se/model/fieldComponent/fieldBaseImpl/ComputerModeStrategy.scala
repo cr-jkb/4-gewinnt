@@ -30,5 +30,16 @@ case class ComputerModeStrategy() extends GameMode {
         myDifficulty = difficultStrategy();
         println("Computer spielt ab jetzt auf Schwer")
       case 3 => println("Verfuegbar ab AIN 5")
+      case -1 => //just to have it conciously handled (loading gamestate is set to multiplayer)
+  }
+
+  override def getDifficulty(): Int = {
+    myDifficulty match
+      case easyStrategy() =>
+        0
+      case mediumStrategy() =>
+        1
+      case difficultStrategy() =>
+        2
   }
 }

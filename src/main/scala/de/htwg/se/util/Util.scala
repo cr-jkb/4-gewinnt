@@ -15,6 +15,7 @@ object Util {
     Json.obj(
       "field" -> Json.obj(
         "mode" -> JsString(field.getMode()),
+        "difficulty" -> JsNumber(field.getDifficulty()),
         "player" -> JsString(if (field.getPlayerState()) "true" else "false"),
         "cells" -> Json.toJson(
           for {
@@ -42,6 +43,8 @@ object Util {
 
       field = field.set(row, col, value)
     }
+    field.setMode("singleplayer")
+    field.setDifficulty((json \\ "difficulty")(0).as[Int])
     field.setMode((json \\ "mode")(0).as[String])
     field.setPlayer((json \\ "player")(0).as[String])
     field

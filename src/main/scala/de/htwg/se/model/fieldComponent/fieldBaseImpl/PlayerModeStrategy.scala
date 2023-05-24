@@ -28,4 +28,6 @@ case class PlayerModeStrategy() extends GameMode {
       "Sorry, you need to be in SinglePlayer Mode to set the difficulty. \n(Enter in TUI: singleplayer)"
     )
   } // not needed
+
+  override def getDifficulty(): Int = { -1 }
 }

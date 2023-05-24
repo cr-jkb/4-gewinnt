@@ -7,4 +7,5 @@ trait GameMode {
   def put(x: Int, y: Int, field: Field): ErrorField
 
   def setDifficulty(diff: Int): Unit
+  def getDifficulty(): Int
 }

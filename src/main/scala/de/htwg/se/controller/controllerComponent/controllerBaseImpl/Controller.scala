@@ -111,6 +111,7 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
   def setMode(str: String): GameMode = field.setMode(str)
   def getPlayer: Stone = if (field.getPlayerState()) Stone.X else Stone.O
   def setStrength(d: Int) = field.setDifficulty(d)
+  def getStrength(): Int = field.getDifficulty()
 
   def quit =
     killObservers
@@ -119,7 +120,7 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
     // fileIo.save(field)
     implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
     implicit val executionContext = system.executionContext
-
+    println("Accessing the API - Please wait (10s Timeout)")
     val response: Future[HttpResponse] = Http().singleRequest(
       HttpRequest(
         method = HttpMethods.POST,
@@ -128,35 +129,39 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
       )
     )
     response.onComplete {
-      case Failure(e) => sys.error("Fail when saving field.")
+      case Failure(e) =>
+        println(s"Fehler beim Speichern: \n$e");
+        sys.error("Fail when saving field.");
       case Success(value) =>
         println("Spiel ueber API gespeichert.")
+        notifyObservers
 
     }
-
-    notifyObservers
 
   def load: Unit =
     // field = fileIo.load
     implicit val system = ActorSystem(Behaviors.empty, "SingleRequest")
     implicit val executionContext = system.executionContext
-
+    println("Accessing the API - Please wait (10s Timeout)")
     val response: Future[HttpResponse] = Http().singleRequest(
       HttpRequest(
         uri = fileIOServer + "/load"
       )
     )
     response.onComplete {
-      case Failure(e) => sys.error("Fail when loading field.")
+      case Failure(e) =>
+        println(s"Fehler beim Lesen: \n$e");
+        sys.error("Fail when loading field.");
       case Success(value) =>
         Unmarshal(value.entity).to[String].onComplete {
-          case Failure(e) => sys.error("Failed unmarshalling")
+          case Failure(e) =>
+            println(s"Fehler beim Lesen: \n$e");
+            sys.error("Failed unmarshalling");
           case Success(value) =>
             println("Spiel ueber API geladen.")
             field = Util.jsonToField(value)
+            notifyObservers
         }
     }
-
-    notifyObservers
 
   override def toString = field.toString
