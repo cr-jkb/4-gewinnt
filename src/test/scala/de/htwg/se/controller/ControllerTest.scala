@@ -5,7 +5,7 @@ import de.htwg.se.util.Observer
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.ComputerModeStrategy
 
-class ControllerSpec extends AnyWordSpec {
+class ControllerTest extends AnyWordSpec {
   "A controller" when {
     "observed by an Observer" should {
       val controller = new Controller(new Field())
@@ -42,7 +42,7 @@ class ControllerSpec extends AnyWordSpec {
     "a set Mode occurs" should {
       val controller2 = new Controller(new Field())
       "set the Field to this Mode" in {
-        controller2.setMode("computer") should be(ComputerModeStrategy())
+        controller2.setMode("single") should be(ComputerModeStrategy())
         // controller2.setMode("player") should be(PlayerModeStrategy())
       }
     }

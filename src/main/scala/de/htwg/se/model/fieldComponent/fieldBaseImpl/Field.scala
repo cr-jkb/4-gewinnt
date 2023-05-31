@@ -65,10 +65,6 @@ case class Field(
     }
     player
 
-  def getMode(): String =
-    if (mode == PlayerModeStrategy()) "multiplayer"
-    else "singleplayer"
-
   override def toString = mesh()
 
   // --Mode Layer related:
@@ -84,14 +80,17 @@ case class Field(
   def getPlayerState(): Boolean =
     if (player == TruePlayerState()) true else false
 
+  def getMode(): String =
+    if (mode == PlayerModeStrategy()) "multiplayer"
+    else "singleplayer"
+
   def setMode(str: String): GameMode =
     str match
-      case "multiplayer" =>
+      case "multiplayer" | "multi" =>
         mode = PlayerModeStrategy()
-        mode
-      case "singleplayer" =>
+      case ("singleplayer" | "single") =>
         mode = ComputerModeStrategy()
-        mode
+    mode
 
   def setDifficulty(d: Int) = { mode.setDifficulty(d) }
   def getDifficulty() = { mode.getDifficulty() }

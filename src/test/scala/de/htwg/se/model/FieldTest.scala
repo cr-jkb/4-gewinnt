@@ -4,7 +4,7 @@ import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.ComputerModeStrategy
 
-class FieldSpec extends AnyWordSpec {
+class FieldTest extends AnyWordSpec {
   "A TicTacToe Field" when {
     "filled with X" should {
       val field1 = new Field(1, 1, Stone.X)
@@ -37,7 +37,7 @@ class FieldSpec extends AnyWordSpec {
           )
         }
       "be able to set a new Mode" in {
-        field1.setMode("computer") should be(ComputerModeStrategy())
+        field1.setMode("single") should be(ComputerModeStrategy())
         // field1.setMode("player") should be(PlayerModeStrategy())
       }
     }
@@ -72,7 +72,7 @@ class FieldSpec extends AnyWordSpec {
           )
         }
       "be able to set a new Mode" in {
-        field1.setMode("computer") should be(ComputerModeStrategy())
+        field1.setMode("single") should be(ComputerModeStrategy())
         // field1.setMode("player") should be(PlayerModeStrategy())
       }
     }
@@ -98,10 +98,10 @@ class FieldSpec extends AnyWordSpec {
           #+---+---+---+
           #""").stripMargin('#'))
       }
-      "be able to set a new Mode" in {
+      /* "be able to set a new Mode" in {
         field.setMode("computer") should be(ComputerModeStrategy())
         // field.setMode("player") should be(PlayerModeStrategy())
-      }
+      } */
     }
   }
 

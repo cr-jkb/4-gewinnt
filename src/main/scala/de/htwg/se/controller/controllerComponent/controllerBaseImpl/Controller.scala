@@ -108,7 +108,7 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
       error = "Redo erfolgreich"
     notifyObservers
 
-  def setMode(str: String): GameMode = field.setMode(str)
+  def setMode(str: String): GameMode = field.setMode(str);
   def getPlayer: Stone = if (field.getPlayerState()) Stone.X else Stone.O
   def setStrength(d: Int) = field.setDifficulty(d)
   def getStrength(): Int = field.getDifficulty()
