@@ -4,7 +4,7 @@ import java.io.PrintWriter
 import scala.io.Source
 import java.io.File
 
-import de.htwg.se.databaseComponent.slickFieldDAO
+/* import de.htwg.se.databaseComponent.slickFieldDAO */
 
 object fileIOJsonImpl {
   var latestID: Int = -1;

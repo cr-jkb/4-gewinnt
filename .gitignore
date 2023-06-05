@@ -15,3 +15,4 @@ project/metals.sbt
 *.sqlite
 .idea/
 .idea
+gatling-charts-highcharts-bundle-3.9.5/
