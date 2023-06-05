@@ -3,7 +3,6 @@ package fieldComponent.fieldBaseImpl
 
 case class ErrorField(field: Field, error: String) {
   def returnField: Field = field
-  def returnError: String = error
 }
 
 case class Error(errorMessage: String) {
