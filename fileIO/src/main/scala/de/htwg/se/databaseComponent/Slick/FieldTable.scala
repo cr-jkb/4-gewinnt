@@ -5,7 +5,7 @@ import slick.lifted.Tag
 
 class FieldTable(tag: Tag) extends Table[(Int, String)](tag, "field") {
 
-  def id = column[Int]("id", O.PrimaryKey, O.AutoInc)
+  def id = column[Int]("id", O.PrimaryKey)
   def jsonField = column[String]("jsonField")
 
   // default projection
