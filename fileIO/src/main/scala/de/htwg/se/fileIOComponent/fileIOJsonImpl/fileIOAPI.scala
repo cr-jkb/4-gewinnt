@@ -11,12 +11,15 @@ import scala.util.Failure
 import java.time._
 import de.htwg.se.databaseComponent.MongodbImpl
 import de.htwg.se.databaseComponent.SlickImpl
+import de.htwg.se.databaseComponent.slickFieldDAO
 
 object fileIOAPI {
 
   def main(args: Array[String]): Unit = {
     implicit val system: ActorSystem[Any] =
       ActorSystem(Behaviors.empty, "fileIO")
+
+    slickFieldDAO.initiate()
 
     // needed for the future flatMap/onComplete in the end
     implicit val executionContext: ExecutionContextExecutor =
@@ -28,16 +31,16 @@ object fileIOAPI {
         HttpEntity(
           ContentTypes.`application/json`,
           //fileIOJsonImpl.load()
-          // SlickImpl.load()
-          MongodbImpl.load()
+          SlickImpl.load()
+          //MongodbImpl.load()
         )
       )
     } ~ path("fileio" / "save") {
       post {
         entity(as[String]) { game =>
           fileIOJsonImpl.save(game)
-          // SlickImpl.save(game)
-          MongodbImpl.save(game)
+           SlickImpl.save(game)
+          // MongodbImpl.save(game)
 
           complete("Game is saved!")
         }

@@ -15,12 +15,12 @@ object slickFieldDAO extends DAOInterface {
   var counter = 1;
   val ip = "localhost"
   val port = "5432"
-  val dbname = "fileio"
+  val dbname = "postgres"
   val db = Database.forURL(
     url =
       "jdbc:postgresql://" + ip + ":" + port + "/" + dbname + "?serverTimezone=UTC",
-    user = sys.env.getOrElse("POSTGRES_USER", "username").toString,
-    password = sys.env.getOrElse("POSTGRES_USER", "password").toString,
+    user = sys.env.getOrElse("POSTGRES_USER", "postgres").toString,
+    password = sys.env.getOrElse("POSTGRES_PASSWORD", "password2").toString,
     driver = "org.postgresql.Driver"
   )
   val fieldTable = TableQuery(new FieldTable(_))
