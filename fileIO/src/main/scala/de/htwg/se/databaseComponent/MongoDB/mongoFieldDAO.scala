@@ -29,10 +29,11 @@ object mongoFieldDAO extends DAOInterface {
     val vars = splitField(jsonField)
     val document: Document = Document(
       "_id" -> id,
-      "field" -> jsonField/*,
+      "field" -> jsonField,
       "mode" -> vars(0),
       "difficulty" -> vars(1),
-      "currentPlayer" -> vars(2)*/
+      "currentPlayer" -> vars(2),
+      "cells" -> vars(3)
     )
     val insertObservable: Observable[InsertOneResult] =
       collection.insertOne(document)
@@ -55,13 +56,7 @@ object mongoFieldDAO extends DAOInterface {
     val findObservable = collection.find(filter).first()
     val result: Document =
       Await.result(findObservable.toFuture(), 5.seconds)
-    // matching geht iwi nicht
-    // result match {
-    //   case Some(document: Document) =>
-    //     println(s"Found document: $document"); document.getString("field")
-    //   case None => throw new NoSuchElementException("Document not found")
-    // }
-    result.getString("field")
+    result.getString("field") 
 
   }
 
@@ -98,22 +93,14 @@ object mongoFieldDAO extends DAOInterface {
 
   def splitField(jsonField: String): Array[String] = {
     val json: JsValue = Json.parse(jsonField)
-    var myValues: Array[String] = Array("", "", "", "");
+    
+    val mode = (json \ "field" \ "mode").as[String]
+    val difficulty = (json \ "field" \ "difficulty").as[Int].toString
+    val player = (json \ "field" \ "player").as[String]
+    val cells = Json.stringify((json \ "field" \ "cells").get)
 
-    /* val row = (json \\ "row")(index).as[Int]
-    val col = (json \\ "col")(index).as[Int]
-    val value = (json \\ "value")(index).as[String] */
-    /*
-    myValues += (json \\ "mode")(0).as[String]
-    myValues += (json \\ "difficulty")(0).as[Int]
-    myValues += (json \\ "player")(0).as[Boolean] */
+    Array(mode, difficulty, player, cells)
 
-    myValues(0) = (json \\ "mode")(0).as[String]
-    myValues(1) = (json \\ "difficulty")(0).as[String]
-    myValues(2) = (json \\ "player")(0).as[String]
-    myValues(3) = (json \\ "cells")(0).as[String]
-
-    myValues
   }
 
 }
