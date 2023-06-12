@@ -1,0 +1,10 @@
+{
+  "simulation": "SpikeTests",
+  "simulationId": "spiketests-20230612162635164",
+  "start": 1686587196609,
+  "description": "Offline",
+  "scenarios": ["Restarting Users", "Leaving Users"],
+  "assertions": [
+
+  ]
+}
