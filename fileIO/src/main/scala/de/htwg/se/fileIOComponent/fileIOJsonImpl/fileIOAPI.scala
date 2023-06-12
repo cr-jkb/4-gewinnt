@@ -31,16 +31,16 @@ object fileIOAPI {
         HttpEntity(
           ContentTypes.`application/json`,
           //fileIOJsonImpl.load()
-          SlickImpl.load()
-          //MongodbImpl.load()
+          // SlickImpl.load()
+          MongodbImpl.load()
         )
       )
     } ~ path("fileio" / "save") {
       post {
         entity(as[String]) { game =>
-          fileIOJsonImpl.save(game)
-           SlickImpl.save(game)
-          // MongodbImpl.save(game)
+          //fileIOJsonImpl.save(game)
+          /* SlickImpl.save(game) */
+          MongodbImpl.save(game)
 
           complete("Game is saved!")
         }

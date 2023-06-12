@@ -1,3 +1,3 @@
 cd ./fileIO/
-sbt run
+sbt ~run
 PAUSE
