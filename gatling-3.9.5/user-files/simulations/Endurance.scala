@@ -67,9 +67,10 @@ class EnduranceTests extends Simulation {
         )
     }
 
-  setUp( //Endurance of 100/50 Users at once each 10 Seconds * 100 times
+  setUp( //Endurance of 100/50 Users at once each 10 Seconds * 100 times  (10.000 Users on 3 runs is 30.000 dbReads // 5.000 & 15.000 dbWrites = TOTAL 45k)
     rScenario.inject(atOnceUsers(100)),
     wScenario.inject(atOnceUsers(50))
   )
     .protocols(httpProtocol)
 }
+// Example of first run: 11:48 for (~1720s = 28,7min) finished in 2003s at 12:21 (33,4min)

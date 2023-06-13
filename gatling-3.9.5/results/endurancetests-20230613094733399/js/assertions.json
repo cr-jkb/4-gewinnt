@@ -1,0 +1,10 @@
+{
+  "simulation": "EnduranceTests",
+  "simulationId": "endurancetests-20230613094733399",
+  "start": 1686649654526,
+  "description": "Mongo",
+  "scenarios": ["Restarting Users", "Leaving Users"],
+  "assertions": [
+
+  ]
+}

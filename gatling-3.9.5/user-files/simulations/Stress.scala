@@ -64,8 +64,34 @@ class StressTests extends Simulation {
     )
 
   setUp( //StressTests exceeding the capacity limit: increasing Active Users to 10000 in Steps of 100 in 60 seconds
-    rScenario.inject(rampUsersPerSec(100).to(10000).during(60.seconds)),
-    wScenario.inject(rampUsersPerSec(100).to(10000).during(60.seconds))
-  )
+    /*rScenario.inject(rampUsersPerSec(100).to(10000).during(60.seconds)),
+    wScenario.inject(rampUsersPerSec(100).to(10000).during(60.seconds))*/
+	rScenario.inject(rampUsersPerSec(100).to(500).during(60.seconds)),
+	wScenario.inject(rampUsersPerSec(100).to(500).during(60.seconds))
+  ) 
     .protocols(httpProtocol)
 }
+//293387&293387 Users broke Java Heap: java.lang.OutOfMemoryError: Java heap space; shutting down JVM since 'akka.jvm-exit-on-fatal-error' is enabled for ActorSystem[GatlingSystem]
+
+/*
+---- Restarting Users ----------------------------------------------------------
+[#--------------------------                                               ]  1%
+          waiting: 21074  / active: 11410  / done: 516
+---- Leaving Users -------------------------------------------------------------
+[#--------------------------                                               ]  1%
+          waiting: 21101  / active: 11384  / done: 515
+================================================================================
+
+java.lang.OutOfMemoryError: Java heap space
+
+
+---- Restarting Users ----------------------------------------------------------
+[##---------------------------------------------                           ]  2%
+          waiting: 6571   / active: 10908  / done: 521
+---- Leaving Users -------------------------------------------------------------
+[##---------------------------------------------                           ]  2%
+          waiting: 6622   / active: 10858  / done: 520
+================================================================================
+
+java.lang.OutOfMemoryError: Java heap space
+Dumping heap to java_pid14368.hprof ...*/
