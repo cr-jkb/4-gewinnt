@@ -11,11 +11,14 @@ import org.mongodb.scala.model.Projections._
 import org.mongodb.scala.result.{DeleteResult, InsertOneResult, UpdateResult}
 import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
+import java.util.concurrent.locks.ReentrantLock
 
 import java.util.Random
 
 object mongoFieldDAO extends DAOInterface {
   var counter = 1
+  private val counterLock = new ReentrantLock()
+
 
   val client: MongoClient = MongoClient("mongodb://localhost:27017")
   val database: MongoDatabase = client.getDatabase("mydb")
@@ -25,7 +28,11 @@ object mongoFieldDAO extends DAOInterface {
   def create(jsonField: String): Int = {
     // val rand: Random = new Random()
     // val id = rand.nextInt(900000)
+    counterLock.lock()
     val id = counter
+    counter += 1
+    counterLock.unlock()
+
     val vars = splitField(jsonField)
     val document: Document = Document(
       "_id" -> id,
@@ -45,7 +52,7 @@ object mongoFieldDAO extends DAOInterface {
       override def onComplete(): Unit = println("Insertion completeed")
 
     })
-    counter += 1
+    //counter += 1
     id
 
   }
