@@ -19,3 +19,5 @@ gatling-3.9.5/bin
 gatling-3.9.5/conf
 gatling-3.9.5/lib
 gatling-3.9.5/target
+gatling-3.9.5/License
+*.hprof
