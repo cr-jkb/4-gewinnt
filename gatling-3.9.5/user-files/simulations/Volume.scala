@@ -22,7 +22,7 @@ class VolumeTests extends Simulation {
     "Proxy-Connection" -> "keep-alive"
   )
 
-  /* private val rScenario = scenario("Restarting Users")
+  private val rScenario = scenario("Restarting Users")
     .exec(
       http("l_run_1 (restart)")
         .get("/load")
@@ -39,32 +39,32 @@ class VolumeTests extends Simulation {
       http("l_run_3 (restart)")
         .get("/load")
         .headers(additionalHeaders)
-    ) */
+    ) 
 
   private val wScenario = scenario("Leaving Users")
     .exec(
       http("w_run_1 (leave)")
         .post("/save")
-        .body(ElFileBody("game.json"))
+        .body(ElFileBody("gameBIG.json"))
         .headers(additionalHeaders)
     )
     .pause(10)
     .exec(
       http("w_run_2 (leave)")
         .post("/save")
-        .body(ElFileBody("game.json"))
+        .body(ElFileBody("gameBIG.json"))
         .headers(additionalHeaders)
     )
     .pause(10)
     .exec(
       http("w_run_3 (leave)")
         .post("/save")
-        .body(ElFileBody("game.json"))
+        .body(ElFileBody("gameBIG.json"))
         .headers(additionalHeaders)
     )
 
   setUp( //VolumeTests of 50 Users at once each 10 Seconds writing trippleFields
-    /* rScenario.inject(atOnceUsers(100)), */
+    rScenario.inject(atOnceUsers(100)), 
     wScenario.inject(atOnceUsers(50))
   )
     .protocols(httpProtocol)
