@@ -14,6 +14,7 @@ import java.util.concurrent.locks.ReentrantLock
 
 object slickFieldDAO extends DAOInterface {
   var counter = 1;
+  private val counterLock = new ReentrantLock()
   val ip = "localhost"
   val port = "5432"
   val dbname = "postgres"
