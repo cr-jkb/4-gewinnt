@@ -68,8 +68,8 @@ class EnduranceTests extends Simulation {
     }
 
   setUp( //Endurance of 100/50 Users at once each 10 Seconds * 100 times  (10.000 Users on 3 runs is 30.000 dbReads // 5.000 & 15.000 dbWrites = TOTAL 45k)
-    rScenario.inject(atOnceUsers(100)),
-    wScenario.inject(atOnceUsers(50))
+    wScenario.inject(atOnceUsers(100)),
+    rScenario.inject(atOnceUsers(50))
   )
     .protocols(httpProtocol)
 }

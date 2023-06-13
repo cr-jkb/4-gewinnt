@@ -1,0 +1,10 @@
+{
+  "simulation": "EnduranceTests",
+  "simulationId": "endurancetests-20230613195736541",
+  "start": 1686686257693,
+  "description": "slick",
+  "scenarios": ["Leaving Users", "Restarting Users"],
+  "assertions": [
+
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "simulation": "LoadTests",
+  "simulationId": "loadtests-20230613183505169",
+  "start": 1686681306162,
+  "description": "Slick",
+  "scenarios": ["Restarting Users", "Leaving Users"],
+  "assertions": [
+
+  ]
+}

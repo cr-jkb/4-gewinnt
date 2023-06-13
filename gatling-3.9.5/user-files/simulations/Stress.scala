@@ -66,8 +66,8 @@ class StressTests extends Simulation {
   setUp( //StressTests exceeding the capacity limit: increasing Active Users to 10000 in Steps of 100 in 60 seconds
     /*rScenario.inject(rampUsersPerSec(100).to(10000).during(60.seconds)),
     wScenario.inject(rampUsersPerSec(100).to(10000).during(60.seconds))*/
-	rScenario.inject(rampUsersPerSec(100).to(500).during(60.seconds)),
-	wScenario.inject(rampUsersPerSec(100).to(500).during(60.seconds))
+	wScenario.inject(rampUsersPerSec(100).to(500).during(60.seconds)),
+	rScenario.inject(rampUsersPerSec(100).to(500).during(60.seconds))
   ) 
     .protocols(httpProtocol)
 }

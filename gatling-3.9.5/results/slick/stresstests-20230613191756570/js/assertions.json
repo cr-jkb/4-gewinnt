@@ -1,0 +1,10 @@
+{
+  "simulation": "StressTests",
+  "simulationId": "stresstests-20230613191756570",
+  "start": 1686683877514,
+  "description": "slick",
+  "scenarios": ["Restarting Users", "Leaving Users"],
+  "assertions": [
+
+  ]
+}

@@ -64,8 +64,8 @@ class SpikeTests extends Simulation {
     )
 
   setUp(
-    rScenario.inject(atOnceUsers(1000)),
-    wScenario.inject(atOnceUsers(500))
+    wScenario.inject(atOnceUsers(1000)),
+    rScenario.inject(atOnceUsers(500))
   )
     .protocols(httpProtocol)
 }

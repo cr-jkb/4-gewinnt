@@ -64,8 +64,8 @@ class VolumeTests extends Simulation {
     )
 
   setUp( //VolumeTests of 50 Users at once each 10 Seconds writing trippleFields
-    rScenario.inject(atOnceUsers(100)), 
-    wScenario.inject(atOnceUsers(50))
+    wScenario.inject(atOnceUsers(100)), 
+    rScenario.inject(atOnceUsers(50))
   )
     .protocols(httpProtocol)
 }
