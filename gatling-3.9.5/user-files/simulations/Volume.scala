@@ -45,21 +45,21 @@ class VolumeTests extends Simulation {
     .exec(
       http("w_run_1 (leave)")
         .post("/save")
-        .body(ElFileBody("3game.json"))
+        .body(ElFileBody("game.json"))
         .headers(additionalHeaders)
     )
     .pause(10)
     .exec(
       http("w_run_2 (leave)")
         .post("/save")
-        .body(ElFileBody("3game.json"))
+        .body(ElFileBody("game.json"))
         .headers(additionalHeaders)
     )
     .pause(10)
     .exec(
       http("w_run_3 (leave)")
         .post("/save")
-        .body(ElFileBody("3game.json"))
+        .body(ElFileBody("game.json"))
         .headers(additionalHeaders)
     )
 
