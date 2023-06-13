@@ -10,6 +10,7 @@ import scala.io.StdIn
 import scala.util.{Failure, Success, Try}
 import java.util.Random;
 import play.api.libs.json
+import java.util.concurrent.locks.ReentrantLock
 
 object slickFieldDAO extends DAOInterface {
   var counter = 1;
@@ -43,7 +44,10 @@ object slickFieldDAO extends DAOInterface {
   override def create(jsonField: String): Int = {
     // val rand: Random = new Random();
     // val id = rand.nextInt(900000);
+    counterLock.lock()
     val id = counter
+    counter += 1
+    counterLock.unlock()
     val query = fieldTable += (id, jsonField)
 
     val result = db.run(query)
@@ -53,7 +57,7 @@ object slickFieldDAO extends DAOInterface {
       case Failure(exc) =>
         println(s"error on create: ${exc.getMessage}"); -1;
     }
-    counter += 1
+    //counter += 1
     Await.result(result, Duration.Inf)
   }
 
