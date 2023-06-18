@@ -4,8 +4,8 @@ RUN apt-get update
 
 EXPOSE 8080
 
-WORKDIR /fileIO
+WORKDIR /fileIOService
 
-ADD . /fileIO
+ADD . /fileIOService
 
 CMD sbt run

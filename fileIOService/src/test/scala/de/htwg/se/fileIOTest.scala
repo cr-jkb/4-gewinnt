@@ -45,7 +45,6 @@ class fileIOTest extends AnyWordSpec {
       mongoFieldDAO.read(id) should be(updatedField)
 
       mongoFieldDAO.delete(id)
-      //mongoFieldDAO.read(id) should be ("")
     }
   
   }

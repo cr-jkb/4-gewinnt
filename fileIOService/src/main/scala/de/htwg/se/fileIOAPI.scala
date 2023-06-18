@@ -1,4 +1,4 @@
-package de.htwg.se.fileIOComponent.fileIOJsonImpl
+package de.htwg.se.fileIOComponent
 
 import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.Behaviors
@@ -12,6 +12,7 @@ import java.time._
 import de.htwg.se.databaseComponent.MongodbImpl
 import de.htwg.se.databaseComponent.SlickImpl
 import de.htwg.se.databaseComponent.slickFieldDAO
+import de.htwg.se.fileIOComponent.fileIOJsonImpl.fileIOJsonImpl
 
 object fileIOAPI {
 
@@ -19,7 +20,7 @@ object fileIOAPI {
     implicit val system: ActorSystem[Any] =
       ActorSystem(Behaviors.empty, "fileIO")
 
-    slickFieldDAO.initiate()
+    //slickFieldDAO.initiate()
 
     // needed for the future flatMap/onComplete in the end
     implicit val executionContext: ExecutionContextExecutor =
@@ -27,20 +28,19 @@ object fileIOAPI {
 
     val route = path("fileio" / "load") {
       complete(
-        /* fileIOJsonImpl.load() */
         HttpEntity(
           ContentTypes.`application/json`,
-          //fileIOJsonImpl.load()
+          fileIOJsonImpl.load()
           // SlickImpl.load()
-          MongodbImpl.load()
+          //MongodbImpl.load()
         )
       )
     } ~ path("fileio" / "save") {
       post {
         entity(as[String]) { game =>
-          //fileIOJsonImpl.save(game)
+          fileIOJsonImpl.save(game)
           /* SlickImpl.save(game) */
-          MongodbImpl.save(game)
+          //MongodbImpl.save(game)
 
           complete("Game is saved!")
         }
@@ -56,11 +56,7 @@ object fileIOAPI {
         println(
           s"Server now online. Please navigate to http://localhost:8080/fileio\nPress RETURN to stop..."
         )
-      /*var quit = false
-        while (!quit) {
-          /* quit = true; */
-          Thread.sleep(1000L);
-        }*/
+
       case Failure(exception) =>
         println(s"FileIO Rest service couldnt be started!Error: ${exception}")
 

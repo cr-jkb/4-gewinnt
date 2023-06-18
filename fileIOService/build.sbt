@@ -46,7 +46,7 @@ lazy val settings = Seq(
 lazy val root = project
   .in(file("."))
   .settings(
-    name := "4-Gewinnt (CJ, YH)",
+    name := "FileIO Service",
     version := "1",
     settings
   )
