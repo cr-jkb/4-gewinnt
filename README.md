@@ -2,7 +2,7 @@
 <h1 align="center">Willkommen zum Software-Architektur Projekt</h1> <h3 align="center">aus SPO3 bei AIN6 an der HTWG Konstanz</h3>
 
 <p align="center">Jahr: SoSe 2023</p>
-<h4 align="center">4 Gewinnt + FileIO Service <br> Chris Jakob & Yasmin Hoffmann </br> <br> </h3>
+<h4 align="center">4 Gewinnt + FileIO Service <br>  Chris Jakob & Yasmin Hoffmann </br> <br> </h3>
 
 <p align="center">
   <img src="https://github.com/cr-jkb/4-gewinnt/actions/workflows/scala.yml/badge.svg" /> 
@@ -40,6 +40,8 @@ Command | Description
  
  ## Authors
 [@Chris Jakob](https://github.com/cr-jkb "Chris sein GitHub") <br/>
+[@Yasmin Hoffmann](https://github.com/yasmoonx "Yasmin ihr GitHub") <br>
 [@Julian Mennel](https://github.com/JulianMennel "Julian sein GitHub")
+
 
 credits to ShutTheBox and Uno for Inspiration for this ReadMe Structure & Title Style
