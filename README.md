@@ -1,8 +1,8 @@
 
-<h1 align="center">Willkommen zum Software-Engineering Projekt</h1> <h3 align="center">aus SPO3 bei AIN3 an der HTWG Konstanz</h3>
+<h1 align="center">Willkommen zum Software-Architektur Projekt</h1> <h3 align="center">aus SPO3 bei AIN6 an der HTWG Konstanz</h3>
 
-<p align="center">Jahr: WiSe 2021-2022</p>
-<h4 align="center">Spieltitel: 4 Gewinnt<br> Julian Mennel & Chris Jakob </br></h3>
+<p align="center">Jahr: SoSe 2023</p>
+<h4 align="center">4 Gewinnt + FileIO Service <br> Chris Jakob & Yasmin Hoffmann </br> <br> </h3>
 
 <p align="center">
   <img src="https://github.com/cr-jkb/4-gewinnt/actions/workflows/scala.yml/badge.svg" /> 
