@@ -2,8 +2,8 @@
 package de.htwg.se.util
 
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
-import de.htwg.se.model.fieldComponent.fieldBaseImpl.ErrorField
+/* import de.htwg.se.model.fieldComponent.fieldBaseImpl.ErrorField */
 
 trait PlayerState {
-  def put(x: Int, y: Int, field: Field): ErrorField
+  def put(x: Int, field: Field): Field
 }

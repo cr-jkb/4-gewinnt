@@ -9,10 +9,11 @@ import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
 trait FieldInterface {
   def sizeOfDimY: Int // ex size
   def sizeOfDimX: Int // ex size2
-  def error: String
-  def put(x: Int, y: Int): Field
+  def getLatestError: String
+  def setLatestError(err: String): Unit
+  def put(x: Int): Field
   def get(x: Int, y: Int): Stone
-  def set(x: Int, y: Int, filling: String): FieldInterface
+  def set(x: Int, y: Int, filling: String): Field
   def getPlayerState(): Boolean
   def setPlayer(player: String): PlayerState
   def getMode(): String

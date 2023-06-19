@@ -17,10 +17,7 @@ case class PlayerModeStrategy() extends GameMode {
       y,
       field
     ) // hand parameters through to the next layer (which is player)
-    val won = winCheck.checkWin(
-      mF.field
-    ) // destroys field somehow (not handed through afterwards) probably because of the warning
-    
+    val won = winCheck.checkWin(mF.field)
     mF
   }
 
@@ -28,7 +25,7 @@ case class PlayerModeStrategy() extends GameMode {
     println(
       "Sorry, you need to be in SinglePlayer Mode to set the difficulty. \n(Enter in TUI: singleplayer)"
     )
-  } // not needed
+  }
 
   override def getDifficulty(): Int = { -1 }
 }

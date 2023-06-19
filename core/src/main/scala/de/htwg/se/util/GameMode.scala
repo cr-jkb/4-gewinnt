@@ -4,7 +4,7 @@ import de.htwg.se.model.fieldComponent.fieldBaseImpl.Field
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.ErrorField
 
 trait GameMode {
-  def put(x: Int, y: Int, field: Field): ErrorField
+  def put(x: Int, field: Field): Field
 
   def setDifficulty(diff: Int): Unit
   def getDifficulty(): Int

@@ -10,12 +10,13 @@ case class difficultStrategy() extends ComputerStrategy {
   var alertNext = (-1, 0)
   val alertVal = 2
   override def put(field: FieldInterface) = {
-    if (evalNext) plannedNext
+    /* if (evalNext) plannedNext
     else if (alertNext != (-1, -1)) alertNext
-    else evalNew
+    else evalNew */
+    1
   }
 
-  def evalNext: Boolean = { // If still best solution
+  /* def evalNext: Boolean = { // If still best solution
     alertNext = (-1, 0)
     if (!listenToAlert) {
       true
@@ -32,5 +33,5 @@ case class difficultStrategy() extends ComputerStrategy {
 
   def evalNew: (Int, Int) = { // try getting 3 and 4
     (0, 0)
-  }
+  } */
 }

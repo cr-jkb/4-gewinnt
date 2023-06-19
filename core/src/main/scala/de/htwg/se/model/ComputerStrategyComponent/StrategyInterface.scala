@@ -10,11 +10,18 @@ import de.htwg.se.model.ComputerStrategyComponent.ComputerStrategyComponent_Impl
 
 trait ComputerStrategy { // concept uses Strategy Pattern but is in its own Folder
   var globalY: Int = -1
-  // abstract var globalField : FieldInterface
   var ComputerStone: Stone = Stone.O
 
-  def put(field: FieldInterface): (Int, Int)
+  def put(field: FieldInterface): Int
 
+  //returns true if field is free
+  def checkField(field: FieldInterface, pos: (Int, Int)): Boolean = {
+    if (
+      pos._1 < 0 || pos._1 >= field.sizeOfDimX ||
+      pos._2 < 0 || pos._2 >= field.sizeOfDimY
+    ) false
+    else (field.get(pos._1, pos._2) == Stone.Empty)
+  }
 
   def matchx(wantedX: Int, field: FieldInterface): Int =
     var low_x = 8

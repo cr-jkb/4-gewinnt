@@ -15,12 +15,8 @@ case class easyStrategy() extends ComputerStrategy {
     findRandom(field)
   }
 
-  def checkField(field: FieldInterface, pos: (Int, Int)): Boolean = {
-    field.get(pos._1, pos._2) != Stone.Empty
-  }
-
-  def findRandom(field: FieldInterface): (Int, Int) = {
-    val randomPos = (matchx(Random.nextInt(field.sizeOfDimX), field), 0)
+  def findRandom(field: FieldInterface): (Int) = {
+    val randomPos = (matchx(Random.nextInt(field.sizeOfDimX), field))
     if checkField(field, randomPos) then randomPos
     else findRandom(field);
   }

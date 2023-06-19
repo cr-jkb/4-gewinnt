@@ -46,7 +46,6 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
   def put(x: Int, y: Int) =
     var low_x = field.sizeOfDimY - 1
     val result = Try {
-      /* .find() */
       for (try_x <- field.sizeOfDimY - 1 to 0 by -1) {
         if (field.get(try_x, y) == Stone.Empty) {
           low_x = try_x

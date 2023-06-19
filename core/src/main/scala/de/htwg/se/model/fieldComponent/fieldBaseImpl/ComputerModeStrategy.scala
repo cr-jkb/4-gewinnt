@@ -10,12 +10,16 @@ import de.htwg.se.model.ComputerStrategyComponent.ComputerStrategyComponent_Impl
 case class ComputerModeStrategy() extends GameMode {
   var myDifficulty: ComputerStrategy = easyStrategy()
 
-  override def put(x: Int, y: Int, field: Field): ErrorField = {
-    var field2 = field.player.put(x, y, field)
-    if (y + 1 <= field.sizeOfDimX - 1)
-      var CompPos = myDifficulty.put(field2.field)
-      field2.field.player.put(CompPos._1, CompPos._2, field2.field)
-    else field2
+  override def put(x: Int, field: Field): Field = {
+    print("Spieler setzt auf: " + x + "\n")
+    var field2 = field.player.put(x, field)
+    if field != field2 then
+      var CompPos: Int = myDifficulty.put(field2)
+      print("Computer setzt auf: " + CompPos + "\n")
+      field2.player.put(CompPos, field2)
+    else
+      field.setLatestError("Column already full");
+      field
   }
 
   override def setDifficulty(diff: Int) = {

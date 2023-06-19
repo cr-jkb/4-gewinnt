@@ -21,7 +21,7 @@ case class Field(
   val sizeOfDimY = matrix.sizeOfDimY // vertical
   val sizeOfDimX = matrix.sizeOfDimX // horizontal
   val eol = sys.props("line.separator")
-  var error = ""
+  private var error = ""
   private var gameWinner: Stone = Stone.Empty
 
   // --String Building:
@@ -52,13 +52,6 @@ case class Field(
         trennLine
       ) // eine Linie am Anfang, jeder Eintrag wird getrennt durch Trennlinie und am Ende wird eine zusätzliche hinzugefügt
 
-  def set(x: Int, y: Int, filling: String): FieldInterface =
-    filling match {
-      case " " => copy(matrix.replaceCell(x, y, Stone.Empty))
-      case "X" => copy(matrix.replaceCell(x, y, Stone.X))
-      case "O" => copy(matrix.replaceCell(x, y, Stone.O))
-    }
-
   def setPlayer(str: String): PlayerState =
     str match {
       case "false" => player = FalsePlayerState()
@@ -73,20 +66,28 @@ case class Field(
 
   // --Mode Layer related:
 
-  def put(x: Int, y: Int): Field =
+  // Follow Game Rules on Change of Stone
+  def put(x: Int): Field =
     if (gameWinner == Stone.Empty)
-      val newField = mode.put(x, y, this)
-      newField.field.error = newField.error // TODO23
-      newField.field
+      mode.put(x, this)
     else this
+
+  // Force Change of Stone
+  def set(x: Int, y: Int, filling: String): Field =
+    filling match {
+      case " " => copy(matrix.replaceCell(x, y, Stone.Empty))
+      case "X" => copy(matrix.replaceCell(x, y, Stone.X))
+      case "O" => copy(matrix.replaceCell(x, y, Stone.O))
+    }
 
   def setWinner(winner: Stone): Unit =
     gameWinner = winner
 
   def getWinner(): Stone = gameWinner
 
-  def get(x: Int, y: Int): Stone = if (x == -1 | y == -1) Stone.X
-  else matrix.cell(x, y) // -1 when ComputerStrategy finds a FullRow
+  def get(x: Int, y: Int): Stone = {
+    matrix.cell(x, y)
+  }
 
   def getPlayerState(): Boolean =
     if (player == TruePlayerState()) true else false
@@ -106,6 +107,8 @@ case class Field(
   def setDifficulty(d: Int) = { mode.setDifficulty(d) }
   def getDifficulty() = { mode.getDifficulty() }
 
+  def getLatestError: String = error; error = "";
+  def setLatestError(err: String) = error = err;
   // --Field related:
   def undo(x: Int, y: Int): Field = // remove the stone at x,y
     if (mode == PlayerModeStrategy())

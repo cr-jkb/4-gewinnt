@@ -15,14 +15,13 @@ case class mediumStrategy() extends ComputerStrategy {
   var limitV = 0
   var limitH = 0
 
-  override def put(field: FieldInterface) = {
-    limitV = field.sizeOfDimY; limitH = field.sizeOfDimX;
-    if (evalNext(field)) plannedNext else evalNew(field)
+  def put(field: FieldInterface) = {
+    /* limitV = field.sizeOfDimY; limitH = field.sizeOfDimX;
+    if (evalNext(field)) plannedNext else evalNew(field) */
+    0
   }
 
-
-
-  def evalNext(field: FieldInterface): Boolean = {
+  /*  def evalNext(field: FieldInterface): Boolean = {
     object FoundWin extends Exception
     val myDataSet = WinCheck.checkWinWithNumber(field, ComputerStone)
 
@@ -144,5 +143,5 @@ case class mediumStrategy() extends ComputerStrategy {
   def evalNew(field: FieldInterface): (Int, Int) = { // try getting 3 and 4
     val mE = easyStrategy()
     mE.findRandom(field)
-  }
+  } */
 }
