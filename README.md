@@ -11,6 +11,15 @@
   </a>
  </p>
  
+# Architektur:   
+Dieses Projekt basiert auf dem Software-Engineering Projekt von Chris Jakob und Julian Mennel aus dem WiSe 2021-2022.   
+Im Laufe des Semesters wurde 4-Gewinnt um einen FileIO Microservice erweitert, der komplett unabhängig von dem Spiel ist und mit dem über eine API kommuniziert werden kann. Der Microservice kümmert sich um das saven und loaden von Spielständen. Diese Funktionen wurden für MongoDB oder Postgres implementiert. In fileIOService/src/main/scala/de/htwg/se/fileIOAPI.scala kann jeweils ausgewählt werden, welche Datenbank verwendet werden soll.
+Beide Implementierungen wurden zudem mit verschiedenen Gatling Simulationen getestet, deren Resultate sich im gatling Ordner befinden.   
+- **sbt:** sbt run / clean / compile / test
+- **docker:** docker build image . / docker run image
+
+
+
 # Anleitung:
 
 ### Wie gewinnen?
