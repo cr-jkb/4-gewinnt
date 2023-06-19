@@ -44,7 +44,7 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
     field = new Field() // no need for new if "instance-ized" with parameters
     notifyObservers
 
-   error = (s"the vertical row at ${y + 1} is full\n") // throw noAction
+   
   
   def put(x: Int, y: Int) =
     var low_x = field.sizeOfDimY - 1
