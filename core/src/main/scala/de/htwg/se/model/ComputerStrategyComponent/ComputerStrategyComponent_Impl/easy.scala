@@ -25,29 +25,4 @@ case class easyStrategy() extends ComputerStrategy {
     else findRandom(field);
   }
 
-//   def findRandom(field: FieldInterface): (Int, Int) = {
-
-//     var validPos = (0, 0)
-//     val result = Try {
-//       while (true) {
-//         globalY = Random.nextInt(field.sizeOfDimX)
-//         val randomPos = (matchx(Random.nextInt(field.sizeOfDimX), field), globalY)
-//         if (field.get(randomPos._1, randomPos._2) == Stone.Empty) {
-//           validPos = randomPos
-//           throw end
-//         }
-
-//       }
-//       validPos
-
-//     } match {
-//       case Success(validPos) => validPos
-//       case Failure(end)      => validPos
-//       case Failure(e)        => println("UNHANDLED EXCEPTION"); (-1, -1)
-
-//     }
-//     result
-
-//   }
-
 }

@@ -20,36 +20,7 @@ case class mediumStrategy() extends ComputerStrategy {
     if (evalNext(field)) plannedNext else evalNew(field)
   }
 
-//   def evalNext(field: FieldInterface): Boolean = { // true if there is a better reaction (prioritizing)
-//     object FoundWin extends Exception
 
-//     val myDataSet = WinCheck.checkWinWithNumber(
-//       field,
-//       ComputerStone
-//     ) // limit Scanning on my own Stones
-//     try {
-//       if (myDataSet._2 == 3) { // 3er Row found
-//         for (x <- myDataSet._3) { // jede Row
-//           var possiblePos = (0, 0)
-//           if (x._1 == 3) { // Wenn Set aus 3*StonePos besteht
-//             val freePossibilities = relevantPos(
-//               field,
-//               predict(x._2)
-//             ) // übergebe Set; bekomme freie Möglichkeiten
-//             for (i <- 1 until freePossibilities.size) { // skip ZombieElement
-//               possiblePos = freePossibilities(i)
-//               val matchedPos = matchx(possiblePos._1, field)
-//               if (matchedPos == possiblePos._1) {
-//                 plannedNext = possiblePos; throw FoundWin
-//               }
-//             }
-//           }
-//         }
-//         plannedNext = (0, 0)
-//         false
-//       } else false
-//     } catch { case FoundWin => true }
-//   }
 
   def evalNext(field: FieldInterface): Boolean = {
     object FoundWin extends Exception
@@ -168,22 +139,7 @@ case class mediumStrategy() extends ComputerStrategy {
 
     mL
   }
-  /* ^ Prove:
-        (x-1; y-1 // x+1; y+1)
 
-        f(a1, b1) =
-        a - 1
-        b - 1
-        a + 1
-        b + 1
-
-        (x+1; y-1 // x-1; y+1)
-
-        f(-1, 1) =
-        a - -1
-        b - 1
-        a + -1
-        b + 1   */
 
   def evalNew(field: FieldInterface): (Int, Int) = { // try getting 3 and 4
     val mE = easyStrategy()

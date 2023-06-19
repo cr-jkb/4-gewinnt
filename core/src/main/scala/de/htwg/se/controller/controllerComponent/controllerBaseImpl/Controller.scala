@@ -1,7 +1,6 @@
 package de.htwg.se
 package controller.controllerComponent.controllerBaseImpl
 import com.google.inject.Guice
-//import de.htwg.se.MainModule
 
 import com.google.inject.Inject
 import com.google.inject.name.Named
@@ -36,8 +35,6 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
   val fileIOServer = "http://localhost:8080/fileio"
 
   val undoManager = new UndoManager[FieldInterface]
-  // val injector = Guice.createInjector(new MainModule)
-  // val fileIo = injector.getInstance(classOf[FileIOInterface])
   var error = ""
   var gameWon = false
 
@@ -47,25 +44,8 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
     field = new Field() // no need for new if "instance-ized" with parameters
     notifyObservers
 
-  // def put(x: Int, y: Int) =
-  //   var low_x = field.sizeOfDimY - 1
-  //   try {
-  //     for (try_x <- field.sizeOfDimY - 1 to 0 by -1) { // gehe von unten los
-  //       if (field.get(try_x, y) == Stone.Empty) {
-  //         low_x = try_x; throw SpaceFound;
-  //       }
-  //     }
-  //     throw FullRow
-  //   } catch {
-  //     case SpaceFound =>
-  //       undoManager.clearRedo();
-  //       field = undoManager.doStep(field, new PutCommand(low_x, y, this));
-  //       error = "Stone successfully set" // print(s"will put to ${low_x}\n")
-  //     case FullRow =>
-  //       error = (s"the vertical row at ${y + 1} is full\n") // throw noAction
-  //   }
-  //   notifyObservers
-
+   error = (s"the vertical row at ${y + 1} is full\n") // throw noAction
+  
   def put(x: Int, y: Int) =
     var low_x = field.sizeOfDimY - 1
     val result = Try {
