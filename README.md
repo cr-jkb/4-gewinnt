@@ -51,6 +51,3 @@ Command | Description
 [@Chris Jakob](https://github.com/cr-jkb "Chris sein GitHub") <br/>
 [@Yasmin Hoffmann](https://github.com/yasmoonx "Yasmin ihr GitHub") <br>
 [@Julian Mennel](https://github.com/JulianMennel "Julian sein GitHub")
-
-
-credits to ShutTheBox and Uno for Inspiration for this ReadMe Structure & Title Style
