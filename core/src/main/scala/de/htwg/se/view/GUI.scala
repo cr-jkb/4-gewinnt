@@ -113,7 +113,7 @@ class GUI(controller: ControllerInterface) extends Observer:
       }
       val fullRB = new RadioButton("Invincible") {
         reactions += { case event.ButtonClicked(_) => ShowWin }
-        // enabled = false
+        enabled = false
       }
       val gameModes = new GridPanel(1, 2) {
         border = BorderFactory.createEmptyBorder(20, 50, 0, 0)
@@ -129,7 +129,7 @@ class GUI(controller: ControllerInterface) extends Observer:
         border = BorderFactory.createEmptyBorder(0, 20, 10, 0)
         val playerRadioButton = new RadioButton("Multiplayer") {
           reactions += { case event.ButtonClicked(_) =>
-            controller.setMode("player")
+            controller.setMode("multiplayer")
             if (easyRB.enabled) {
               easyRB.enabled = !easyRB.enabled
               mediumRB.enabled = !mediumRB.enabled
@@ -141,7 +141,7 @@ class GUI(controller: ControllerInterface) extends Observer:
         playerRadioButton.preferredSize_=(new Dimension(30, 50))
         val computerRadioButton = new RadioButton("Singleplayer") {
           reactions += { case event.ButtonClicked(_) =>
-            controller.setMode("computer")
+            controller.setMode("singleplayer")
             if (!easyRB.enabled) {
               easyRB.enabled = !easyRB.enabled
               mediumRB.enabled = !mediumRB.enabled
