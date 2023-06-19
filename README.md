@@ -74,9 +74,11 @@ Command | Description
  
  Das Spiel reagiert auch auf halbe Befehle: z.B. s für save und multi für Multiplayer
  ## TUI
+ ![tuiImage](/core/TUI.png)
  
  ## GUI
- 
+ ![guiImage](/core/GUI.png)
+
  ## Authors
 [@Chris Jakob](https://github.com/cr-jkb "Chris sein GitHub") <br/>
 [@Yasmin Hoffmann](https://github.com/yasmoonx "Yasmin ihr GitHub") <br>

@@ -58,7 +58,7 @@ class GUI(controller: ControllerInterface) extends Observer:
   val MainIcon = ImageIO.read(new File("res/logo.jpg"))
 
   val frame = new Frame {
-    title = "4-Gewinnt - Gruppe 15"
+    title = "4-Gewinnt - Gruppe 18"
     override def closeOperation(): Unit = {
       controller.quit
     } // does not work - needs a 'q' in TUI to really quit
