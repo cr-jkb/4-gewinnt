@@ -87,3 +87,25 @@ Command | Description
 
 [./4-gewinnt/fileIOService/src/main/scala/de/htwg/se/fileIOAPI.scala]<br>
 [./4-gewinnt/gatling-3.9.5/results]
+
+
+<br/>
+
+# Dependencies:
+Unser Programm wurde mit folgenden Tools gebaut und ist daher mit den folgenden Programmen und Versionsnummern kompatibel:
+
+## Tools:
+- **Windows 11 Edu**
+- **Java JDK 17.0.2**
+- **Scala 3.2.2**
+- **Sbt 1.8.2**
+- **Metals 0.11.11 (VS Code ext 1.22.0)**
+- **Bloop 1.5.6**
+- **VS Code 1.77.0**
+
+<br/>
+
+- **Guice 5.1.1**
+- **JUnit 0.13.3**
+- **Scala-XML 2.1.0**
+- **Play Server 2.10.0-RC7**
