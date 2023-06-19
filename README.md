@@ -40,8 +40,8 @@ sbt run
 - **.(Dev Material):** enthält Scripte und Archive mit DevTools
 - **.bloop, .bsp, .github, .idea, .metals, .vscode:** enthalten Daten für die verwendeten BuildTools, Versionsverwaltung, IDEs und Scala
 - **core:** enthält unter /src und /res den Code und das Modul für 4-Gewinnt.
-- **fileIO:** 
-- **fileIOService:** 
+- **fileIOService:** enthält unter /src den Code für den Mikroservice sowie den Dockerfile (Compose File) zum Starten in Docker.
+<br/>Unser Mikroservice speichert den Spielstand, wenn gewollt, auch lokal auf der Festplatte, und erstellt dabei /game.json in diesem Ordner.
 - **gatling-3.9.5:** enthält Gatling Programmdaten, Performance Test Simulationen und die dazugehörigen Ergebnisse für jeweils MongoDB und postgreSQL
 - **project:** wird von Scala automatisch generiert
 - **target:** wird von Scala automatisch generiert
