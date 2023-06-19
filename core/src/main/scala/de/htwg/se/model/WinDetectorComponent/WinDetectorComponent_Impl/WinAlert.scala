@@ -28,6 +28,10 @@ case class WinAlert()
   } // returns Win Bool, Number of max stones in a row, multiDim Array with StonesInRow & Positions
   // List must be sorted
 
+  /*
+
+****** Private Functions ******
+   */
   def checkCombination(
       player: Stone,
       field: FieldInterface,
@@ -50,7 +54,7 @@ case class WinAlert()
     allSets = (thisRound, subSet) :: allSets
     if (winningSet & thisRound == 4 & player != Stone.Empty) {
       winner = player;
-      println(s"congratulations to player with Stone ${winner}");
+      field.setWinner(player);
     }
     (winningSet & thisRound == 4 & player != Stone.Empty)
 
@@ -80,7 +84,7 @@ case class WinAlert()
             returnBool = checkCombination(current, field, cSet)
           }
 
-          if (returnBool) true
+          if (returnBool) returnBool
 
           if (i - 3 >= 0) {
             var cSet = List((i, j)) // checkSet
@@ -91,7 +95,7 @@ case class WinAlert()
             returnBool = checkCombination(current, field, cSet)
           }
 
-          if (returnBool) true
+          if (returnBool) returnBool
 
           // within y (horizontal)
           if (j + 3 < limitH) {
@@ -103,7 +107,7 @@ case class WinAlert()
             returnBool = checkCombination(current, field, cSet)
           }
 
-          if (returnBool) true
+          if (returnBool) returnBool
 
           if (j - 3 >= 0) {
             var cSet = List((i, j)) // checkSet
@@ -114,7 +118,7 @@ case class WinAlert()
             returnBool = checkCombination(current, field, cSet)
           }
 
-          if (returnBool) true
+          if (returnBool) returnBool
 
           // diagonal
           if (j + 3 < limitH & i + 3 < limitV) { // hoch R
@@ -126,7 +130,7 @@ case class WinAlert()
             returnBool = checkCombination(current, field, cSet)
           }
 
-          if (returnBool) true
+          if (returnBool) returnBool
 
           if (j + 3 < limitH & i - 3 >= 0) { // runter R
             var cSet = List((i, j)) // checkSet
@@ -137,7 +141,7 @@ case class WinAlert()
             returnBool = checkCombination(current, field, cSet)
           }
 
-          if (returnBool) true
+          if (returnBool) returnBool
 
           if (j - 3 >= 0 & i - 3 >= 0) { // runter L
             var cSet = List((i, j)) // checkSet
@@ -148,7 +152,7 @@ case class WinAlert()
             returnBool = checkCombination(current, field, cSet)
           }
 
-          if (returnBool) true
+          if (returnBool) returnBool
 
           if (j - 3 >= 0 & i + 3 < limitV) { // hoch L
             var cSet = List((i, j)) // checkSet
@@ -159,7 +163,7 @@ case class WinAlert()
             returnBool = checkCombination(current, field, cSet)
           }
 
-          if (returnBool) true
+          if (returnBool) returnBool
 
           // könnte man wunderschön funktional programmieren:
           // Pattern: if (L/R) & (Hoch/Runter)

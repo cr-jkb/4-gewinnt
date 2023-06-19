@@ -36,16 +36,13 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
 
   val undoManager = new UndoManager[FieldInterface]
   var error = ""
-  var gameWon = false
 
-  override def setGameState(won: Boolean) = { gameWon = won }
+  def getWinner(): String = { field.getWinner().toString() }
+
   def newField =
-    gameWon = false
     field = new Field() // no need for new if "instance-ized" with parameters
     notifyObservers
 
-   
-  
   def put(x: Int, y: Int) =
     var low_x = field.sizeOfDimY - 1
     val result = Try {

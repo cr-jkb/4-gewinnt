@@ -20,6 +20,7 @@ case class PlayerModeStrategy() extends GameMode {
     val won = winCheck.checkWin(
       mF.field
     ) // destroys field somehow (not handed through afterwards) probably because of the warning
+    
     mF
   }
 

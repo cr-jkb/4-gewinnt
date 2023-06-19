@@ -8,7 +8,6 @@ import de.htwg.se.util.GameMode
 import de.htwg.se.model.fieldComponent.fieldBaseImpl.Stone
 
 trait ControllerInterface extends Observable {
-  def setGameState(won: Boolean): Unit
   def field: FieldInterface
   def error: String
   def newField: Unit
@@ -22,4 +21,5 @@ trait ControllerInterface extends Observable {
   def save: Unit
   def load: Unit
   def toString: String
+  def getWinner(): String
 }

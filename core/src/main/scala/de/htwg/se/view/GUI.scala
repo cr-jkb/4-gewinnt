@@ -61,7 +61,7 @@ class GUI(controller: ControllerInterface) extends Observer:
     title = "4-Gewinnt - Gruppe 18"
     override def closeOperation(): Unit = {
       controller.quit
-    } // does not work - needs a 'q' in TUI to really quit
+    }
     iconImage = MainIcon
     minimumSize = new java.awt.Dimension(900, 1000)
     centerOnScreen
@@ -176,10 +176,10 @@ class GUI(controller: ControllerInterface) extends Observer:
       contents += new Menu("SaveGame") {
         mnemonic = Key.S
         contents += new MenuItem(Action("Import") {
-          controller.load; /* println("Spiel geladen.") */
+          controller.load;
         })
         contents += new MenuItem(Action("Export") {
-          controller.save; /* println("Spiel gespeichert.") */
+          controller.save;
         })
       }
     }
@@ -199,11 +199,8 @@ class GUI(controller: ControllerInterface) extends Observer:
     redraw()
   }
 
-  def redraw(): Unit =
-    if (false) { // (controller.gameWon) { //23TODO
+  def redraw(): Unit = {
 
-      ShowWin
-    }
     for (index <- 0 to controller.field.sizeOfDimY - 1)
       for (index2 <- 0 to controller.field.sizeOfDimX - 1)
         if (controller.field.get(index, index2).toString.equals("X")) {
@@ -219,6 +216,13 @@ class GUI(controller: ControllerInterface) extends Observer:
             ImageIO.read(new File("res/slot2.png"))
           )
         }
+
+    if (!controller.getWinner().equals(Stone.Empty.toString())) {
+      selector_fullyRefresh
+      ShowWin
+    }
+
+  }
 
   def getField(sizeOfDimY: Int, sizeOfDimX: Int): GridPanel =
     new GridPanel(sizeOfDimY, sizeOfDimX) {
@@ -282,22 +286,25 @@ class GUI(controller: ControllerInterface) extends Observer:
   def selector_fullyRefresh =
     for (i <- 0 until selectors.size) {
       selectors(i).icon = empty
-      if (i == selector_pos) {
+      if (
+        i == selector_pos &&
+        controller
+          .getWinner()
+          .equals(Stone.Empty.toString())
+      ) {
         if (controller.getPlayer == Stone.X) selectors(i).icon = selector_yellow
         else selectors(i).icon = selector_red
       }
     }
 
+  val url = new File("res/win.wav")
+  val audioIn = AudioSystem.getAudioInputStream(url)
+  val clip = AudioSystem.getClip
+  clip.open(audioIn)
+
   def ShowWin =
-    val url = new File("res/win.wav")
-    val audioIn = AudioSystem.getAudioInputStream(url)
-    val clip = AudioSystem.getClip
-    clip.open(audioIn)
     clip.start
     winPop(controller).ret.open()
 
   def ShowLose = // Singleplayer only
     print("lost")
-
-  def MenuMusic =
-    print("Menu Page in AIN 5")

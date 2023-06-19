@@ -22,6 +22,7 @@ case class Field(
   val sizeOfDimX = matrix.sizeOfDimX // horizontal
   val eol = sys.props("line.separator")
   var error = ""
+  private var gameWinner: Stone = Stone.Empty
 
   // --String Building:
   def bar(cellWidth: Int = 3, cellNum: Int = 3): String =
@@ -65,14 +66,24 @@ case class Field(
     }
     player
 
-  override def toString = mesh()
+  override def toString =
+    if gameWinner == Stone.Empty then mesh()
+    else
+      s"congratulations to player with Stone ${gameWinner.toString()}" + eol + mesh() + eol
 
   // --Mode Layer related:
 
   def put(x: Int, y: Int): Field =
-    val newField = mode.put(x, y, this)
-    newField.field.error = newField.error // TODO23
-    newField.field
+    if (gameWinner == Stone.Empty)
+      val newField = mode.put(x, y, this)
+      newField.field.error = newField.error // TODO23
+      newField.field
+    else this
+
+  def setWinner(winner: Stone): Unit =
+    gameWinner = winner
+
+  def getWinner(): Stone = gameWinner
 
   def get(x: Int, y: Int): Stone = if (x == -1 | y == -1) Stone.X
   else matrix.cell(x, y) // -1 when ComputerStrategy finds a FullRow

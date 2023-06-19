@@ -20,4 +20,6 @@ trait FieldInterface {
   def setDifficulty(d: Int): Unit
   def getDifficulty(): Int
   def undo(x: Int, y: Int): FieldInterface
+  def setWinner(winner: Stone): Unit
+  def getWinner(): Stone
 }

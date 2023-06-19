@@ -30,7 +30,7 @@ Beide Implementierungen wurden zudem mit verschiedensten Gatling Simulationen au
 - **sbt:** <br/>
 cd core <br/>
 sbt run
-- **docker:** docker build image . / docker run image
+- **docker:** <br/> cd fileIOService <br/> docker build image . / docker run image
 
 (* beide Befehle werden für den vollständigen Funktionsumfang benötigt)
 
@@ -39,7 +39,7 @@ sbt run
 ### Zur weiteren Ordnerstruktur:
 - **.(Dev Material):** enthält Scripte und Archive mit DevTools
 - **.bloop, .bsp, .github, .idea, .metals, .vscode:** enthalten Daten für die verwendeten BuildTools, Versionsverwaltung, IDEs und Scala
-- **core:** enthält unter /src und /res den Code und das Modul für 4-Gewinnt.
+- **core:** enthält unter /src und /res den Code und das Modul für 4-Gewinnt. Der Dockerfile erlaubt das Starten in Docker, sollte aber aufgrund der Beschränkungen von Docker zu Scala nicht verwendet werden. Der Core soll damit ausschließlich per SBT gestartet werden.
 - **fileIOService:** enthält unter /src den Code für den Mikroservice sowie den Dockerfile (Compose File) zum Starten in Docker.
 <br/>Unser Mikroservice speichert den Spielstand, wenn gewollt, auch lokal auf der Festplatte, und erstellt dabei /game.json in diesem Ordner.
 - **gatling-3.9.5:** enthält Gatling Programmdaten, Performance Test Simulationen und die dazugehörigen Ergebnisse für jeweils MongoDB und postgreSQL
@@ -98,7 +98,7 @@ Unser Programm wurde mit folgenden Tools gebaut und ist daher mit den folgenden 
 
 ## Tools:
 - **Windows 11 Edu**
-- **Java JDK 17.0.2**
+- **Java JDK 17.0.2** (auch kompatibel mit 14.0.2)
 - **Scala 3.2.2**
 - **Sbt 1.8.2**
 - **Metals 0.11.11 (VS Code ext 1.22.0)**
