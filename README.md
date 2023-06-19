@@ -27,8 +27,8 @@ Beide Implementierungen wurden zudem mit verschiedensten Gatling Simulationen au
 <br/>
 
 ### Spiel kann gestartet werden via*:
-- **sbt:** 
-cd core
+- **sbt:** <br/>
+cd core <br/>
 sbt run
 - **docker:** docker build image . / docker run image
 
@@ -82,8 +82,8 @@ Command | Description
 [@Yasmin Hoffmann](https://github.com/yasmoonx "Yasmin ihr GitHub") <br>
 [@Julian Mennel](https://github.com/JulianMennel "Julian sein GitHub")<br>
 
-[fileIOAPI.scala]: 4-gewinnt/fileIOService/src/main/scala/de/htwg/se/fileIOAPI.scala
-[results]: 4-gewinnt/gatling-3.9.5/results/
+[fileIOAPI.scala]: /fileIOService/src/main/scala/de/htwg/se/fileIOAPI.scala
+[results]:/gatling-3.9.5/results/
 
 [./4-gewinnt/fileIOService/src/main/scala/de/htwg/se/fileIOAPI.scala]<br>
 [./4-gewinnt/gatling-3.9.5/results]
