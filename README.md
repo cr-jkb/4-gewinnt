@@ -44,8 +44,18 @@ sbt run
 - **project:** wird von Scala automatisch generiert
 - **target:** wird von Scala automatisch generiert
 
+
 <br/>
 
+### Test Coverage
+
+To evaluate our current code coverage please check our written test files.
+- core is tested
+- fileio microservice and api is tested
+
+and as a bonus we also have tests for *all* CRUD Functions on MongoDB **AND** PostgreSQL
+
+<br/>
 
 # Anleitung:
 
@@ -109,14 +119,3 @@ Unser Programm wurde mit folgenden Tools gebaut und ist daher mit den folgenden 
 - **JUnit 0.13.3**
 - **Scala-XML 2.1.0**
 - **Play Server 2.10.0-RC7**
-
-
-<br/>
-
-## Test Coverage
-
-To evaluate our current code coverage please check our written test files.
-- core is tested
-- fileio microservice and api is tested
-
-and as a bonus we also have tests for *all* CRUD Functions on MongoDB **AND** PostgreSQL
