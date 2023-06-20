@@ -2,9 +2,9 @@ name: Scala CI
 
 on:
   pull_request:
-    branches: [ sa23-FINAL ]
+    branches: [ sa23-FINAL, software-architektur23(coveralls) ]
   push:
-    branches: [ sa23-FINAL ]
+    branches: [ sa23-FINAL, software-architektur23(coveralls) ]
 
 jobs:
   build:
@@ -30,3 +30,18 @@ jobs:
         run: |
           export CI_BRANCH="${GITHUB_REF#refs/heads/}"
           sbt clean jacoco jacocoCoveralls
+
+      - name: Run tests
+        run: sbt clean coverage test
+
+      - name: Upload coverage data to Coveralls
+        run: sbt coverageReport coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+          COVERALLS_FLAG_NAME: WhatIsThis
+
+      - name: Upload coverage data to Coveralls
+        run: sbt coverageAggregate coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+          COVERALLS_FLAG_NAME: WhatIsThis
