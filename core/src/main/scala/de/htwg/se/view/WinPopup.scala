@@ -12,6 +12,7 @@ import scala.swing.{
 }
 import java.awt.Color
 import javax.swing.ImageIcon
+import java.awt.Image;
 import scala.swing.event.MouseClicked
 import javax.swing.BorderFactory
 import de.htwg.se.controller.controllerComponent.ControllerInterface
@@ -22,22 +23,43 @@ case class winPop(controller: ControllerInterface) {
   def ret: Dialog = new Dialog() {
     modal = true
     centerOnScreen
-    var winnerColor = ""
+    var winnerName = ""
+    var winnerColor = Color.black
     if controller.getWinner().equals(Stone.X.toString()) then
-      winnerColor = "Yellow"
-    else winnerColor = "Red"
-    title = "winner: " + winnerColor
+      winnerName = "Yellow"
+      winnerColor = Color.YELLOW
+    else if (controller.getMode() == "singleplayer")
+      winnerName = "Computer"
+      winnerColor = Color.RED
+    else
+      winnerName = "Red"
+      winnerColor = Color.RED
+    title = "winner: " + winnerName
+
     contents = new BoxPanel(Orientation.Vertical) {
       minimumSize = new Dimension(450, 420)
       maximumSize = new Dimension(450, 420)
       preferredSize = new Dimension(450, 420)
 
+      var winnerPic = new ImageIcon("res/Winner.jpg")
+      var winnerImage: Image = winnerPic
+        .getImage()
+        .getScaledInstance(
+          300,
+          300,
+          java.awt.Image.SCALE_SMOOTH
+        )
+
+      contents += new Label() {
+        icon = new ImageIcon(winnerImage)
+        /* setHorizontalAlignment = SwingConstants.CENTER; */
+      }
+
       contents += new Label(
-        winnerColor + " has won!"
+        winnerName + " has won!"
       ) {
-        font = new Font("Arial", 3, 50)
-        if winnerColor.equals("Red") then foreground = Color.RED
-        else foreground = Color.YELLOW
+        font = new Font("Arial", 3, 45)
+        foreground = winnerColor
         border = BorderFactory.createEmptyBorder(10, 0, 10, 0)
       }
       contents += new Label("restart game") {
@@ -49,9 +71,6 @@ case class winPop(controller: ControllerInterface) {
           controller.newField
           dispose()
         }
-      }
-      contents += new Label() {
-        icon = new ImageIcon("res/LogoFull.jpg")
       }
     }
     resizable = false

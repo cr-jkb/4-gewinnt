@@ -15,6 +15,7 @@ trait ControllerInterface extends Observable {
   def undo: Unit
   def redo: Unit
   def setMode(str: String): GameMode
+  def getMode(): String
   def setStrength(d: Int): Unit
   def getPlayer: Stone
   def quit: Unit

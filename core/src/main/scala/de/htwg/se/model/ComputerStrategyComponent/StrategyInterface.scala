@@ -15,6 +15,36 @@ trait ComputerStrategy { // concept uses Strategy Pattern but is in its own Fold
 
   def put(field: FieldInterface): (Int, Int)
 
+  def checkField(field: FieldInterface, pos: (Int, Int)): Boolean = {
+    if (
+      pos._1 < 0 || pos._1 >= field.sizeOfDimX ||
+      pos._2 < 0 || pos._2 >= field.sizeOfDimY
+    )
+      false;
+    else (field.get(pos._1, pos._2) == Stone.Empty)
+  }
+
+  //Y counts from bottom(=sizeOfDimY -1) to top(=0)
+  def letStoneFallDown(atX: Int, field: FieldInterface): (Int, Int) = {
+    var currentYPos = -1;
+    val result = Try {
+      for (try_y <- field.sizeOfDimY - 1 to 0 by -1) {
+        if (field.get(try_y, atX) == Stone.Empty) {
+          currentYPos = try_y
+          throw SpaceFound
+        }
+      }
+      throw FullRow
+    } match {
+      case Success(x) => x
+      case Failure(e) =>
+        e match {
+          case SpaceFound => (currentYPos, atX)
+          case FullRow    => (-1, -1)
+        }
+    }
+    result
+  }
 
   def matchx(wantedX: Int, field: FieldInterface): Int =
     var low_x = 8

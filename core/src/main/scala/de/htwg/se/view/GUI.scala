@@ -298,13 +298,20 @@ class GUI(controller: ControllerInterface) extends Observer:
     }
 
   val url = new File("res/win.wav")
-  val audioIn = AudioSystem.getAudioInputStream(url)
-  val clip = AudioSystem.getClip
-  clip.open(audioIn)
+  var clip = AudioSystem.getClip
 
   def ShowWin =
-    clip.start
+    if (clip.getMicrosecondLength == 0)
+      playSound
+    if (clip.getMicrosecondLength() == clip.getMicrosecondPosition())
+      playSound
     winPop(controller).ret.open()
+
+  def playSound =
+    val audioIn = AudioSystem.getAudioInputStream(url)
+    clip = AudioSystem.getClip
+    clip.open(audioIn)
+    clip.start
 
   def ShowLose = // Singleplayer only
     print("lost")

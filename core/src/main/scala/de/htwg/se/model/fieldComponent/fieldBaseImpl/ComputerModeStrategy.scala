@@ -6,16 +6,29 @@ import de.htwg.se.model.ComputerStrategyComponent.ComputerStrategy
 import de.htwg.se.model.ComputerStrategyComponent.ComputerStrategyComponent_Impl.easyStrategy
 import de.htwg.se.model.ComputerStrategyComponent.ComputerStrategyComponent_Impl.difficultStrategy
 import de.htwg.se.model.ComputerStrategyComponent.ComputerStrategyComponent_Impl.mediumStrategy
+import de.htwg.se.model.WinDetectorComponent.WinDetectorComponent_Impl.WinAlert
+import de.htwg.se.model.WinDetectorComponent.WinDetectorInterface
 
 case class ComputerModeStrategy() extends GameMode {
   var myDifficulty: ComputerStrategy = easyStrategy()
+  val winCheck: WinDetectorInterface = WinAlert()
 
   override def put(x: Int, y: Int, field: Field): ErrorField = {
     var field2 = field.player.put(x, y, field)
-    if (y + 1 <= field.sizeOfDimX - 1)
+    val won: Boolean = winCheck
+      .checkWin(
+        field2.field
+      )
+      ._1
+    if (won == false) then
+
       var CompPos = myDifficulty.put(field2.field)
-      field2.field.player.put(CompPos._1, CompPos._2, field2.field)
-    else field2
+      field2 = field2.field.player.put(CompPos._1, CompPos._2, field2.field)
+      val CompWon = winCheck.checkWin(
+        field2.field
+      )
+
+    return field2;
   }
 
   override def setDifficulty(diff: Int) = {

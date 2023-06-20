@@ -40,7 +40,13 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
   def getWinner(): String = { field.getWinner().toString() }
 
   def newField =
-    field = new Field() // no need for new if "instance-ized" with parameters
+    if field != null then
+      val oldfield = field
+      field = new Field()
+      field.setMode(oldfield.getMode())
+      if oldfield.getMode() == "singleplayer" then
+        field.setDifficulty(oldfield.getDifficulty())
+    else field = new Field()
     notifyObservers
 
   def put(x: Int, y: Int) =
@@ -86,6 +92,7 @@ case class Controller @Inject() (@Named("DefField") var field: FieldInterface)
     notifyObservers
 
   def setMode(str: String): GameMode = field.setMode(str);
+  def getMode(): String = field.getMode();
   def getPlayer: Stone = if (field.getPlayerState()) Stone.X else Stone.O
   def setStrength(d: Int) = field.setDifficulty(d)
   def getStrength(): Int = field.getDifficulty()
