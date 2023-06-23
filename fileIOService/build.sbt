@@ -27,20 +27,20 @@ lazy val settings = Seq(
   libraryDependencies += "org.postgresql" % "postgresql" % "42.6.0",
   libraryDependencies += ("org.mongodb.scala" %% "mongo-scala-driver" % "4.9.0")
     .cross(CrossVersion.for3Use2_13),
-  jacocoReportSettings := JacocoReportSettings(
-    "Jacoco Coverage Report",
-    None,
-    JacocoThresholds(),
-    Seq(
-      JacocoReportFormats.ScalaHTML,
-      JacocoReportFormats.XML
-    ), // note XML formatter
-    "utf-8"
-  ),
-  jacocoCoverallsServiceName := "github-actions",
-  jacocoCoverallsBranch := sys.env.get("CI_BRANCH"),
-  jacocoCoverallsPullRequest := sys.env.get("GITHUB_EVENT_NAME"),
-  jacocoCoverallsRepoToken := sys.env.get("REPO_TOKEN")
+  // jacocoReportSettings := JacocoReportSettings(
+  //   "Jacoco Coverage Report",
+  //   None,
+  //   JacocoThresholds(),
+  //   Seq(
+  //     JacocoReportFormats.ScalaHTML,
+  //     JacocoReportFormats.XML
+  //   ), // note XML formatter
+  //   "utf-8"
+  // ),
+  // jacocoCoverallsServiceName := "github-actions",
+  // jacocoCoverallsBranch := sys.env.get("CI_BRANCH"),
+  // jacocoCoverallsPullRequest := sys.env.get("GITHUB_EVENT_NAME"),
+  // jacocoCoverallsRepoToken := sys.env.get("REPO_TOKEN")
 )
 
 lazy val root = project
@@ -50,4 +50,4 @@ lazy val root = project
     version := "1",
     settings
   )
-  .enablePlugins(JacocoCoverallsPlugin)
+  //.enablePlugins(JacocoCoverallsPlugin)
