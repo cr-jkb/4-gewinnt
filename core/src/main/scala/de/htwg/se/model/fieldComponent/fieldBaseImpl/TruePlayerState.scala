@@ -13,7 +13,7 @@ case class TruePlayerState() extends PlayerState { // Todo23 , evt reicht auch i
       field.player =
         FalsePlayerState() // hand ball over to the other player (to 'O')
       (
-        new ErrorField(field.copy(field.matrix.replaceCell(x, y, Stone.X)), "")
+        new ErrorField(field.copy(field.matrix.replaceCell(x, y, Stone.X)), "None")
         /* Error("") */
       ) // x is vertical
     else new ErrorField(field, "Field already taken")
