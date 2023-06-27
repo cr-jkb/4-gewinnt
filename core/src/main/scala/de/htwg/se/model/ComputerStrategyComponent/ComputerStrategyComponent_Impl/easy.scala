@@ -21,5 +21,4 @@ case class easyStrategy() extends ComputerStrategy {
     if checkField(field, randomPos) then randomPos
     else findRandom(field);
   }
-
 }
