@@ -5,7 +5,7 @@
 <h4 align="center">4 Gewinnt + FileIO Service <br>  Chris Jakob & Yasmin Hoffmann </br> <br> </h3>
 
 <p align="center">
-  <img src="https://github.com/cr-jkb/4-gewinnt/actions/workflows/scala.yml/badge.svg" /> 
+ 
   
  </p>
 
